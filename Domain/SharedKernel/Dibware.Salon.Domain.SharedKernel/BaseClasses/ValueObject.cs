@@ -1,5 +1,9 @@
-﻿namespace Dibware.Salon.Domain.SharedKernel
+﻿using Dibware.Salon.Domain.SharedKernel.Helpers;
+
+namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
 {
+    /// <summary>Represents the base class which a descriptive aspect of the domain with no conceptual identity should inherit from.</summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class ValueObject<T>
         where T : ValueObject<T>
     {

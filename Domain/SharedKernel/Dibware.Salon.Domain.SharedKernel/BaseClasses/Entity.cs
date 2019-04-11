@@ -1,17 +1,32 @@
-﻿using System;
+﻿using Dibware.Salon.Domain.SharedKernel.Helpers;
 
-namespace Dibware.Salon.Domain.SharedKernel
+namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
 {
     /// <summary>The shared base class which all entities should inherit from</summary>
     public abstract class Entity
     {
         /// <summary>Gets or sets the entity identifier.</summary>
         /// <value>The identifier.</value>
-        public virtual long Id { get; protected set; }
+        public long Id { get; protected set; }
 
         /// <summary>Returns this instance cast as an <see cref="object"/>.</summary>
         /// <value>The cast instance.</value>
-        protected virtual object Actual => this;
+        protected object Actual => this;
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is persistent. TrPersistentansient
+        /// indicates this instance can be persisted to a data store. This state is the opposite of
+        /// <see cref="IsTransient"/>
+        /// </summary>
+        /// <returns><c>true</c> if this instance is persistent; otherwise, <c>false</c>.</returns>
+        public virtual bool IsPersistent => !IsTransient;
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is transient.ransient indicates this
+        /// instance cannot be persisted to a data store. This state is the opposite of <see cref="IsPersistent"/>
+        /// </summary>
+        /// <value><c>true</c> if this instance is transient; otherwise, <c>false</c>.</value>
+        public virtual bool IsTransient => Id.Equals(default(long));
 
         /// <summary>Determines whether the specified <see cref="System.Object"/>, is equal to this instance.</summary>
         /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
