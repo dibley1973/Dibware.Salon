@@ -1,0 +1,12 @@
+G:\Dev\Dibware.Salon\Domain\Resources\Dibware.Salon.Domain.Resources\bin\Debug\netcoreapp2.0\Dibware.Salon.Domain.Resources.deps.json
+G:\Dev\Dibware.Salon\Domain\Resources\Dibware.Salon.Domain.Resources\bin\Debug\netcoreapp2.0\Dibware.Salon.Domain.Resources.dll
+G:\Dev\Dibware.Salon\Domain\Resources\Dibware.Salon.Domain.Resources\bin\Debug\netcoreapp2.0\Dibware.Salon.Domain.Resources.pdb
+G:\Dev\Dibware.Salon\Domain\Resources\Dibware.Salon.Domain.Resources\bin\Debug\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.dll
+G:\Dev\Dibware.Salon\Domain\Resources\Dibware.Salon.Domain.Resources\bin\Debug\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.pdb
+G:\Dev\Dibware.Salon\Domain\Resources\Dibware.Salon.Domain.Resources\obj\Debug\netcoreapp2.0\Dibware.Salon.Domain.Resources.csprojResolveAssemblyReference.cache
+G:\Dev\Dibware.Salon\Domain\Resources\Dibware.Salon.Domain.Resources\obj\Debug\netcoreapp2.0\Dibware.Salon.Domain.Resources.csproj.CoreCompileInputs.cache
+G:\Dev\Dibware.Salon\Domain\Resources\Dibware.Salon.Domain.Resources\obj\Debug\netcoreapp2.0\Dibware.Salon.Domain.Resources.AssemblyInfoInputs.cache
+G:\Dev\Dibware.Salon\Domain\Resources\Dibware.Salon.Domain.Resources\obj\Debug\netcoreapp2.0\Dibware.Salon.Domain.Resources.AssemblyInfo.cs
+G:\Dev\Dibware.Salon\Domain\Resources\Dibware.Salon.Domain.Resources\obj\Debug\netcoreapp2.0\Dibware.Salon.Domain.Resources.csproj.CopyComplete
+G:\Dev\Dibware.Salon\Domain\Resources\Dibware.Salon.Domain.Resources\obj\Debug\netcoreapp2.0\Dibware.Salon.Domain.Resources.dll
+G:\Dev\Dibware.Salon\Domain\Resources\Dibware.Salon.Domain.Resources\obj\Debug\netcoreapp2.0\Dibware.Salon.Domain.Resources.pdb

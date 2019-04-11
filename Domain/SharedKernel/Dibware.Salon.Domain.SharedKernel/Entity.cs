@@ -42,10 +42,10 @@ namespace Dibware.Salon.Domain.SharedKernel
         /// <returns>The result of the comparison operator.</returns>
         public static bool operator ==(Entity primary, Entity secondary)
         {
-            if (BothEntitiesAreNull(primary, secondary))
+            if (ReferenceHelper.BothReferencesAreNull(primary, secondary)) 
                 return true;
 
-            if (OneOrTheOtherIsNull(primary, secondary))
+            if (ReferenceHelper.OneOrTheOtherReferenceIsNull(primary, secondary))
                 return false;
 
             // ReSharper disable once PossibleNullReferenceException
@@ -67,15 +67,6 @@ namespace Dibware.Salon.Domain.SharedKernel
         public override int GetHashCode()
         {
             return (Actual.GetType().ToString() + Id).GetHashCode();
-        }
-
-        /// <summary>Gets a value indicating if both of the entities are null.</summary>
-        /// <param name="primary">The primary.</param>
-        /// <param name="secondary">The secondary.</param>
-        /// <returns>Returns <c>true</c> if both entities are null; otherwise <c>false</c>.</returns>
-        private static bool BothEntitiesAreNull(Entity primary, Entity secondary)
-        {
-            return primary is null && secondary is null;
         }
 
         /// <summary>Gets a value indicating if both of the entity Ids match.</summary>
@@ -112,15 +103,6 @@ namespace Dibware.Salon.Domain.SharedKernel
         private bool EntityTypesDiffer(Entity other)
         {
             return Actual.GetType() != other.Actual.GetType();
-        }
-
-        /// <summary>Returns primary value indicating if either the primary or secondary is null.</summary>
-        /// <param name="primary">The primary.</param>
-        /// <param name="secondary">The secondary.</param>
-        /// <returns>Returns <c>true</c> if the primary of the secondary is null; otherwise <c>false</c>.</returns>
-        private static bool OneOrTheOtherIsNull(Entity primary, Entity secondary)
-        {
-            return primary is null || secondary is null;
         }
     }
 }
