@@ -19,6 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dibware.Salon.Domain.Shared
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dibware.Salon.Domain.SharedKernel.UnitTests", "Domain\SharedKernel\Dibware.Salon.Domain.SharedKernel.UnitTests\Dibware.Salon.Domain.SharedKernel.UnitTests.csproj", "{05EA7389-6CAC-41F9-91FC-F9706EF4BF99}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Travis", "_Travis", "{8B3FDF36-553A-4D64-A8B2-9AB28F2BACA9}"
+	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+		build.sh = build.sh
+		run-tests.sh = run-tests.sh
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
