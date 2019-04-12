@@ -65,7 +65,7 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
 
             // ReSharper disable once PossibleNullReferenceException
             // Because primary has already been checked for null
-            return primary.Equals(secondary);
+            return primary == secondary;
         }
 
         /// <summary>Implementation of the the != comparison operator for the <see cref="Entity"/>.</summary>

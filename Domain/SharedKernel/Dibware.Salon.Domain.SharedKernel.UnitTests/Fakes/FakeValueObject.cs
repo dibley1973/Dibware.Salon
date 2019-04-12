@@ -9,6 +9,7 @@
 
 using System;
 using Dibware.Salon.Domain.SharedKernel.BaseClasses;
+using Dibware.Salon.Domain.SharedKernel.Guards;
 
 namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Fakes
 {
@@ -28,8 +29,8 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Fakes
         /// <exception cref="ArgumentNullException">code or name</exception>
         public FakeValueObject(string code, string name)
         {
-            //Ensure.IsNotNullEmptyOrWhiteSpace(code, (ArgumentName)nameof(code));
-            //Ensure.IsNotNullEmptyOrWhiteSpace(name, (ArgumentName)nameof(name));
+            Ensure.IsNotNullEmptyOrWhiteSpace(code, (ArgumentName)nameof(code));
+            Ensure.IsNotNullEmptyOrWhiteSpace(name, (ArgumentName)nameof(name));
 
             _code = code;
             _name = name;

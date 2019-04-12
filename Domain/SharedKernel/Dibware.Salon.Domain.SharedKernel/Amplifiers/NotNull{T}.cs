@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Dibware.Salon.Domain.SharedKernel.Guards;
 using Dibware.Salon.Domain.SharedKernel.Helpers;
 
 namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
@@ -8,32 +9,59 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
     /// <summary>
     /// Non-nullable wrapper.
     /// </summary>
-    /// <typeparam name="T">The type of the object which must be not null</typeparam>
-    public struct NotNull<T>
+    /// <typeparam name="TNotNullable">The type of the object which must be not null</typeparam>
+    public struct NotNull<TNotNullable> 
+        : IEquatable<NotNull<TNotNullable>> 
+        where TNotNullable : class
     {
-        public NotNull(T val)
+        /// <summary>Initializes a new instance of the <see cref="NotNull{TNotNullable}"/> struct.</summary>
+        /// <param name="value">The value.</param>
+        /// <exception cref="ArgumentNullException">Required value cannot be null</exception>
+        public NotNull(TNotNullable value)
         {
-            if (((object) val) != null)
-                Value = val;
-            else
-                throw new ArgumentNullException("Required value cannot be null");
+            value.ThrowExceptionIfNull((ArgumentName)nameof(value));
+
+            Value = value;
+        }
+
+        /// <summary>
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        /// true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
+        /// </returns>
+        public bool Equals(NotNull<TNotNullable> other)
+        {
+            return EqualityComparer<TNotNullable>.Default.Equals(Value, other.Value);
+        }
+
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        public override int GetHashCode()
+        {
+            return EqualityComparer<TNotNullable>.Default.GetHashCode(Value);
         }
 
         /// <summary>Gets the value.</summary>
         /// <value>The value.</value>
-        public T Value { get; }
+        public TNotNullable Value { get; }
 
-        public static implicit operator NotNull<T>(T val)
+        public static implicit operator NotNull<TNotNullable>(TNotNullable val)
         {
-            return new NotNull<T>(val);
+            return new NotNull<TNotNullable>(val);
         }
 
-        public static implicit operator T(NotNull<T> val)
+        public static implicit operator TNotNullable(NotNull<TNotNullable> val)
         {
             return val.Value;
         }
 
-        public static bool operator ==(NotNull<T> primary, NotNull<T> secondary)
+        public static bool operator ==(NotNull<TNotNullable> primary, NotNull<TNotNullable> secondary)
         {
             if (ReferenceHelper.BothReferencesAreNull(primary.Value, secondary.Value))
                 return true;
@@ -41,34 +69,26 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
             if (ReferenceHelper.OneOrTheOtherReferenceIsNull(primary.Value, secondary.Value))
                 return false;
 
-            return primary.Value.Equals(secondary.Value);
+            return primary.Value == secondary.Value;
         }
 
-        public static bool operator !=(NotNull<T> a, NotNull<T> b)
+        public static bool operator !=(NotNull<TNotNullable> a, NotNull<TNotNullable> b)
         {
             return !(a == b);
         }
 
         public override bool Equals(object obj)
         {
-            if (obj == null)
-                return false;
+            TNotNullable value = obj as TNotNullable;
 
-            try
-            {
-                T val = (T) obj;
-                return Value.Equals(val);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            if (value == null) return false;
+
+            return Equals(value);
         }
 
-        public bool Equals(T obj)
+        public bool Equals(TNotNullable value)
         {
-            // Return true if the fields match:
-            return Value.Equals(obj);
+            return Value.Equals(value);
         }
 
         public override string ToString()
