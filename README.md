@@ -7,7 +7,8 @@ The purpose of this project is to build a web based salon booking application.
 * master branch [![Build Status](https://travis-ci.org/dibley1973/Dibware.Salon.svg?branch=master)](https://travis-ci.org/dibley1973/Dibware.Salon)
 
 ## Travis-Build
-[![Build Status](https://api.travis-ci.org/dibley1973/Dibware.Salon.png?branch=master)](https://travis-ci.org/dibley1973/Dibware.Salon)
+**Branches:**
+* master branch [![Build Status](https://api.travis-ci.org/dibley1973/Dibware.Salon.png?branch=master)](https://travis-ci.com/dibley1973/Dibware.Salon)
 
 ## Tooling
 Before embarking on development it is suggested that SonarLint is installed.
