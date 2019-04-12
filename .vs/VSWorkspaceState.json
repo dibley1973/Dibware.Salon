@@ -5,8 +5,10 @@
     "\\Domain\\Resources",
     "\\Domain\\Resources\\Dibware.Salon.Domain.Resources",
     "\\Domain\\SharedKernel",
+    "\\Domain\\SharedKernel\\Dibware.Salon.Domain.SharedKernel.UnitTests",
+    "\\Domain\\SharedKernel\\Dibware.Salon.Domain.SharedKernel.UnitTests\\Fakes",
     "\\UI"
   ],
-  "SelectedNode": "\\Domain\\Resources\\Dibware.Salon.Domain.Resources\\ResourceType.cs",
+  "SelectedNode": "\\Domain\\SharedKernel\\Dibware.Salon.Domain.SharedKernel.UnitTests\\Fakes\\FakeValueObject.cs",
   "PreviewInSolutionExplorer": false
 }
