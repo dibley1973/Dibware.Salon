@@ -2,6 +2,11 @@
 An open source salon booking application. Anyone is welcome to contribute. 
 The purpose of this project is to build a web based salon booking application.
 
+## Current Status
+**Branches:**
+* master branch [![Build Status](https://travis-ci.org/dibley1973/OpenRMS.svg?branch=master)](https://travis-ci.org/dibley1973/OpenRMS)
+
+
 ## Tooling
 Before embarking on development it is suggested that SonarLint is installed.
 
