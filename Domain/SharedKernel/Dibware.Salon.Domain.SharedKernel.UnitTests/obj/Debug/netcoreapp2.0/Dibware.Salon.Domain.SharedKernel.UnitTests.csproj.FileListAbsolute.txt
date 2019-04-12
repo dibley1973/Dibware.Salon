@@ -10,3 +10,8 @@ G:\Dev\Dibware.Salon\Domain\SharedKernel\Dibware.Salon.Domain.SharedKernel.UnitT
 G:\Dev\Dibware.Salon\Domain\SharedKernel\Dibware.Salon.Domain.SharedKernel.UnitTests\obj\Debug\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.UnitTests.csproj.CopyComplete
 G:\Dev\Dibware.Salon\Domain\SharedKernel\Dibware.Salon.Domain.SharedKernel.UnitTests\obj\Debug\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.UnitTests.dll
 G:\Dev\Dibware.Salon\Domain\SharedKernel\Dibware.Salon.Domain.SharedKernel.UnitTests\obj\Debug\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.UnitTests.pdb
+G:\Dev\Dibware.Salon\Domain\SharedKernel\Dibware.Salon.Domain.SharedKernel.UnitTests\bin\Debug\netcoreapp2.0\NUnit3.TestAdapter.dll
+G:\Dev\Dibware.Salon\Domain\SharedKernel\Dibware.Salon.Domain.SharedKernel.UnitTests\bin\Debug\netcoreapp2.0\NUnit3.TestAdapter.pdb
+G:\Dev\Dibware.Salon\Domain\SharedKernel\Dibware.Salon.Domain.SharedKernel.UnitTests\bin\Debug\netcoreapp2.0\nunit.engine.netstandard.dll
+G:\Dev\Dibware.Salon\Domain\SharedKernel\Dibware.Salon.Domain.SharedKernel.UnitTests\bin\Debug\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.UnitTests.runtimeconfig.json
+G:\Dev\Dibware.Salon\Domain\SharedKernel\Dibware.Salon.Domain.SharedKernel.UnitTests\bin\Debug\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.UnitTests.runtimeconfig.dev.json
