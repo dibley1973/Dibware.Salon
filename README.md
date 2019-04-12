@@ -2,11 +2,7 @@
 An open source salon booking application. Anyone is welcome to contribute. 
 The purpose of this project is to build a web based salon booking application.
 
-## Current Status
-**Branches:**
-* master branch [![Build Status](https://travis-ci.com/dibley1973/Dibware.Salon.svg?branch=master)](https://travis-ci.org/dibley1973/Dibware.Salon)
-
-## Travis-Build
+## Current Travis-Build Status
 **Branches:**
 * master branch [![Build Status](https://api.travis-ci.org/dibley1973/Dibware.Salon.png?branch=master)](https://travis-ci.com/dibley1973/Dibware.Salon)
 
