@@ -4,7 +4,7 @@ The purpose of this project is to build a web based salon booking application.
 
 ## Current Status
 **Branches:**
-* master branch [![Build Status](https://travis-ci.org/dibley1973/Dibware.Salon.svg?branch=master)](https://travis-ci.org/dibley1973/Dibware.Salon)
+* master branch [![Build Status](https://travis-ci.com/dibley1973/Dibware.Salon.svg?branch=master)](https://travis-ci.org/dibley1973/Dibware.Salon)
 
 ## Travis-Build
 **Branches:**
