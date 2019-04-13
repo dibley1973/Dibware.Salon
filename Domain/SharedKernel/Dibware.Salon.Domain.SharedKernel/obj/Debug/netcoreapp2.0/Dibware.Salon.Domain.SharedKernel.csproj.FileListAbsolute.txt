@@ -6,3 +6,4 @@ G:\Dev\Dibware.Salon\Domain\SharedKernel\Dibware.Salon.Domain.SharedKernel\obj\D
 G:\Dev\Dibware.Salon\Domain\SharedKernel\Dibware.Salon.Domain.SharedKernel\obj\Debug\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.AssemblyInfo.cs
 G:\Dev\Dibware.Salon\Domain\SharedKernel\Dibware.Salon.Domain.SharedKernel\obj\Debug\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.dll
 G:\Dev\Dibware.Salon\Domain\SharedKernel\Dibware.Salon.Domain.SharedKernel\obj\Debug\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.pdb
+G:\Dev\Dibware.Salon\Domain\SharedKernel\Dibware.Salon.Domain.SharedKernel\obj\Debug\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.csprojResolveAssemblyReference.cache

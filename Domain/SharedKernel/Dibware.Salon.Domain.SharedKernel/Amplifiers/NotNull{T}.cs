@@ -61,6 +61,14 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
             return val.Value;
         }
 
+        /// <summary>
+        /// Custom implementation of the operator ==.
+        /// </summary>
+        /// <param name="primary">The primary to check</param>
+        /// <param name="primary">The secondary to check.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static bool operator ==(NotNull<TNotNullable> primary, NotNull<TNotNullable> secondary)
         {
             if (ReferenceHelper.BothReferencesAreNull(primary.Value, secondary.Value))
@@ -72,11 +80,26 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
             return primary.Value == secondary.Value;
         }
 
-        public static bool operator !=(NotNull<TNotNullable> a, NotNull<TNotNullable> b)
+        /// <summary>
+        /// Custom implementation of the operator !=.
+        /// </summary>
+        /// <param name="primary">The primary to check</param>
+        /// <param name="secondary">The secondary to check.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
+        public static bool operator !=(NotNull<TNotNullable> primary, NotNull<TNotNullable> secondary)
         {
-            return !(a == b);
+            return !(primary == secondary);
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
         public override bool Equals(object obj)
         {
             TNotNullable value = obj as TNotNullable;
@@ -86,11 +109,22 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
             return Equals(value);
         }
 
+        /// <summary>
+        /// Returns a value indicating if the specified value equals this.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public bool Equals(TNotNullable value)
         {
             return Value.Equals(value);
         }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             return Value.ToString();
