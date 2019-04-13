@@ -287,6 +287,44 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
                 "the wrapped ToString() text should match the warpper's ToString() text");
         }
 
+        /// <summary>
+        /// Given the widening casting operator when provided with null then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenWideningCastingOperator_WhenProvidedWithNull_ThenThrowsException()
+        {
+            // ARRANGE
+            const FakeEntity nullEntity = null;
+            
+            // ACT
+            Action actual = () =>
+            {
+                // ReSharper disable once UnusedVariable
+                var actualEntity = (NotNull<FakeEntity>) nullEntity;
+            };
+
+            // ASSERT
+            actual.Should().Throw<ArgumentNullException>("because a conversion from null is not permitted");
+        }
+
+        /// <summary>
+        /// Given the widening casting operator when provided with instance then returns not null wrapped object.
+        /// </summary>
+        [Test]
+        public void GivenWideningCastingOperator_WhenProvidedWithInstance_ThenReturnsNotNullWrappedObject()
+        {
+            // ARRANGE
+            var fakeEntity = new FakeEntity();
+
+            // ACT
+            var actual = (NotNull<FakeEntity>)fakeEntity;
+            
+            // ASSERT
+            actual.Value.Should().Be(fakeEntity,
+                "because the value of wrapper should be the object which was cast from");
+        }
+
+
         /// <summary>A dummy method for testing.</summary>
         /// <param name="notNullObject">The not null object.</param>
         // ReSharper disable once UnusedParameter.Local

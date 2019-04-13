@@ -65,7 +65,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
         /// Custom implementation of the operator ==.
         /// </summary>
         /// <param name="primary">The primary to check</param>
-        /// <param name="primary">The secondary to check.</param>
+        /// <param name="secondary">The secondary to check.</param>
         /// <returns>
         /// The result of the operator.
         /// </returns>
