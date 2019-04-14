@@ -44,6 +44,23 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
         }
 
         /// <summary>
+        /// Given the value when called after constructor passed with not null then does returns constructedvalue.
+        /// </summary>
+        [Test]
+        public void GivenValue_WhenCalledAfterConstructorPassedWithNotNull_ThenDoesReturnsConstructedvalue()
+        {
+            // ARRANGE
+            var entity = new FakeEntity();
+            var notNullEntity = new NotNull<FakeEntity>(entity);
+
+            // ACT
+            var actual = notNullEntity.Value;
+
+            // ASSERT
+            actual.Should().Be(entity,"because a not null object is permitted");
+        }
+
+        /// <summary>
         /// Given the used as method parameter when passed null then throws exception.
         /// </summary>
         [Test]
@@ -101,10 +118,29 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
         {
             // ARRANGE
             var fakeEntity1 = new FakeEntity();
-            var notNullFakeEntity = new NotNull<FakeEntity>(fakeEntity1);
+            var notNullFakeEntity1 = new NotNull<FakeEntity>(fakeEntity1);
+            var notNullFakeEntity2 = (object)new NotNull<FakeEntity>(fakeEntity1);
 
             // ACT
-            var actual = notNullFakeEntity.Equals(notNullFakeEntity);
+            var actual = notNullFakeEntity1.Equals(notNullFakeEntity2);
+
+            // ASSERT
+            actual.Should().BeTrue("because the specified object has an instance reference");
+        }
+
+        /// <summary>
+        /// Given the equals for object when passed valid instance of same wrapped object then returns true.
+        /// </summary>
+        [Test]
+        public void GivenEqualsForObject_WhenPassedValidInstanceOfSameWrappedObject_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var fakeEntity1 = new FakeEntity();
+            var notNullFakeEntity1 = new NotNull<FakeEntity>(fakeEntity1);
+            var fakeEntity2 = (object)fakeEntity1;
+
+            // ACT
+            var actual = notNullFakeEntity1.Equals(fakeEntity2);
 
             // ASSERT
             actual.Should().BeTrue("because the specified object has an instance reference");
@@ -143,6 +179,42 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
 
             // ACT
             var actual = notNullFakeEntity1.Equals(notNullFakeEntity2);
+
+            // ASSERT
+            actual.Should().BeFalse("because both entities are the same reference");
+        }
+
+        /// <summary>
+        /// Given the equals when supplied with wrapped type of same reference then returns true.
+        /// </summary>
+        [Test]
+        public void GivenEquals_WhenSuppliedWithWrappedTypeOfSameReference_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var fakeEntity1 = new FakeEntity();
+            var fakeEntity2 = fakeEntity1;
+            var notNullFakeEntity1 = new NotNull<FakeEntity>(fakeEntity1);
+
+            // ACT
+            var actual = notNullFakeEntity1.Equals(fakeEntity2);
+
+            // ASSERT
+            actual.Should().BeTrue("because both entities are the same reference");
+        }
+
+        /// <summary>
+        /// Given the equals when supplied with wrapped type of different reference then returns false.
+        /// </summary>
+        [Test]
+        public void GivenEquals_WhenSuppliedWithWrappedTypeOfDifferentReference_ThenReturnsFalse()
+        {
+            // ARRANGE
+            var fakeEntity1 = new FakeEntity();
+            var fakeEntity2 = new FakeEntity();
+            var notNullFakeEntity1 = new NotNull<FakeEntity>(fakeEntity1);
+
+            // ACT
+            var actual = notNullFakeEntity1.Equals(fakeEntity2);
 
             // ASSERT
             actual.Should().BeFalse("because both entities are the same reference");
@@ -295,12 +367,13 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
         {
             // ARRANGE
             const FakeEntity nullEntity = null;
-            
+            // ReSharper disable once NotAccessedVariable
+            NotNull<FakeEntity> actualEntity;
+
             // ACT
             Action actual = () =>
             {
-                // ReSharper disable once UnusedVariable
-                var actualEntity = (NotNull<FakeEntity>) nullEntity;
+                actualEntity = (NotNull<FakeEntity>) nullEntity;
             };
 
             // ASSERT
@@ -324,6 +397,22 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
                 "because the value of wrapper should be the object which was cast from");
         }
 
+        /// <summary>
+        /// Given the narrowing operator when supplied with not null wrapped object then returns wrapped object.
+        /// </summary>
+        [Test]
+        public void GivenNarrowingOperator_WhenSuppliedWithNotNullWrappedObject_ThenReturnsWrappedObject()
+        {
+            // ARRANGE
+            var fakeEntity = new FakeEntity();
+            var notNullFakeEntity = new NotNull<FakeEntity>(fakeEntity);
+
+            // ACT
+            FakeEntity actual = notNullFakeEntity;
+
+            // ASSERT
+            actual.Should().Be(fakeEntity);
+        }
 
         /// <summary>A dummy method for testing.</summary>
         /// <param name="notNullObject">The not null object.</param>

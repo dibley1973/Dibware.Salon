@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Dibware.Salon.Domain.SharedKernel.Guards;
 using Dibware.Salon.Domain.SharedKernel.Helpers;
 
@@ -37,6 +36,42 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
         }
 
         /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            if (obj is TNotNullable)
+            {
+                var value = (TNotNullable) obj;
+
+                return Equals(value);
+            }
+
+            if (obj is NotNull<TNotNullable>)
+            {
+                var notNullable = (NotNull<TNotNullable>) obj;
+
+                return Equals(notNullable.Value);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Returns a value indicating if the specified value equals this.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        public bool Equals(TNotNullable value)
+        {
+            return Value.Equals(value);
+        }
+
+        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -51,14 +86,22 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
         /// <value>The value.</value>
         public TNotNullable Value { get; }
 
-        public static implicit operator NotNull<TNotNullable>(TNotNullable val)
+        /// <summary>
+        /// Implementation of the implicit widening operator to <see cref="NotNull{TNotNullable}"/>
+        /// </summary>
+        /// <param name="value">The value to wrap.</param>
+        public static implicit operator NotNull<TNotNullable>(TNotNullable value)
         {
-            return new NotNull<TNotNullable>(val);
+            return new NotNull<TNotNullable>(value);
         }
 
-        public static implicit operator TNotNullable(NotNull<TNotNullable> val)
+        /// <summary>
+        /// Implementation of the implicit narrowing operator to <see cref="TNotNullable"/>
+        /// </summary>
+        /// <param name="value">The value to unwrap.</param>
+        public static implicit operator TNotNullable(NotNull<TNotNullable> value)
         {
-            return val.Value;
+            return value.Value;
         }
 
         /// <summary>
@@ -91,32 +134,6 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
         public static bool operator !=(NotNull<TNotNullable> primary, NotNull<TNotNullable> secondary)
         {
             return !(primary == secondary);
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            TNotNullable value = obj as TNotNullable;
-
-            if (value == null) return false;
-
-            return Equals(value);
-        }
-
-        /// <summary>
-        /// Returns a value indicating if the specified value equals this.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns></returns>
-        public bool Equals(TNotNullable value)
-        {
-            return Value.Equals(value);
         }
 
         /// <summary>

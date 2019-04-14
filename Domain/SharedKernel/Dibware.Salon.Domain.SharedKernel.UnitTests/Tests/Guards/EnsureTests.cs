@@ -38,7 +38,7 @@
 //            Action action = () => Ensure.IsNotDefault(argumentValue, (ArgumentName)argumentName);
 
 //            // ASSERT
-//            action.ShouldThrow<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsDefault + ParameterNameSuffix);
+//            action.Should().Throw<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsDefault + ParameterNameSuffix);
 //        }
 
 //        /// <summary>
@@ -71,7 +71,7 @@
 //            Action action = () => Ensure.IsNotNull(null, (ArgumentName)argumentName);
 
 //            // ASSERT
-//            action.ShouldThrow<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNull + ParameterNameSuffix);
+//            action.Should().Throw<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNull + ParameterNameSuffix);
 //        }
 
 //        /// <summary>
@@ -104,7 +104,7 @@
 //            Action action = () => Ensure.IsNotNullOrEmpty(null, (ArgumentName)argumentName);
 
 //            // ASSERT
-//            action.ShouldThrow<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNotNullOrEmpty + ParameterNameSuffix);
+//            action.Should().Throw<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNotNullOrEmpty + ParameterNameSuffix);
 //        }
 
 //        /// <summary>
@@ -121,7 +121,7 @@
 //            Action action = () => Ensure.IsNotNullOrEmpty(value, (ArgumentName)argumentName);
 
 //            // ASSERT
-//            action.ShouldThrow<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNotNullOrEmpty + ParameterNameSuffix);
+//            action.Should().Throw<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNotNullOrEmpty + ParameterNameSuffix);
 //        }
 
 //        /// <summary>
@@ -154,7 +154,7 @@
 //            Action action = () => Ensure.IsNotNullEmptyOrWhiteSpace(null, (ArgumentName)argumentName);
 
 //            // ASSERT
-//            action.ShouldThrow<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNotNullEmptyOrWhiteSpace + ParameterNameSuffix);
+//            action.Should().Throw<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNotNullEmptyOrWhiteSpace + ParameterNameSuffix);
 //        }
 
 //        /// <summary>
@@ -171,7 +171,7 @@
 //            Action action = () => Ensure.IsNotNullEmptyOrWhiteSpace(value, (ArgumentName)argumentName);
 
 //            // ASSERT
-//            action.ShouldThrow<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNotNullEmptyOrWhiteSpace + ParameterNameSuffix);
+//            action.Should().Throw<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNotNullEmptyOrWhiteSpace + ParameterNameSuffix);
 //        }
 
 //        /// <summary>
@@ -189,7 +189,7 @@
 //            Action action = () => Ensure.IsNotNullEmptyOrWhiteSpace(value, (ArgumentName)argumentName);
 
 //            // ASSERT
-//            action.ShouldThrow<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNotNullEmptyOrWhiteSpace + ParameterNameSuffix);
+//            action.Should().Throw<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNotNullEmptyOrWhiteSpace + ParameterNameSuffix);
 //        }
 
 //        /// <summary>
@@ -241,7 +241,7 @@
 //            Action action = () => Ensure.IsNotInvalidOperation(condition, errorMessage);
 
 //            // ASSERT
-//            action.ShouldThrow<InvalidOperationException>();
+//            action.Should().Throw<InvalidOperationException>();
 //        }
 
 //        /// <summary>
@@ -277,7 +277,7 @@
 //            Action action = () => Ensure.IsNotInvalidOperation(conditionCallback, errorMessage);
 
 //            // ASSERT
-//            action.ShouldThrow<InvalidOperationException>();
+//            action.Should().Throw<InvalidOperationException>();
 //        }
 
 //        /// <summary>
@@ -311,7 +311,7 @@
 //            Action action = () => Ensure.IsNotInvalidCast(condition, errorMessage);
 
 //            // ASSERT
-//            action.ShouldThrow<InvalidCastException>();
+//            action.Should().Throw<InvalidCastException>();
 //        }
 
 //        /// <summary>
@@ -347,7 +347,7 @@
 //            Action action = () => Ensure.IsNotInvalidCast(condition, errorMessageCallback);
 
 //            // ASSERT
-//            action.ShouldThrow<InvalidCastException>();
+//            action.Should().Throw<InvalidCastException>();
 //        }
 
 //        /// <summary>
@@ -382,7 +382,7 @@
 //            Action action = () => Ensure.IsNotInvalidCast(conditionCallback, errorMessage);
 
 //            // ASSERT
-//            action.ShouldThrow<InvalidCastException>();
+//            action.Should().Throw<InvalidCastException>();
 //        }
 
 //        /// <summary>
@@ -418,7 +418,7 @@
 //            Action action = () => Ensure.IsNotInvalidCast(conditionCallback, errorMessageCallback);
 
 //            // ASSERT
-//            action.ShouldThrow<InvalidCastException>();
+//            action.Should().Throw<InvalidCastException>();
 //        }
 //    }
 //}

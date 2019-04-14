@@ -98,72 +98,72 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers.ResultTes
             result.IsSuccess.Should().Be(false);
         }
 
-    //    /// <summary>
-    //    /// Given the value property when a genericfail result then throws exception.
-    //    /// </summary>
-    //    [Test]
-    //    public void GivenValueProperty_WhenAGenericfailResult_ThenThrowsException()
-    //    {
-    //        // ARRANGE
-    //        var result = Result.Fail<FakeEntity>("Error message");
+        /// <summary>
+        /// Given the value property when a generic fail result then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenValueProperty_WhenAGenericfailResult_ThenThrowsException()
+        {
+            // ARRANGE
+            var result = Result.Fail<FakeEntity>("Error message");
 
-    //        // ACT
-    //        Action action = () => { FakeEntity dummy = result.Value; };
+            // ACT
+            Action action = () => { FakeEntity dummy = result.Value; };
 
-    //        // ASSERT
-    //        action.ShouldThrow<InvalidOperationException>();
-    //    }
+            // ASSERT
+            action.Should().Throw<InvalidOperationException>();
+        }
 
-    //    /// <summary>
-    //    /// Given a non generic fail creation when null message throws exception.
-    //    /// </summary>
-    //    [Test]
-    //    public void GivenANonGenericFailCreation_WhenNullMessage_ThrowsException()
-    //    {
-    //        // ARRANGE
-    //        Action action1 = () => { Result.Fail(null); };
+        /// <summary>
+        /// Given a non generic fail creation when null message throws exception.
+        /// </summary>
+        [Test]
+        public void GivenANonGenericFailCreation_WhenNullMessage_ThrowsException()
+        {
+            // ARRANGE
+            Action action1 = () => { Result.Fail(null); };
 
-    //        // ASSERT
-    //        action1.ShouldThrow<ArgumentNullException>();
-    //    }
+            // ASSERT
+            action1.Should().Throw<ArgumentNullException>();
+        }
 
-    //    /// <summary>
-    //    /// Given a non generic fail creation when empty string message throws exception.
-    //    /// </summary>
-    //    [Test]
-    //    public void GivenANonGenericFailCreation_WhenEmptyStringMessage_ThrowsException()
-    //    {
-    //        // ARRANGE
-    //        Action action2 = () => { Result.Fail(string.Empty); };
+        /// <summary>
+        /// Given a non generic fail creation when empty string message throws exception.
+        /// </summary>
+        [Test]
+        public void GivenANonGenericFailCreation_WhenEmptyStringMessage_ThrowsException()
+        {
+            // ARRANGE
+            Action action2 = () => { Result.Fail(string.Empty); };
 
-    //        // ASSERT
-    //        action2.ShouldThrow<ArgumentNullException>();
-    //    }
+            // ASSERT
+            action2.Should().Throw<ArgumentNullException>();
+        }
 
-    //    /// <summary>
-    //    /// Given a generic fail creation when null message throws exception.
-    //    /// </summary>
-    //    [Test]
-    //    public void GivenAGenericFailCreation_WhenNullMessage_ThrowsException()
-    //    {
-    //        // ARRANGE
-    //        Action action3 = () => { Result.Fail<FakeEntity>(null); };
+        /// <summary>
+        /// Given a generic fail creation when null message throws exception.
+        /// </summary>
+        [Test]
+        public void GivenAGenericFailCreation_WhenNullMessage_ThrowsException()
+        {
+            // ARRANGE
+            Action action3 = () => { Result.Fail<FakeEntity>(null); };
 
-    //        // ASSERT
-    //        action3.ShouldThrow<ArgumentNullException>();
-    //    }
+            // ASSERT
+            action3.Should().Throw<ArgumentNullException>();
+        }
 
-    //    /// <summary>
-    //    /// Given a generic fail creation when empty string message throws exception.
-    //    /// </summary>
-    //    [Test]
-    //    public void GivenAGenericFailCreation_WhenEmptyStringMessage_ThrowsException()
-    //    {
-    //        // ARRANGE
-    //        Action action4 = () => { Result.Fail<FakeEntity>(string.Empty); };
+        /// <summary>
+        /// Given a generic fail creation when empty string message throws exception.
+        /// </summary>
+        [Test]
+        public void GivenAGenericFailCreation_WhenEmptyStringMessage_ThrowsException()
+        {
+            // ARRANGE
+            Action action4 = () => { Result.Fail<FakeEntity>(string.Empty); };
 
-    //        // ASSERT
-    //        action4.ShouldThrow<ArgumentNullException>();
-    //    }
+            // ASSERT
+            action4.Should().Throw<ArgumentNullException>();
+        }
     }
 }

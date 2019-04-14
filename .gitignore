@@ -8,9 +8,9 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.FileListAbsolute.txt
 VSWorkspace.json
 slnx.sqlite
-*.FileListAbsolute.txt
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
