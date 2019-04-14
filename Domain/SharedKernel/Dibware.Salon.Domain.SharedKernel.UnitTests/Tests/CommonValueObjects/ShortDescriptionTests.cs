@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ShortDescriptionTests.cs" company="Chesil Media">
+// <copyright file="ShortDescriptionTests.cs" company="Dibware">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -135,6 +135,20 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.CommonValueObjects
 
             // ASSERT
             actual.Should().Be(value);
+        }
+
+        /// <summary>Given the empty short description when accessed then has empty value.</summary>
+        [Test]
+        public void GivenEmpty_WhenAccessed_ThenHasEmptyValue()
+        {
+            // ARRANGE
+            var emptyDescription = ShortDescription.Empty;
+
+            // ACT
+            var actual = emptyDescription.Value;
+
+            // ASSERT
+            actual.Should().BeEmpty("because the empty short desciption does not contain a value");
         }
 
         /// <summary>

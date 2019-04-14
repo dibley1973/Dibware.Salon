@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="CheckTests.cs" company="Chesil Media">
+// <copyright file="CheckTests.cs" company="Dibware">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -17,7 +17,7 @@ using NUnit.Framework;
 namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
 {
     /// <summary>
-    /// Tests the guard clauses&gt;
+    /// Tests the guard clauses
     /// </summary>
     [TestFixture]
     public class CheckTests
