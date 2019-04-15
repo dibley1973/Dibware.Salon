@@ -8,6 +8,7 @@
 //-----------------------------------------------------------------------
 
 using Dibware.Salon.Domain.SharedKernel.Amplifiers;
+using Dibware.Salon.Domain.SharedKernel.UnitTests.Fakes;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -75,6 +76,24 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers.ResultTes
         }
 
         /// <summary>
+        /// Given the combine method when combined results are all ok, with separator then returns no failures.
+        /// </summary>
+        [Test]
+        public void GivenCombine_WhenCombinedResultsAreAllOkWithSeparator_ThenReturnsNoFailures()
+        {
+            // ARRANGE
+            var result1 = Result.Ok();
+            var result2 = Result.Ok();
+            var result3 = Result.Ok("Some string");
+
+            // ACT
+            var result = Result.Combine( result1, result2, result3);
+
+            // ASSERT
+            result.IsSuccess.Should().BeTrue();
+        }
+
+        /// <summary>
         /// Given the combine method when combined results are all ok then returns no failures.
         /// </summary>
         [Test]
@@ -103,6 +122,26 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers.ResultTes
 
             // ACT
             var result = Result.Combine(";", results);
+
+            // ASSERT
+            result.IsSuccess.Should().BeTrue();
+        }
+
+        /// <summary>
+        /// Given the combine of T method when combined array of generic results then returns success.
+        /// </summary>
+        [Test]
+        public void GivenCombineOfT_WhenCombinedArrayOfGenericResults_ThenReturnsSuccess()
+        {
+            // ARRANGE
+            Result<FakeEntity>[] results =
+            {
+                Result.Ok(new FakeEntity()),
+                Result.Ok(new FakeEntity())
+            };
+
+            // ACT
+            var result = Result.Combine<FakeEntity>(results);
 
             // ASSERT
             result.IsSuccess.Should().BeTrue();
