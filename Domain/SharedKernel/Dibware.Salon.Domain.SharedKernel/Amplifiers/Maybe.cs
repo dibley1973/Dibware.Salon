@@ -206,9 +206,9 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
         /// <returns>A <see cref="string"/> that represents this instance.</returns>
         public override string ToString()
         {
-            if (HasNoValue) return "Value: No-value";
+            if (HasNoValue) return $"An empty maybe of type {typeof(T).Name}";
 
-            return $"Value: {Value.ToString()}";
+            return $"A maybe of type {typeof(T).Name} with a value of: {Value.ToString()}";
         }
     }
 }
