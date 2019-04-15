@@ -9,6 +9,7 @@
 
 using System;
 using Dibware.Salon.Domain.SharedKernel.Guards;
+using Dibware.Salon.Domain.SharedKernel.Helpers;
 
 namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
 {
@@ -39,12 +40,6 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
         {
             _value = value;
         }
-
-        /////// <summary>
-        /////// Gets an empty maybe.
-        /////// </summary>
-        /////// <value>The none.</value>
-        ////public static Maybe<T> Empty => EmptyMaybe;
 
         /// <summary>
         /// Gets a value indicating whether this instance has value.
@@ -112,23 +107,38 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
         }
 
         /// <summary>
-        /// Determines whether the value of the first specified <see cref="Maybe{T}"/> is the same as
-        /// the value of the second specified <see cref="Maybe{T}"/>.
+        /// Determines whether the value of the primary specified <see cref="Maybe{T}"/> is the same as
+        /// the value of the secondary specified <see cref="Maybe{T}"/>.
         /// </summary>
-        /// <param name="first">The first maybe.</param>
-        /// <param name="second">The second value.</param>
+        /// <param name="primary">The primary maybe.</param>
+        /// <param name="secondary">The secondary value.</param>
         /// <returns>The result of the operator.</returns>
-        public static bool operator ==(Maybe<T> first, Maybe<T> second)
+        public static bool operator ==(Maybe<T> primary, Maybe<T> secondary)
         {
-            return first.Equals(second);
+            if (primary.HasValue ^ secondary.HasValue)
+            {
+                return false;
+            }
+
+            if (primary.HasNoValue && secondary.HasNoValue)
+            {
+                return true;
+            }
+
+            if (ReferenceHelper.BothReferencesAreNull(primary.Value, secondary.Value))
+            {
+                return true;
+            }
+
+            return primary.Value.Equals(secondary.Value);
         }
 
         /// <summary>
-        /// Determines whether the value of the first specified <see cref="Maybe{T}"/> is not the
-        /// same as the value of the second specified <see cref="Maybe{T}"/>.
+        /// Determines whether the value of the primary specified <see cref="Maybe{T}"/> is not the
+        /// same as the value of the secondary specified <see cref="Maybe{T}"/>.
         /// </summary>
-        /// <param name="first">The first maybe.</param>
-        /// <param name="second">The second value.</param>
+        /// <param name="first">The primary maybe.</param>
+        /// <param name="second">The secondary value.</param>
         /// <returns>The result of the operator.</returns>
         public static bool operator !=(Maybe<T> first, Maybe<T> second)
         {

@@ -223,6 +223,73 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
             maybe.HasValue.Should().BeTrue();
         }
 
+        /// <summary>Given the is equal to when both are different references then returns false.</summary>
+        [Test]
+        public void GivenIsEqualTo_WhenBothAreDifferentReferences_ThenReturnsFalse()
+        {
+            // ARRANGE
+            var product1 = FakeEntityData.CreateEmptyProduct();
+            var product2 = FakeEntityData.CreateEmptyProduct();
+            Maybe<FakeEntity> maybe1 = product1;
+            Maybe<FakeEntity> maybe2 = product2;
+
+            // ACT
+            var actual = maybe1 == maybe2;
+
+            // ASSERT
+            actual.Should().BeFalse("because they are different references");
+        }
+
+        /// <summary>Given the is equal to when both are same reference then returns true.</summary>
+        [Test]
+        public void GivenIsEqualTo_WhenBothAreSameReference_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var product = FakeEntityData.CreateEmptyProduct();
+            Maybe<FakeEntity> maybe1 = product;
+            Maybe<FakeEntity> maybe2 = maybe1;
+
+            // ACT
+            var actual = maybe1 == maybe2;
+
+            // ASSERT
+            actual.Should().BeTrue("because they are the same references");
+        }
+
+        /// <summary>Given the is equal to when both are null reference then returns true.</summary>
+        [Test]
+        public void GivenIsEqualTo_WhenBothAreNullReference_ThenReturnsTrue()
+        {
+            // ARRANGE
+            Maybe<FakeEntity> maybe1 = default(Maybe<FakeEntity>);
+            Maybe<FakeEntity> maybe2 = default(Maybe<FakeEntity>);
+
+            // ACT
+            var actual = maybe1 == maybe2;
+
+            // ASSERT
+            actual.Should().BeTrue("because they are the same references");
+        }
+
+        /// <summary>Given the is equal to when one has value andthe other does not then returnsfalse.</summary>
+        [Test]
+        public void GivenIsEqualTo_WhenOneHasValueAndtheOtherDoesNot_ThenReturnsfalse()
+        {
+            // ARRANGE
+            var product1 = FakeEntityData.CreateEmptyProduct();
+            Maybe<FakeEntity> maybe1 = product1;
+            Maybe<FakeEntity> maybe2 = Maybe<FakeEntity>.Empty;
+            Maybe<FakeEntity> maybe3 = product1;
+
+            // ACT
+            var actual1 = maybe1 == maybe2;
+            var actual2 = maybe2 == maybe3;
+
+            // ASSERT
+            actual1.Should().BeFalse("because they first has a value and the other does not");
+            actual2.Should().BeFalse("because they second has a value and the other does not");
+        }
+
         /// <summary>
         /// Given the HasNoValue for a default maybe returns true.
         /// </summary>
