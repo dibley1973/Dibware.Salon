@@ -6,6 +6,8 @@ The purpose of this project is to build a web based salon booking application.
 **Branches:**
 * master branch [![Build Status](https://api.travis-ci.com/dibley1973/Dibware.Salon.svg?branch=master)](https://travis-ci.com/dibley1973/Dibware.Salon)
 
+[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=Dibware.Salon)](https://sonarcloud.io/dashboard/index/Dibware.Salon)
+
 ## Tooling
 Before embarking on development it is suggested that SonarLint is installed.
 
