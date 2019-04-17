@@ -125,7 +125,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
             var actual = notNullFakeEntity1.Equals(notNullFakeEntity2);
 
             // ASSERT
-            actual.Should().BeTrue("because the specified object has an instance reference");
+            actual.Should().BeTrue("because the specified object has the same instance reference");
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
             var actual = notNullFakeEntity1.Equals(fakeEntity2);
 
             // ASSERT
-            actual.Should().BeTrue("because the specified object has an instance reference");
+            actual.Should().BeTrue("because the specified object has the same wrapped instance reference");
         }
 
         /// <summary>

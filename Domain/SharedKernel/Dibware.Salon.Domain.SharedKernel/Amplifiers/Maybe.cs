@@ -205,7 +205,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
         /// </returns>
         public override int GetHashCode()
         {
-            if (HasNoValue) return 0;
+            if (HasNoValue) return GetHashCodeBasedUponTypeNames();
 
             return _value.GetHashCode();
         }
@@ -219,6 +219,25 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
             if (HasNoValue) return $"An empty maybe of type {typeof(T).Name}";
 
             return $"A maybe of type {typeof(T).Name} with a value of: {Value.ToString()}";
+        }
+
+        /// <summary>Gets the hash code based upon type names.</summary>
+        /// <returns>Returns in <c>int</c> representation</returns>
+        private int GetHashCodeBasedUponTypeNames()
+        {
+            int initialPrimeNumber = 61;
+            int multiplierPrimeNumber = 79;
+
+            // Overflow is fine, just wrap
+            unchecked
+            {
+                int hash = initialPrimeNumber;
+
+                hash = (hash * multiplierPrimeNumber) + GetType().Name.GetHashCode();
+                hash = (hash * multiplierPrimeNumber) + typeof(T).Name.GetHashCode();
+
+                return hash;
+            }
         }
     }
 }

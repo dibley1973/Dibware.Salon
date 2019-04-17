@@ -22,6 +22,60 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
     public class MaybeTests
     {
         /// <summary>
+        /// Given the equals for object when passed null then returns false.
+        /// </summary>
+        [Test]
+        public void GivenEqualsForObject_WhenPassedNull_ThenReturnsFalse()
+        {
+            // ARRANGE
+            const object nullObject = null;
+            var fakeEntity = new FakeEntity();
+            var fakeEntityOrNothing = Maybe<FakeEntity>.Wrap(fakeEntity);
+
+            // ACT
+            var actual = fakeEntityOrNothing.Equals(nullObject);
+
+            // ASSERT
+            actual.Should().BeFalse("because the specified object is a null reference");
+        }
+
+        /// <summary>
+        /// Given the equals for object when passed same instance then returns true.
+        /// </summary>
+        [Test]
+        public void GivenEqualsForObject_WhenPassedValidInstance_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var fakeEntity1 = new FakeEntity();
+            var fakeEntityOrNothing1 = Maybe<FakeEntity>.Wrap(fakeEntity1);
+            var fakeEntityOrNothing2 = (object)Maybe<FakeEntity>.Wrap(fakeEntity1);
+
+            // ACT
+            var actual = fakeEntityOrNothing1.Equals(fakeEntityOrNothing2);
+
+            // ASSERT
+            actual.Should().BeTrue("because the specified object has the same instance reference");
+        }
+
+        /// <summary>
+        /// Given the equals for object when passed valid instance of same wrapped object then returns true.
+        /// </summary>
+        [Test]
+        public void GivenEqualsForObject_WhenPassedValidInstanceOfSameWrappedObject_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var fakeEntity1 = new FakeEntity();
+            var fakeEntityOrNothing1 = Maybe<FakeEntity>.Wrap(fakeEntity1);
+            var fakeEntity2 = (object)fakeEntity1;
+
+            // ACT
+            var actual = fakeEntityOrNothing1.Equals(fakeEntity2);
+
+            // ASSERT
+            actual.Should().BeTrue("because the specified object has the same wrapped instance reference");
+        }
+
+        /// <summary>
         /// Given value for a default <see cref="Maybe{T}"/> throws exception.
         /// </summary>
         [Test]
@@ -291,6 +345,43 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
         }
 
         /// <summary>
+        /// Given the get hash code when accessed for populated Maybe then returns the same as wrapped class.
+        /// </summary>
+        [Test]
+        public void GivenGetHashCode_WhenAccessedForPopulatedMaybe_ThenReturnsTheSameAsWrappedClass()
+        {
+            // ARRANGE
+            var fakeValueObject = new FakeValueObject("1", "11");
+            var notNullFakeEntity = Maybe<FakeValueObject>.Wrap(fakeValueObject);
+            var expectedHashCode = fakeValueObject.GetHashCode();
+
+            // ACT
+            var actual = notNullFakeEntity.GetHashCode();
+
+            // ASSERT
+            actual.Should().Be(expectedHashCode,
+                "because the hash code and the wrapped object's hashcode should match");
+        }
+        
+        /// <summary>
+        /// Given the get hash code when accessed for empty then returns hash code for type names.
+        /// </summary>
+        [Test]
+        public void GivenGetHashCode_WhenAccessedForEmptyMaybe_ThenReturnsHashcodeForTypeNames()
+        {
+            // ARRANGE
+            var notNullFakeEntity = Maybe<FakeValueObject>.Empty;
+            var expectedHashCode = GetHashCodeBasedUponTypeNames<Maybe<FakeValueObject>, FakeValueObject>();
+
+            // ACT
+            var actual = notNullFakeEntity.GetHashCode();
+
+            // ASSERT
+            actual.Should().Be(expectedHashCode,
+                "because the hash code and the wrapped object's hashcode should match");
+        }
+
+        /// <summary>
         /// Given the HasNoValue for a default maybe returns true.
         /// </summary>
         [Test]
@@ -368,6 +459,27 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
 
             // ASSERT
             maybe.HasNoValue.Should().BeFalse();
+        }
+
+        /// <summary>Gets the hash code based upon type names.</summary>
+        /// <typeparam name="TWrapper">The type of the class which wraps the object</typeparam>
+        /// <typeparam name="TWrapped">The type of the class which is wrapped</typeparam>
+        /// <returns>Returns in <c>int</c> representation</returns>
+        private int GetHashCodeBasedUponTypeNames<TWrapper, TWrapped>()
+        {
+            int initialPrimeNumber = 61;
+            int multiplierPrimeNumber = 79;
+
+            // Overflow is fine, just wrap
+            unchecked
+            {
+                int hash = initialPrimeNumber;
+
+                hash = (hash * multiplierPrimeNumber) + typeof(TWrapper).Name.GetHashCode();
+                hash = (hash * multiplierPrimeNumber) + typeof(TWrapped).Name.GetHashCode();
+
+                return hash;
+            }
         }
     }
 }
