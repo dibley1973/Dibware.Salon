@@ -32,11 +32,6 @@ namespace Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys
         /// </summary>
         protected const int ExpectedElementCount = 2;
 
-        protected ErrorKeyBase()
-        {
-            
-        }
-
         /// <summary>
         /// Tries to parses the specofoed formatted key. If it succeeds then a tuple containing the
         /// key and argument name is wrapped in a success result and returned. If it fails then a

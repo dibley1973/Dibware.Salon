@@ -1,4 +1,4 @@
-﻿
+﻿using Dibware.Salon.Domain.SharedKernel.BaseClasses;
 using Dibware.Salon.Domain.SharedKernel.UnitTests.Fakes;
 using Dibware.Salon.Domain.SharedKernel.UnitTests.TestData;
 using FluentAssertions;

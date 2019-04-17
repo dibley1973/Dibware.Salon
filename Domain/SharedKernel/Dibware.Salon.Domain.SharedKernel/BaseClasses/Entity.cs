@@ -9,16 +9,14 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
         /// <value>The identifier.</value>
         public long Id { get; protected set; }
 
-        /// <summary>Returns this instance cast as an <see cref="object"/>.</summary>
-        /// <value>The cast instance.</value>
-        protected object Actual => this;
-
         /// <summary>
         /// Gets a value indicating whether this instance is persistent. TrPersistentansient
         /// indicates this instance can be persisted to a data store. This state is the opposite of
         /// <see cref="IsTransient"/>
         /// </summary>
-        /// <returns><c>true</c> if this instance is persistent; otherwise, <c>false</c>.</returns>
+        /// <value>
+        ///   <c>true</c> if this instance is persistent; otherwise, <c>false</c>.
+        /// </value>
         public virtual bool IsPersistent => !IsTransient;
 
         /// <summary>
@@ -83,6 +81,10 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
         {
             return (Actual.GetType().ToString() + Id).GetHashCode();
         }
+
+        /// <summary>Returns this instance cast as an <see cref="object"/>.</summary>
+        /// <value>The cast instance.</value>
+        protected object Actual => this;
 
         /// <summary>Gets a value indicating if both of the entity Ids match.</summary>
         /// <param name="other">The other <see cref="Entity"/>.</param>

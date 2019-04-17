@@ -1,16 +1,20 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+    "signature": "956d36dfd667222d846450ba922e197b7c9a8d4a"
   },
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.0": {
       "Dibware.Salon.Domain.SharedKernel/1.0.0": {
+        "dependencies": {
+          "StyleCop.Analyzers": "1.0.2"
+        },
         "runtime": {
           "Dibware.Salon.Domain.SharedKernel.dll": {}
         }
-      }
+      },
+      "StyleCop.Analyzers/1.0.2": {}
     }
   },
   "libraries": {
@@ -18,6 +22,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "StyleCop.Analyzers/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SJXrFL+4YbLBlV+4Ija4/ezKApo1PfMBpeYS4vZomnUTWNxHHt0D3b+4GYc8ayA06+ZMAChYi6+nSfuFD56WMw==",
+      "path": "stylecop.analyzers/1.0.2",
+      "hashPath": "stylecop.analyzers.1.0.2.nupkg.sha512"
     }
   }
 }

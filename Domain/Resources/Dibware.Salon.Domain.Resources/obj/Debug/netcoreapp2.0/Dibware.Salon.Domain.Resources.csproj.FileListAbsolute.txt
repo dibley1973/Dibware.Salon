@@ -10,3 +10,4 @@ G:\Dev\Dibware.Salon\Domain\Resources\Dibware.Salon.Domain.Resources\obj\Debug\n
 G:\Dev\Dibware.Salon\Domain\Resources\Dibware.Salon.Domain.Resources\obj\Debug\netcoreapp2.0\Dibware.Salon.Domain.Resources.csproj.CopyComplete
 G:\Dev\Dibware.Salon\Domain\Resources\Dibware.Salon.Domain.Resources\obj\Debug\netcoreapp2.0\Dibware.Salon.Domain.Resources.dll
 G:\Dev\Dibware.Salon\Domain\Resources\Dibware.Salon.Domain.Resources\obj\Debug\netcoreapp2.0\Dibware.Salon.Domain.Resources.pdb
+G:\Dev\Dibware.Salon\Domain\Resources\Dibware.Salon.Domain.Resources\bin\Debug\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.xml

@@ -197,9 +197,15 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
+      "StyleCop.Analyzers/1.0.2": {
+        "type": "package"
+      },
       "Dibware.Salon.Domain.SharedKernel/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "StyleCop.Analyzers": "1.0.2"
+        },
         "compile": {
           "bin/placeholder/Dibware.Salon.Domain.SharedKernel.dll": {}
         },
@@ -665,6 +671,20 @@
         "lib/netstandard1.0/_._",
         "netstandard.library.2.0.0.nupkg.sha512",
         "netstandard.library.nuspec"
+      ]
+    },
+    "StyleCop.Analyzers/1.0.2": {
+      "sha512": "SJXrFL+4YbLBlV+4Ija4/ezKApo1PfMBpeYS4vZomnUTWNxHHt0D3b+4GYc8ayA06+ZMAChYi6+nSfuFD56WMw==",
+      "type": "package",
+      "path": "stylecop.analyzers/1.0.2",
+      "files": [
+        ".signature.p7s",
+        "analyzers/dotnet/cs/StyleCop.Analyzers.CodeFixes.dll",
+        "analyzers/dotnet/cs/StyleCop.Analyzers.dll",
+        "stylecop.analyzers.1.0.2.nupkg.sha512",
+        "stylecop.analyzers.nuspec",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
       ]
     },
     "Dibware.Salon.Domain.SharedKernel/1.0.0": {

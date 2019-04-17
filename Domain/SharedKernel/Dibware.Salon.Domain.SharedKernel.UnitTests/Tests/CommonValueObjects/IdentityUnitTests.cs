@@ -27,7 +27,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.CommonValueObjects
         public void GivenCreateMethod_WhenCalledWithLessThanMinimumValue_ThenReturnsFailResult()
         {
             // ARRANGE
-            const int value = Identity.MinimumValue -1;
+            const int value = Identity.MinimumValue - 1;
 
             // ACT
             var actual = Identity.Create(value);

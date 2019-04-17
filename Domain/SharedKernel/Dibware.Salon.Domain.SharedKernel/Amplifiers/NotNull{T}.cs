@@ -23,6 +23,10 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
             Value = value;
         }
 
+        /// <summary>Gets the value.</summary>
+        /// <value>The value.</value>
+        public TNotNullable Value { get; }
+
         /// <summary>
         /// Indicates whether the current object is equal to another object of the same type.
         /// </summary>
@@ -46,14 +50,14 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
         {
             if (obj is TNotNullable)
             {
-                var value = (TNotNullable) obj;
+                var value = (TNotNullable)obj;
 
                 return Equals(value);
             }
 
             if (obj is NotNull<TNotNullable>)
             {
-                var notNullable = (NotNull<TNotNullable>) obj;
+                var notNullable = (NotNull<TNotNullable>)obj;
 
                 return Equals(notNullable.Value);
             }
@@ -65,7 +69,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
         /// Returns a value indicating if the specified value equals this.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns></returns>
+        /// <returns>Returns <c>true</c> if equal; otherwise <c>false</c>.</returns>
         public bool Equals(TNotNullable value)
         {
             return Value.Equals(value);
@@ -81,10 +85,6 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
         {
             return EqualityComparer<TNotNullable>.Default.GetHashCode(Value);
         }
-
-        /// <summary>Gets the value.</summary>
-        /// <value>The value.</value>
-        public TNotNullable Value { get; }
 
         /// <summary>
         /// Implementation of the implicit widening operator to <see cref="NotNull{TNotNullable}"/>

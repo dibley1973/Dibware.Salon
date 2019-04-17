@@ -57,7 +57,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
             var actual = notNullEntity.Value;
 
             // ASSERT
-            actual.Should().Be(entity,"because a not null object is permitted");
+            actual.Should().Be(entity, "because a not null object is permitted");
         }
 
         /// <summary>

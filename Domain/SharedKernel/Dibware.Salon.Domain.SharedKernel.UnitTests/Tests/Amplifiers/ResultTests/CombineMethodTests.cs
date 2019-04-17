@@ -87,7 +87,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers.ResultTes
             var result3 = Result.Ok("Some string");
 
             // ACT
-            var result = Result.Combine( result1, result2, result3);
+            var result = Result.Combine(result1, result2, result3);
 
             // ASSERT
             result.IsSuccess.Should().BeTrue();
