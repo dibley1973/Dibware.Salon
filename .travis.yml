@@ -8,7 +8,7 @@ addons:
   sonarcloud:
     organization: "dibley1973-github" # the key of the org you chose at step #3
     token:
-      secure: e5bc1a7c518288b7d5ad6ecac1fe0a69d7fda231
+      secure: SONAR_TOKEN
 branches:
   only:
     - master
@@ -18,7 +18,5 @@ before_script:
 script:
   - ./build.sh
   - ./run-tests.sh
-  - sonar-scanner -x
+  - sonar-scanner
   
-
-
