@@ -18,7 +18,7 @@ before_script:
 script:
   - ./build.sh
   - ./run-tests.sh
-  - sonar-scanner
+  - sonar-scanner -x
   
 
 
