@@ -14,7 +14,7 @@ using Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys;
 namespace Dibware.Salon.Domain.SharedKernel.CommonValueObjects
 {
     /// <summary>
-    /// Represents an idendity
+    /// Represents an identity
     /// </summary>
     /// <seealso cref="BaseClasses.ValueObject{Identity}"/>
     public class Identity : ValueObject<Identity>

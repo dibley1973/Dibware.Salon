@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="NameTests.cs" company="Dibware">
+// <copyright file="NameUnitTests.cs" company="Dibware">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -19,7 +19,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.CommonValueObjects
     /// Test for <see cref="Name"/> structure
     /// </summary>
     [TestFixture]
-    public class NameTests
+    public class NameUnitTests
     {
         /// <summary>
         /// Given the create method when called with null value then returns fail result.

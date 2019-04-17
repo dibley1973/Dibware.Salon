@@ -90,41 +90,6 @@ namespace Dibware.Salon.Domain.SharedKernel.CommonValueObjects
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="T:System.Object"/>, is equal to this instance
-        /// of <see cref="T:ORMS.Shared.SharedKernel.BaseClasses.ValueObject`1"/>.
-        /// </summary>
-        /// <param name="other">The other.</param>
-        /// <returns>
-        /// <c>true</c> if the specified <see
-        /// cref="T:ORMS.Shared.SharedKernel.BaseClasses.ValueObject`1"/> is equal to this instance;
-        /// otherwise, <c>false</c>.
-        /// </returns>
-        protected bool EqualsCore(Name other)
-        {
-            return Value.Equals(other.Value);
-        }
-
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>Returns a hash code for this instance</returns>
-        protected override int GetHashCodeCore()
-        {
-            int initialPrimeNumber = 61;
-            int multiplierPrimeNumber = 79;
-
-            // Overflow is fine, just wrap
-            unchecked
-            {
-                int hash = initialPrimeNumber;
-
-                hash = (hash * multiplierPrimeNumber) + Value.GetHashCode();
-
-                return hash;
-            }
-        }
-
-        /// <summary>
         /// Internal method to create a <see cref="Name"/> object.
         /// Warning: This function bypasses argument validation.
         /// </summary>

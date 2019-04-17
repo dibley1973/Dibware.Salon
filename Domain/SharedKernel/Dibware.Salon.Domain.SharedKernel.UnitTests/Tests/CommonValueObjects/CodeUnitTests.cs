@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ShortDescriptionTests.cs" company="Dibware">
+// <copyright file="CodeUnitTests.cs" company="Dibware">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -8,6 +8,7 @@
 //-----------------------------------------------------------------------
 
 using System;
+using Dibware.Salon.Domain.SharedKernel.Amplifiers;
 using Dibware.Salon.Domain.SharedKernel.CommonValueObjects;
 using Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys;
 using FluentAssertions;
@@ -16,13 +17,13 @@ using NUnit.Framework;
 namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.CommonValueObjects
 {
     /// <summary>
-    /// Test for <see cref="ShortDescription"/> structure
+    /// Test for <see cref="Code"/> structure
     /// </summary>
     [TestFixture]
-    public class ShortDescriptionTests
+    public class CodeUnitTests
     {
         /// <summary>
-        /// Given the create method when called with null value then returns fail result.
+        /// Given Create method when called with null value then returns fail result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenCalledWithNullValue_ThenReturnsFailResult()
@@ -30,15 +31,15 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.CommonValueObjects
             // ARRANGE
 
             // ACT
-            var actual = ShortDescription.Create(null);
+            var actual = Code.Create(null);
 
             // ASSERT
             actual.IsFailure.Should().BeTrue();
-            actual.Error.Should().Be(ShortDescriptionErrorKeys.IsNullEmptyOrWhiteSpace);
+            actual.Error.Should().Be(CodeErrorKeys.IsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
-        /// Given the create method when called with empty string then returns fail result.
+        /// Given Create method when called with empty string then returns fail result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenCalledWithEmptyValue_ThenReturnsFailResult()
@@ -46,15 +47,15 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.CommonValueObjects
             // ARRANGE
 
             // ACT
-            var actual = ShortDescription.Create(string.Empty);
+            var actual = Code.Create(string.Empty);
 
             // ASSERT
             actual.IsFailure.Should().BeTrue();
-            actual.Error.Should().Be(ShortDescriptionErrorKeys.IsNullEmptyOrWhiteSpace);
+            actual.Error.Should().Be(CodeErrorKeys.IsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
-        /// Given the create method when called with white space then returns fail result.
+        /// Given Create method when called with white space then returns fail result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenCalledWithWhiteSpace_ThenReturnsFailResult()
@@ -62,58 +63,57 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.CommonValueObjects
             // ARRANGE
 
             // ACT
-            var actual = ShortDescription.Create("  ");
+            var actual = Code.Create("  ");
 
             // ASSERT
             actual.IsFailure.Should().BeTrue();
-            actual.Error.Should().Be(ShortDescriptionErrorKeys.IsNullEmptyOrWhiteSpace);
+            actual.Error.Should().Be(CodeErrorKeys.IsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
-        /// Given the create method when called with value longer than maximum length then returns
-        /// fail result.
+        /// Given Create method when called with value longer than maximum length then returns fail result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenCalledWithValueLongerThanMaximumLength_ThenReturnsFailResult()
         {
             // ARRANGE
-            var value = new string('A', ShortDescription.MaximumCharacterLength + 1);
+            var value = new string('A', Code.MaximumCharacterLength + 1);
 
             // ACT
-            var actual = ShortDescription.Create(value);
+            var actual = Code.Create(value);
 
             // ASSERT
             actual.IsFailure.Should().BeTrue();
-            actual.Error.Should().Be(ShortDescriptionErrorKeys.IsTooLong);
+            actual.Error.Should().Be(CodeErrorKeys.IsTooLong);
         }
 
         /// <summary>
-        /// Given the create method when called with value longer at maximum length returns success result.
+        /// Given Create method when called with value at maximum returns success result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenCalledWithValueAtMaximumLength_ThenReturnsSuccessResult()
         {
             // ARRANGE
-            var value = new string('A', ShortDescription.MaximumCharacterLength);
+            var value = new string('A', Code.MaximumCharacterLength);
 
             // ACT
-            var actual = ShortDescription.Create(value);
+            var actual = Code.Create(value);
 
             // ASSERT
             actual.IsSuccess.Should().BeTrue();
         }
 
         /// <summary>
-        /// Given the create method when called with value less than maximum length returns success result.
+        /// Given Create method when called with value less than maximum returns success result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenCalledWithValueLessThanMaximumLength_ThenReturnsSuccessResult()
         {
             // ARRANGE
-            var value = new string('A', ShortDescription.MaximumCharacterLength - 1);
+            var value = new string('A', Code.MaximumCharacterLength - 1);
 
             // ACT
-            var actual = ShortDescription.Create(value);
+            var actual = Code.Create(value);
 
             // ASSERT
             actual.IsSuccess.Should().BeTrue();
@@ -126,29 +126,15 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.CommonValueObjects
         public void GivenValue_WhenReadAfterValidConstruction_ThenReturnsConstructedValue()
         {
             // ARRANGE
-            var value = new string('A', ShortDescription.MaximumCharacterLength - 1);
-            var nameResult = ShortDescription.Create(value);
-            var name = nameResult.Value;
+            var value = new string('A', Code.MaximumCharacterLength - 1);
+            var codeResult = Code.Create(value);
+            var code = codeResult.Value;
 
             // ACT
-            var actual = name.Value;
+            var actual = code.Value;
 
             // ASSERT
             actual.Should().Be(value);
-        }
-
-        /// <summary>Given the empty short description when accessed then has empty value.</summary>
-        [Test]
-        public void GivenEmpty_WhenAccessed_ThenHasEmptyValue()
-        {
-            // ARRANGE
-            var emptyDescription = ShortDescription.Empty;
-
-            // ACT
-            var actual = emptyDescription.Value;
-
-            // ASSERT
-            actual.Should().BeEmpty("because the empty short desciption does not contain a value");
         }
 
         /// <summary>
@@ -158,16 +144,30 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.CommonValueObjects
         public void GivenEquals_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1Result = ShortDescription.Create("ShortDescription");
-            var name1 = name1Result.Value;
-            var name2Result = ShortDescription.Create("ShortDescription");
-            var name2 = name2Result.Value;
+            var code1Result = Code.Create("Code");
+            var code1 = code1Result.Value;
+            var code2Result = Code.Create("Code");
+            var code2 = code2Result.Value;
 
             // ACT
-            var actual = name1.Equals(name2);
+            var actual = code1.Equals(code2);
 
             // ASSERT
             actual.Should().BeTrue();
+        }
+
+        /// <summary>Given the empty code when accessed then has empty value.</summary>
+        [Test]
+        public void GivenEmpty_WhenAccessed_ThenHasEmptyValue()
+        {
+            // ARRANGE
+            var emptyCode = Code.Empty;
+
+            // ACT
+            var actual = emptyCode.Value;
+
+            // ASSERT
+            actual.Should().BeEmpty("because the empty code does not contain a value");
         }
 
         /// <summary>
@@ -177,13 +177,13 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.CommonValueObjects
         public void GivenEquals_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1Result = ShortDescription.Create("ShortDescription1");
-            var name1 = name1Result.Value;
-            var name2Result = ShortDescription.Create("ShortDescription2");
-            var name2 = name2Result.Value;
+            var code1Result = Code.Create("Code1");
+            var code1 = code1Result.Value;
+            var code2Result = Code.Create("Code2");
+            var code2 = code2Result.Value;
 
             // ACT
-            var actual = name1.Equals(name2);
+            var actual = code1.Equals(code2);
 
             // ASSERT
             actual.Should().BeFalse();
@@ -196,13 +196,13 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.CommonValueObjects
         public void GivenGetHashCode_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1Result = ShortDescription.Create("ShortDescription");
-            var name1 = name1Result.Value;
-            var name2Result = ShortDescription.Create("ShortDescription");
-            var name2 = name2Result.Value;
+            var code1Result = Code.Create("Code");
+            var code1 = code1Result.Value;
+            var code2Result = Code.Create("Code");
+            var code2 = code2Result.Value;
 
             // ACT
-            var actual = name1.GetHashCode().Equals(name2.GetHashCode());
+            var actual = code1.GetHashCode().Equals(code2.GetHashCode());
 
             // ASSERT
             actual.Should().BeTrue();
@@ -215,13 +215,13 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.CommonValueObjects
         public void GivenGetHashCode_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1Result = ShortDescription.Create("ShortDescription1");
-            var name1 = name1Result.Value;
-            var name2Result = ShortDescription.Create("ShortDescription2");
-            var name2 = name2Result.Value;
+            var code1Result = Code.Create("Code1");
+            var code1 = code1Result.Value;
+            var code2Result = Code.Create("Code2");
+            var code2 = code2Result.Value;
 
             // ACT
-            var actual = name1.GetHashCode().Equals(name2.GetHashCode());
+            var actual = code1.GetHashCode().Equals(code2.GetHashCode());
 
             // ASSERT
             actual.Should().BeFalse();
@@ -229,16 +229,16 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.CommonValueObjects
 
         /// <summary>
         /// Given the explicit string operator when cast from string at maximum length then created
-        /// name with same value.
+        /// code with same value.
         /// </summary>
         [Test]
-        public void GivenExplicitStringOperator_WhenCastFromStringAtMaximumLength_ThenCreatedShortDescriptionWithSameValue()
+        public void GivenExplicitStringOperator_WhenCastFromStringAtMaximumLength_ThenCreatedCodeWithSameValue()
         {
             // ARRANGE
-            var value = new string('A', ShortDescription.MaximumCharacterLength);
+            var value = new string('A', Code.MaximumCharacterLength);
 
             // ACT
-            var actual = (ShortDescription)value;
+            var actual = (Code)value;
 
             // ASSERT
             actual.Value.Should().Be(value);
@@ -251,15 +251,15 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.CommonValueObjects
         public void GivenExplicitStringOperator_WhenCastFromStringOverMaximumLength_ThrowsException()
         {
             // ARRANGE
-            var value = new string('A', ShortDescription.MaximumCharacterLength + 1);
+            var value = new string('A', Code.MaximumCharacterLength + 1);
 
             // ReSharper disable once NotAccessedVariable
-            var description = default(ShortDescription);
+            var code = default(Code);
 
             // ACT
             Action actual = () =>
             {
-                description = (ShortDescription)value;
+                code = (Code)value;
             };
 
             // ASSERT
@@ -270,15 +270,15 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.CommonValueObjects
         /// Given the implicit string operator when cast to string then created name with same value.
         /// </summary>
         [Test]
-        public void GivenImplicitStringOperator_WhenCastToString_ThenCreatedShortDescriptionWithSameValue()
+        public void GivenImplicitStringOperator_WhenCastToString_ThenCreatedCodeWithSameValue()
         {
             // ARRANGE
-            var value = "ShortDescription";
-            var descriptionResult = ShortDescription.Create(value);
-            var description = descriptionResult.Value;
+            var value = "Code";
+            var nameResult = Code.Create(value);
+            var name = nameResult.Value;
 
             // ACT
-            string actual = description;
+            string actual = name;
 
             // ASSERT
             actual.Should().Be(value);
