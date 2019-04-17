@@ -6,9 +6,9 @@ dotnet: 2.0.0
 solution: Dibware.Salon.sln
 addons:
   sonarcloud:
-    organization: "dibley1973_Dibware.Salon" # the key of the org you chose at step #3
+    organization: "dibley1973-github" # the key of the org you chose at step #3
     token:
-      secure: cd8885dbc52a0fa34451ed91f7433cf9b1ed9f43
+      secure: e5bc1a7c518288b7d5ad6ecac1fe0a69d7fda231
 branches:
   only:
     - master
