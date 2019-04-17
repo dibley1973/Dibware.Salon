@@ -1,0 +1,15 @@
+{
+  "ServerUri": "https://sonarcloud.io/",
+  "Organization": {
+    "Key": "dibley1973-github",
+    "Name": "Duane Dibley"
+  },
+  "ProjectKey": "dibley1973_Dibware.Salon",
+  "ProjectName": "Dibware.Salon",
+  "Profiles": {
+    "CSharp": {
+      "ProfileKey": "AWosEJXDp5PWKZ-fsz5c",
+      "ProfileTimestamp": "2019-03-26T05:47:46+00:00"
+    }
+  }
+}
