@@ -1,4 +1,11 @@
-﻿namespace Dibware.Salon.Domain.SharedKernel.Helpers
+﻿// <copyright file="ReferenceHelper.cs" company="Dibware">
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+// </copyright>
+
+namespace Dibware.Salon.Domain.SharedKernel.Helpers
 {
     /// <summary>Helps with referenced based checks and operations</summary>
     internal static class ReferenceHelper

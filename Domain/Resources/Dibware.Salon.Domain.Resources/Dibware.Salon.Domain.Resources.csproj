@@ -13,8 +13,12 @@
     <DocumentationFile>bin\Debug\netcoreapp2.0\Dibware.Salon.Domain.Resources.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\..\StyleCop.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
   <ItemGroup>
-    <Content Include="..\..\..\stylecop.json" Link="stylecop.json" />
+    <AdditionalFiles Include="..\..\..\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
 
   <ItemGroup>

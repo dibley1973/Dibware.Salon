@@ -1,4 +1,11 @@
-﻿using Dibware.Salon.Domain.SharedKernel.Helpers;
+﻿// <copyright file="ValueObject.cs" company="Dibware">
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+// </copyright>
+
+using Dibware.Salon.Domain.SharedKernel.Helpers;
 
 namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
 {
