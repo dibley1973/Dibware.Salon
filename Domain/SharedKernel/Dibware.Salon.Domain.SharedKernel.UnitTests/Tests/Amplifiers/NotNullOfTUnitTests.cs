@@ -19,7 +19,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
         {
             // ARRANGE
             const FakeEntity nullEntity = null;
-            
+
             // ACT
             Action actual = () => new NotNull<FakeEntity>(nullEntity);
 
@@ -258,7 +258,8 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
             var actual = notNullFakeEntity.GetHashCode();
 
             // ASSERT
-            actual.Should().Be(expectedHashCode,
+            actual.Should().Be(
+                expectedHashCode,
                 "because the hash code and the wrapped object's hashcode should match");
         }
 
@@ -299,7 +300,6 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
             // ASSERT
             actual.Should().BeFalse("because both entities are the same reference");
         }
-
 
         /// <summary>
         /// Given the is not equal to when supplied with same reference then returns false.
@@ -367,13 +367,14 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
         {
             // ARRANGE
             const FakeEntity nullEntity = null;
+
             // ReSharper disable once NotAccessedVariable
             NotNull<FakeEntity> actualEntity;
 
             // ACT
             Action actual = () =>
             {
-                actualEntity = (NotNull<FakeEntity>) nullEntity;
+                actualEntity = (NotNull<FakeEntity>)nullEntity;
             };
 
             // ASSERT
@@ -391,9 +392,10 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
 
             // ACT
             var actual = (NotNull<FakeEntity>)fakeEntity;
-            
+
             // ASSERT
-            actual.Value.Should().Be(fakeEntity,
+            actual.Value.Should().Be(
+                fakeEntity,
                 "because the value of wrapper should be the object which was cast from");
         }
 

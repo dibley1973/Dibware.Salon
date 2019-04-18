@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Dibware.Salon.Domain.SharedKernel.BaseClasses;
 using Dibware.Salon.Domain.SharedKernel.UnitTests.Fakes;
 using Dibware.Salon.Domain.SharedKernel.UnitTests.TestData;
 using FluentAssertions;
@@ -8,7 +9,7 @@ using NUnit.Framework;
 namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.BaseClasses
 {
     /// <summary>
-    /// Provides unit tests for the <see cref="Entity{TId}"/> class.
+    /// Provides unit tests for the <see cref="Entity"/> class.
     /// </summary>
     [TestFixture]
     public class ValueObjectTests
@@ -38,12 +39,10 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.BaseClasses
         {
             // ARRANGE
             var instance = FakeValueObjectData.CreateFakeValueObjectNo1();
-#pragma warning disable 219
-            var other = default(FakeValueObject);
-#pragma warning restore 219
+            const FakeValueObject other = default(FakeValueObject);
 
             // ACT
-            var actual = instance.Equals(null);
+            var actual = instance.Equals(other);
 
             // ASSERT
             actual.Should().BeFalse();

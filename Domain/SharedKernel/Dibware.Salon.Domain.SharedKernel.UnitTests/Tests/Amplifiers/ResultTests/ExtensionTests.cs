@@ -28,14 +28,14 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers.ResultTes
         public void GivenOnFailure_WhenNonGenericResultIsFail_ThenShouldExecuteAction()
         {
             // ARRANGE
-            bool myBool = false;
-            var myResult = Result.Fail(_errorMessage);
+            bool actual = false;
+            var result = Result.Fail(_errorMessage);
 
             // ACT
-            myResult.OnFailure(() => myBool = true);
+            result.OnFailure(() => actual = true);
 
             // ASSERT
-            myBool.Should().Be(true);
+            actual.Should().Be(true);
         }
 
         /// <summary>
@@ -45,14 +45,14 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers.ResultTes
         public void GivenOnFailure_WhenGenericResultIsFail_ThenShouldExecuteAction()
         {
             // ARRANGE
-            var myBool = false;
-            var myResult = Result.Fail<FakeEntity>(_errorMessage);
+            var actual = false;
+            var result = Result.Fail<FakeEntity>(_errorMessage);
 
             // ACT
-            myResult.OnFailure(() => myBool = true);
+            result.OnFailure(() => actual = true);
 
             // ASSERT
-            myBool.Should().Be(true);
+            actual.Should().Be(true);
         }
 
         /// <summary>
@@ -62,14 +62,14 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers.ResultTes
         public void GivenOnFailure_WhenGenericResultIsFail_ThenShouldExecuteActionWithresult()
         {
             // ARRANGE
-            var myError = string.Empty;
-            var myResult = Result.Fail<FakeEntity>(_errorMessage);
+            var actual = string.Empty;
+            var result = Result.Fail<FakeEntity>(_errorMessage);
 
             // ACT
-            myResult.OnFailure(error => myError = error);
+            result.OnFailure(error => actual = error);
 
             // ASSERT
-            myError.Should().Be(_errorMessage);
+            actual.Should().Be(_errorMessage);
         }
     }
 }

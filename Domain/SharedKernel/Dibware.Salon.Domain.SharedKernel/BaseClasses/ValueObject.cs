@@ -3,7 +3,7 @@
 namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
 {
     /// <summary>Represents the base class which a descriptive aspect of the domain with no conceptual identity should inherit from.</summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">The type which this object wraps</typeparam>
     public abstract class ValueObject<T>
         where T : ValueObject<T>
     {
@@ -25,7 +25,7 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
             if (ReferenceHelper.BothReferencesAreNull(primary, secondary))
                 return true;
 
-            if (ReferenceHelper.OneOrTheOtherReferenceIsNull(primary, secondary)) 
+            if (ReferenceHelper.OneOrTheOtherReferenceIsNull(primary, secondary))
                 return false;
 
             // ReSharper disable once PossibleNullReferenceException
@@ -33,10 +33,10 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
             return primary.Equals(secondary);
         }
 
-        /// <summary>Determines whether the specified <see cref="System.Object"/>, is equal to this instance.</summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
+        /// <summary>Determines whether the specified <see cref="object"/>, is equal to this instance.</summary>
+        /// <param name="obj">The <see cref="object"/> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.</returns>
+        ///   <c>true</c> if the specified <see cref="object"/> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             var valueObject = obj as T;

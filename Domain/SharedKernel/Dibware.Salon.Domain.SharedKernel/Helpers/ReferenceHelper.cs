@@ -1,4 +1,4 @@
-namespace Dibware.Salon.Domain.SharedKernel.Helpers
+﻿namespace Dibware.Salon.Domain.SharedKernel.Helpers
 {
     /// <summary>Helps with referenced based checks and operations</summary>
     internal static class ReferenceHelper

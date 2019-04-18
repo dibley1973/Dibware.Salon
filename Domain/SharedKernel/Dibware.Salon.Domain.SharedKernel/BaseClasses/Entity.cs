@@ -1,4 +1,8 @@
-﻿using Dibware.Salon.Domain.SharedKernel.Helpers;
+﻿// <copyright file="Entity.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+using Dibware.Salon.Domain.SharedKernel.Helpers;
 
 namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
 {
@@ -26,28 +30,9 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
         /// <value><c>true</c> if this instance is transient; otherwise, <c>false</c>.</value>
         public virtual bool IsTransient => Id.Equals(default(long));
 
-        /// <summary>Determines whether the specified <see cref="System.Object"/>, is equal to this instance.</summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.</returns>
-        public override bool Equals(object obj)
-        {
-            var other = obj as Entity;
-
-            if (other is null)
-                return false;
-
-            if (BothReferencesMatch(other))
-                return true;
-
-            if (EntityTypesDiffer(other))
-                return false;
-
-            if (BothIdsAreZero(other))
-                return false;
-
-            return BothIdsMatch(other);
-        }
+        /// <summary>Gets a value representing this instance cast as an <see cref="object"/>.</summary>
+        /// <value>The cast instance.</value>
+        protected object Actual => this;
 
         /// <summary>Implementation of the the == comparison operator for the <see cref="Entity"/>.</summary>
         /// <param name="primary">The primary <see cref="Entity"/> to check.</param>
@@ -55,7 +40,7 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
         /// <returns>The result of the comparison operator.</returns>
         public static bool operator ==(Entity primary, Entity secondary)
         {
-            if (ReferenceHelper.BothReferencesAreNull(primary, secondary)) 
+            if (ReferenceHelper.BothReferencesAreNull(primary, secondary))
                 return true;
 
             if (ReferenceHelper.OneOrTheOtherReferenceIsNull(primary, secondary))
@@ -75,16 +60,35 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
             return !(primary == secondary);
         }
 
+        /// <summary>Determines whether the specified <see cref="object"/>, is equal to this instance.</summary>
+        /// <param name="obj">The <see cref="object"/> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="object"/> is equal to this instance; otherwise, <c>false</c>.</returns>
+        public override bool Equals(object obj)
+        {
+            var other = obj as Entity;
+
+            if (other is null)
+                return false;
+
+            if (BothReferencesMatch(other))
+                return true;
+
+            if (EntityTypesDiffer(other))
+                return false;
+
+            if (BothIdsAreZero(other))
+                return false;
+
+            return BothIdsMatch(other);
+        }
+
         /// <summary>Returns a hash code for this instance.</summary>
         /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
         public override int GetHashCode()
         {
             return (Actual.GetType().ToString() + Id).GetHashCode();
         }
-
-        /// <summary>Returns this instance cast as an <see cref="object"/>.</summary>
-        /// <value>The cast instance.</value>
-        protected object Actual => this;
 
         /// <summary>Gets a value indicating if both of the entity Ids match.</summary>
         /// <param name="other">The other <see cref="Entity"/>.</param>

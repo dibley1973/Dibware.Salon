@@ -10,10 +10,10 @@
 namespace Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys
 {
     /// <summary>
-    /// Represents the keys strings for <see cref="Name"/> errors, which can be converted by the UI
+    /// Represents the keys strings for <see cref="CommonValueObjects.Name"/> errors, which can be converted by the UI
     /// to meaningful messages;
     /// </summary>
-    public class NameErrorKeys
+    public static class NameErrorKeys
     {
         /// <summary>
         /// The key for when the value is null, empty or, white space

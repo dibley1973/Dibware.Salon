@@ -296,17 +296,17 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.BaseClasses
         /// Test not equal to when both instance are instantiated with same ids return false.
         /// </summary>
         [Test]
-        public void GivenIsNotEqualTo_WhenBothInstanceAreInstantiatedWithSameIds_ReturnTrue()
+        public void GivenIsNotEqualTo_WhenBothInstanceAreInstantiatedWithSameIds_ReturnFalse()
         {
             // ARRANGE
             FakeEntity entity = FakeEntityData.CreateProductNo2();
-            FakeEntity other = FakeEntityData.CreateProductNo3();
+            FakeEntity other = FakeEntityData.CreateProductNo2();
 
             // ACT
             var actual = entity != other;
 
             // ASSERT
-            actual.Should().BeTrue();
+            actual.Should().BeFalse("because both instances have the same ID");
         }
 
         /// <summary>

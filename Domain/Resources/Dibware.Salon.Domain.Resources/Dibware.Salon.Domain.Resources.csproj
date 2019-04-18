@@ -10,7 +10,12 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CodeAnalysisRuleSet>Dibware.Salon.Domain.Resources.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\netcoreapp2.0\Dibware.Salon.Domain.Resources.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\..\stylecop.json" Link="stylecop.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\SharedKernel\Dibware.Salon.Domain.SharedKernel\Dibware.Salon.Domain.SharedKernel.csproj" />

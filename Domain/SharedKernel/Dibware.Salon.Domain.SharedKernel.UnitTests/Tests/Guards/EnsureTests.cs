@@ -11,8 +11,8 @@ using System;
 using System.Text;
 using Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys;
 using Dibware.Salon.Domain.SharedKernel.Guards;
-using NUnit.Framework;
 using FluentAssertions;
+using NUnit.Framework;
 
 namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
 {

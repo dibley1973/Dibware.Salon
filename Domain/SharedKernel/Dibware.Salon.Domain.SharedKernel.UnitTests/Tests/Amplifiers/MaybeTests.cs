@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="MaybeTests.cs" company="Chesil Media">
+// <copyright file="MaybeTests.cs" company="Dibware">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -149,7 +149,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
             // ARRANGE
             var product = FakeEntityData.CreateEmptyProduct();
             var maybe = Maybe<FakeEntity>.Empty;
-            var expectedToStringText = $"An empty maybe of type { product.GetType().Name}";
+            var expectedToStringText = $"An empty maybe of type {product.GetType().Name}";
 
             // ACT
             var actual = maybe.ToString();
@@ -359,10 +359,11 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
             var actual = notNullFakeEntity.GetHashCode();
 
             // ASSERT
-            actual.Should().Be(expectedHashCode,
+            actual.Should().Be(
+                expectedHashCode,
                 "because the hash code and the wrapped object's hashcode should match");
         }
-        
+
         /// <summary>
         /// Given the get hash code when accessed for empty then returns hash code for type names.
         /// </summary>
@@ -377,7 +378,8 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
             var actual = notNullFakeEntity.GetHashCode();
 
             // ASSERT
-            actual.Should().Be(expectedHashCode,
+            actual.Should().Be(
+                expectedHashCode,
                 "because the hash code and the wrapped object's hashcode should match");
         }
 

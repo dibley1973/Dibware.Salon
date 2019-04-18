@@ -10,10 +10,10 @@
 namespace Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys
 {
     /// <summary>
-    /// Represents the keys strings for <see cref="Identity"/> errors, which can be converted by the
+    /// Represents the keys strings for <see cref="CommonValueObjects.Identity"/> errors, which can be converted by the
     /// UI to meaningful messages;
     /// </summary>
-    public class IdentityErrorKeys
+    public static class IdentityErrorKeys
     {
         /// <summary>
         /// The key for when the value is less than the minimum acceptable

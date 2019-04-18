@@ -16,6 +16,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="..\..\..\stylecop.json" Link="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Fakes\" />
     <Folder Include="Tests\BaseClasses\" />
   </ItemGroup>

@@ -7,6 +7,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using Dibware.Salon.Domain.SharedKernel.Guards;
+
 namespace Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys
 {
     /// <summary>

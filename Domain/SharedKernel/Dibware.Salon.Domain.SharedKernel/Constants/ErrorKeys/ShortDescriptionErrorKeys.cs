@@ -10,7 +10,7 @@
 namespace Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys
 {
     /// <summary>
-    /// Represents the keys strings for <see cref="ShortDescription"/> errors, which can be converted
+    /// Represents the keys strings for <see cref="CommonValueObjects.ShortDescription"/> errors, which can be converted
     /// by the UI to meaningful messages;
     /// </summary>
     public class ShortDescriptionErrorKeys

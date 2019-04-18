@@ -10,7 +10,7 @@
 namespace Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys
 {
     /// <summary>
-    /// Represents the keys strings for <see cref="Ensure"/> errors, which can be converted by the UI
+    /// Represents the keys strings for <see cref="Guards.Ensure"/> errors, which can be converted by the UI
     /// to meaningful messages;
     /// </summary>
     public class EnsureErrorKeys : ErrorKeyBase
