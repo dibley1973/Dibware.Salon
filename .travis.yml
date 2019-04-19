@@ -19,4 +19,5 @@ script:
   - ./build.sh
   - ./run-tests.sh
   - sonar-scanner
-  
+install:
+  - git fetch --unshallow --tags
