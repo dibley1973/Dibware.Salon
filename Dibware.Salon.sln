@@ -39,6 +39,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_StyleCop", "_StyleCop", "{
 		stylecop.json = stylecop.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SonarQube", "_SonarQube", "{599048CE-5507-4CB1-B9D5-12281D214785}"
+	ProjectSection(SolutionItems) = preProject
+		sonar-project.properties = sonar-project.properties
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
