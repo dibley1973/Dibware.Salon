@@ -37,14 +37,17 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
         [DebuggerStepThrough]
         internal Result(bool isFailure, T value, string error)
         {
-            // WARNING: Do not be tempted to replace the guard clause below this comment with the
-            //          line below: if (!isFailure) Ensure.IsNotNull(value, (ArgumentName)nameof(value));
-            // If you do you will create a lovely StackOverflowException!
+#pragma warning disable S125
+            // WARNING:
+            //      Do not be tempted to replace the guard clause below this comment with the
+            //      line below: if (!isFailure) Ensure.IsNotNull(value, (ArgumentName)nameof(value));
+            //      If you do you will create a lovely StackOverflowException!
             if (!isFailure && value == null) throw new ArgumentNullException(nameof(value));
 
             _logic = new ResultCommonLogic(isFailure, error);
             _value = value;
         }
+#pragma warning restore S125
 
         /// <summary>
         /// Gets a value indicating whether this instance is failure.
