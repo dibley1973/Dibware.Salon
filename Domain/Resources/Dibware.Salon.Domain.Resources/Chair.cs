@@ -12,9 +12,5 @@ namespace Dibware.Salon.Domain.Resources
     /// </summary>
     public class Chair : ResourceType
     {
-        public Chair()
-        {
-            var a = "hh";
-        }
     }
 }
