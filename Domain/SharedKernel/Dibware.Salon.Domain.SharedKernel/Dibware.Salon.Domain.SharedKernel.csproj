@@ -6,11 +6,16 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CodeAnalysisRuleSet>Dibware.Salon.Domain.SharedKernel.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CodeAnalysisRuleSet>Dibware.Salon.Domain.SharedKernel.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Debug\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup>
