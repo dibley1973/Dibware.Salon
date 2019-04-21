@@ -29,5 +29,4 @@ script:
   - dotnet sonarscanner begin /k:"Core:Dibware.Salon"
   - ./build.sh
   - ./run-tests.sh
-  - sonar-scanner
   - dotnet sonarscanner end
