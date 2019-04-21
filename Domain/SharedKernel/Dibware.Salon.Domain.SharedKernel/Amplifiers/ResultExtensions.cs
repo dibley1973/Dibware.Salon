@@ -16,7 +16,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
     /// </summary>
     public static class ResultExtensions
     {
-        // TODO: Uncomment other extensions as required but write tests to cover them!
+        // Uncomment other extensions as required but write tests to cover them!
         // Ref:
         // https://github.com/vkhorikov/CSharpFunctionalExtensions/blob/master/CSharpFunctionalExtensions/ResultExtensions.cs
 
