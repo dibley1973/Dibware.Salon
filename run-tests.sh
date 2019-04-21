@@ -1,1 +1,1 @@
-dotnet test -c Release --no-build --no-restore Domain/SharedKernel/Dibware.Salon.Domain.SharedKernel.UnitTests/Dibware.Salon.Domain.SharedKernel.UnitTests.csproj
+dotnet test -c Release --no-build --no-restore Domain/SharedKernel/Dibware.Salon.Domain.SharedKernel.UnitTests/Dibware.Salon.Domain.SharedKernel.UnitTests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=../lcov
