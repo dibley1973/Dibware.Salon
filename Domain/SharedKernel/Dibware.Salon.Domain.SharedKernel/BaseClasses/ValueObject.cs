@@ -5,15 +5,24 @@
 // of the License, or (at your option) any later version.
 // </copyright>
 
+using System;
 using Dibware.Salon.Domain.SharedKernel.Helpers;
 
 namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
 {
+#pragma warning disable S4035
     /// <summary>Represents the base class which a descriptive aspect of the domain with no conceptual identity should inherit from.</summary>
+    /// <remarks>
+    /// Disabled Analyzer S4035 (Classes implementing "IEquatable{T}" should be sealed)
+    /// as this class is designed to be inherited by objects which are value objects
+    /// and "behave" similar to value-types.
+    /// </remarks>
     /// <typeparam name="T">The type which this object wraps</typeparam>
-    public abstract class ValueObject<T>
+    public abstract class ValueObject<T> : IEquatable<T>
         where T : ValueObject<T>
     {
+#pragma warning restore S4035
+
         /// <summary>Implementation of the the != comparison operator for the <see cref="Entity"/>.</summary>
         /// <param name="primary">The primary <see cref="Entity"/> to check.</param>
         /// <param name="secondary">The secondary <see cref="Entity"/> to check.</param>
@@ -23,7 +32,13 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
             return !(primary == secondary);
         }
 
+#pragma warning disable S3875
         /// <summary>Implementation of the the == comparison operator for the <see cref="Entity"/>.</summary>
+        /// <remarks>
+        /// Disable S3975 ("operator==" should not be overloaded on reference types) warning
+        /// from SonarQube as this class is to be treated like a value type when it comes to
+        /// reference equality.
+        /// </remarks>
         /// <param name="primary">The primary <see cref="Entity"/> to check.</param>
         /// <param name="secondary">The secondary <see cref="Entity"/> to check.</param>
         /// <returns>The result of the comparison operator.</returns>
@@ -39,13 +54,14 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
             // Because primary has already been checked for null
             return primary.Equals(secondary);
         }
+#pragma warning restore S3875
 
         /// <summary>Indicates whether the current object is equal to another object of the same type.</summary>
         /// <param name="other">An object to compare with this object.</param>
         /// <returns>
         /// Returns <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.
         /// </returns>
-        public bool Equals(T other)
+        bool IEquatable<T>.Equals(T other)
         {
             if (ReferenceEquals(other, null))
                 return false;
@@ -61,7 +77,7 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
         {
             var valueObject = obj as T;
 
-            return Equals(valueObject);
+            return ((IEquatable<T>)this).Equals(valueObject);
         }
 
         /// <summary>Returns a hash code for this instance.</summary>

@@ -9,3 +9,4 @@ G:\Dev\Dibware.Salon\UI\Dibware.Salon.Web\obj\Debug\netcoreapp2.0\Dibware.Salon.
 G:\Dev\Dibware.Salon\UI\Dibware.Salon.Web\obj\Debug\netcoreapp2.0\Dibware.Salon.Web.dll
 G:\Dev\Dibware.Salon\UI\Dibware.Salon.Web\obj\Debug\netcoreapp2.0\Dibware.Salon.Web.pdb
 G:\Dev\Dibware.Salon\UI\Dibware.Salon.Web\bin\Debug\netcoreapp2.0\Dibware.Salon.Web.xml
+G:\Dev\Dibware.Salon\UI\Dibware.Salon.Web\obj\Debug\netcoreapp2.0\Dibware.Salon.Web.csprojResolveAssemblyReference.cache
