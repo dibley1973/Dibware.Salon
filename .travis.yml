@@ -2,8 +2,10 @@ language: csharp
 dist: xenial
 sudo: required
 mono: none
-dotnet: 2.0.0
+dotnet: 2.1.300
+
 solution: Dibware.Salon.sln
+
 addons:
   sonarcloud:
     organization: "dibley1973-github" # the key of the org you chose at step #3
@@ -15,6 +17,7 @@ branches:
     - master
 
 install:
+  - dotnet tool install --global dotnet-sonarscanner
   - git fetch --unshallow --tags
 
 before_script:
