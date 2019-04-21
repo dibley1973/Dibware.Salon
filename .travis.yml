@@ -15,8 +15,10 @@ branches:
 
 install:
   - git fetch --unshallow --tags
+  - dotnet tool install --global dotnet-sonarscanner
 
 before_script:
+  - export PATH="$PATH:$HOME/.dotnet/tools"
   - chmod +x build.sh
   - chmod +x run-tests.sh
 
