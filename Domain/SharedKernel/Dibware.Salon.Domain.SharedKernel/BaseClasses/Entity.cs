@@ -41,7 +41,7 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
         /// <summary>Implementation of the the == comparison operator for the <see cref="Entity"/>.</summary>
         /// <remarks>
         /// Disable S3975 ("operator==" should not be overloaded on reference types) warning
-        /// from SonarQube as for this class equality os to based entirely upon ID an not 
+        /// from SonarQube as for this class equality os to based entirely upon ID an not
         /// reference equality.
         /// </remarks>
         /// <param name="primary">The primary <see cref="Entity"/> to check.</param>
