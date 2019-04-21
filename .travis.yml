@@ -9,13 +9,13 @@ addons:
     organization: "dibley1973-github" # the key of the org you chose at step #3
     token:
       secure: $SONAR_TOKEN
+      
 branches:
   only:
     - master
 
 install:
   - git fetch --unshallow --tags
-  - dotnet tool install --global dotnet-sonarscanner
 
 before_script:
   - export PATH="$PATH:$HOME/.dotnet/tools"
