@@ -40,6 +40,19 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
             return primary.Equals(secondary);
         }
 
+        /// <summary>Indicates whether the current object is equal to another object of the same type.</summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        /// Returns <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.
+        /// </returns>
+        public bool Equals(T other)
+        {
+            if (ReferenceEquals(other, null))
+                return false;
+
+            return EqualsCore(other);
+        }
+
         /// <summary>Determines whether the specified <see cref="object"/>, is equal to this instance.</summary>
         /// <param name="obj">The <see cref="object"/> to compare with this instance.</param>
         /// <returns>
@@ -48,10 +61,7 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
         {
             var valueObject = obj as T;
 
-            if (ReferenceEquals(valueObject, null))
-                return false;
-
-            return EqualsCore(valueObject);
+            return Equals(valueObject);
         }
 
         /// <summary>Returns a hash code for this instance.</summary>
