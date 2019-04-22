@@ -8,11 +8,15 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CodeAnalysisRuleSet>Dibware.Salon.Domain.SharedKernel.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Debug\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.xml</DocumentationFile>
+    <!-- SonarQube needs this -->
+    <ProjectGuid>{c214eb79-fbdb-4aa2-a2ee-a1ffe04caeee}</ProjectGuid>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CodeAnalysisRuleSet>Dibware.Salon.Domain.SharedKernel.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Debug\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.xml</DocumentationFile>
+    <!-- SonarQube needs this -->
+    <ProjectGuid>{c214eb79-fbdb-4aa2-a2ee-a1ffe04caeee}</ProjectGuid>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -21,6 +25,7 @@
 
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\..\StyleCop.ruleset</CodeAnalysisRuleSet>
+    <ProjectGuid>227f7cb4-2a30-455f-9314-688618b519d8</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>

@@ -11,15 +11,20 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.UnitTests.xml</DocumentationFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <!-- SonarQube needs this -->
+    <ProjectGuid>{a122d4bb-4f5a-4fac-92e9-a3ce22a1217f}</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.UnitTests.xml</DocumentationFile>
+    <!-- SonarQube needs this -->
+    <ProjectGuid>{a122d4bb-4f5a-4fac-92e9-a3ce22a1217f}</ProjectGuid>
   </PropertyGroup>
 
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\..\StyleCop.ruleset</CodeAnalysisRuleSet>
+    <ProjectGuid>05ea7389-6cac-41f9-91fc-f9706ef4bf99</ProjectGuid>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netcoreapp2.0\Dibware.Salon.Domain.SharedKernel.UnitTests.xml</DocumentationFile>
-  </PropertyGroup>
 
   <ItemGroup>
     <AdditionalFiles Include="..\..\..\stylecop.json" Link="stylecop.json" />
