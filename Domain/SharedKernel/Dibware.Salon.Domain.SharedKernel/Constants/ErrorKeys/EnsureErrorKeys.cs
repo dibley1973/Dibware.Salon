@@ -33,6 +33,11 @@ namespace Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys
         /// <summary>
         /// The key for when the value is null, empty or white space.
         /// </summary>
+        public const string ArgumentIsNullEmptyOrWhiteSpace = "ArgumentIsNullEmptyOrWhiteSpace";
+
+        /// <summary>
+        /// The key for when the value is not null, empty or white space.
+        /// </summary>
         public const string ArgumentIsNotNullEmptyOrWhiteSpace = "ArgumentIsNotNullEmptyOrWhiteSpace";
     }
 }

@@ -13,7 +13,7 @@ using Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys;
 namespace Dibware.Salon.Domain.SharedKernel.Guards
 {
     /// <summary>
-    /// Encapsualtes and error key and argument name
+    /// Encapsulates and error key and argument name
     /// </summary>
     public class ErrorKeyAndArgumentName : ErrorKeyBase
     {
@@ -53,7 +53,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
         /// <param name="argumentName">Name of the argument.</param>
         /// <returns>Returns a constructed <see cref="ErrorKeyAndArgumentName"/>.</returns>
         /// <exception cref="ArgumentNullException">
-        /// Thrown if errokey or argiumentname is null, empty or white space.
+        /// Thrown if errorKey or argumentName is null, empty or white space.
         /// </exception>
         public static ErrorKeyAndArgumentName Create(string errorKey, string argumentName)
         {

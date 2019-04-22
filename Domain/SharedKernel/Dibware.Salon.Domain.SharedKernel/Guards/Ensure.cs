@@ -84,7 +84,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
         [DebuggerStepThrough]
         public static void IsNotNullEmptyOrWhiteSpace(string value, ArgumentName argumentName)
         {
-            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(argumentName, EnsureErrorKeys.ArgumentIsNotNullEmptyOrWhiteSpace);
+            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(argumentName, EnsureErrorKeys.ArgumentIsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
