@@ -21,7 +21,7 @@ install:
   - git fetch --unshallow --tags
 
 before_script:
-#  - export PATH="$PATH:$HOME/.dotnet/tools"
+  - export PATH="$PATH:$HOME/.dotnet/tools"
   - chmod +x build.sh
   - chmod +x run-tests.sh
 
