@@ -26,7 +26,7 @@ before_script:
   - chmod +x run-tests.sh
 
 script:
-  - dotnet sonarscanner begin /k:"Core:Dibware.Salon" /d:sonar.login="$SONAR_TOKEN" /d:sonar.exclusions="**/bin/**/*,**/obj/**/*,**/Dibware.Salon.Web/**/*" /d:sonar.cs.opencover.reportsPaths="Dibware.Salon/Domain/SharedKernel/Dibware.Salon.Domain.SharedKernel.UnitTests/coverage.opencover.xml" || true
+  - dotnet sonarscanner begin /k:"Core:Dibware.Salon" /d:sonar.login="$SONAR_TOKEN" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" /d:sonar.exclusions="**/bin/**/*,**/obj/**/*,**/Dibware.Salon.Web/**/*" || true
   - ./build.sh
   - ./run-tests.sh
   - dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN" || true
