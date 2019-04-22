@@ -8,7 +8,6 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Text;
 using Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys;
 using Dibware.Salon.Domain.SharedKernel.Guards;
 using FluentAssertions;
@@ -131,6 +130,38 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
             // ASSERT
             actual.Should().Throw<ArgumentNullException>("because a white space argument name is not permitted")
                 .WithMessage(GetExpectedMessage(argumentName), "because the exception message should match");
+        }
+
+        /// <summary>
+        /// Givens the argument name when accessed after construction then returns constructed value.
+        /// </summary>
+        [Test]
+        public void GivenArgumentName_WhenAccessedAfterConstruction_ThenReturnsConstructedValue()
+        {
+            // ARRANGE
+            var errorKeyAndArgumentName = ErrorKeyAndArgumentName.Create(ValidErrorKey, ValidArgumentName);
+
+            // ACT
+            var actual = errorKeyAndArgumentName.ArgumentName;
+
+            // ASSERT
+            actual.Should().Be(ValidArgumentName, "because the value of the property should match the constructed value");
+        }
+
+        /// <summary>
+        /// Givens the key when accessed after construction then returns constructed value.
+        /// </summary>
+        [Test]
+        public void GivenKey_WhenAccessedAfterConstruction_ThenReturnsConstructedValue()
+        {
+            // ARRANGE
+            var errorKeyAndArgumentName = ErrorKeyAndArgumentName.Create(ValidErrorKey, ValidArgumentName);
+
+            // ACT
+            var actual = errorKeyAndArgumentName.ErrorKey;
+
+            // ASSERT
+            actual.Should().Be(ValidErrorKey, "because the value of the property should match the constructed value");
         }
 
         /// <summary>

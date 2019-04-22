@@ -35,16 +35,16 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
         }
 
         /// <summary>
-        /// Gets the error key.
-        /// </summary>
-        /// <value>The error key.</value>
-        public string ErrorKey => _errorKey;
-
-        /// <summary>
         /// Gets the name of the argument.
         /// </summary>
         /// <value>The name of the argument.</value>
         public string ArgumentName => _argumentName;
+
+        /// <summary>
+        /// Gets the error key.
+        /// </summary>
+        /// <value>The error key.</value>
+        public string ErrorKey => _errorKey;
 
         /// <summary>
         /// Creates an instance of a the specified error key.
