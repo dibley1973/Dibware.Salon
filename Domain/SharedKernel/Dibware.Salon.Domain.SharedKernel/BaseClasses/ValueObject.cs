@@ -95,7 +95,7 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
         /// <summary>
         /// Override this method with the derived implementation of `GetsHashCode`.
         /// </summary>
-        /// <returns>Returns a <see cref="int"/> representaion of the has code</returns>
+        /// <returns>Returns a <see cref="int"/> representation of the hash code</returns>
         protected abstract int GetHashCodeCore();
     }
 }

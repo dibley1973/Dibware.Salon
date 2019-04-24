@@ -91,7 +91,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.CommonValueObjects
         }
 
         /// <summary>
-        /// Givens the equals when supplied differnt value the returns false.
+        /// Given the equals when supplied differnt value the returns false.
         /// </summary>
         [Test]
         public void GivenEquals_WhenSuppliedDifferntValue_TheReturnsFalse()
@@ -112,7 +112,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.CommonValueObjects
         }
 
         /// <summary>
-        /// Givens the equals when supplied null value the returns false.
+        /// Given the equals when supplied null value the returns false.
         /// </summary>
         [Test]
         public void GivenEquals_WhenSuppliedNullValue_TheReturnsFalse()

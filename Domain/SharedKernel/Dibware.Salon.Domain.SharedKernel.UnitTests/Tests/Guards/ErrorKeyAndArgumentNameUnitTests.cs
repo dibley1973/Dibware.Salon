@@ -25,7 +25,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         private const string ValidArgumentName = "Value1";
 
         /// <summary>
-        /// Givens the create when passed null error key then throws exception.
+        /// Given the create when passed null error key then throws exception.
         /// </summary>
         [Test]
         public void GivenCreate_WhenPassedNullErrorKey_ThenThrowsException()
@@ -43,7 +43,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         }
 
         /// <summary>
-        /// Givens the create when passed empty error key then throws exception.
+        /// Given the create when passed empty error key then throws exception.
         /// </summary>
         [Test]
         public void GivenCreate_WhenPassedEmptyErrorKey_ThenThrowsException()
@@ -61,7 +61,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         }
 
         /// <summary>
-        /// Givens the create when passed white space error key then throws exception.
+        /// Given the create when passed white space error key then throws exception.
         /// </summary>
         [Test]
         public void GivenCreate_WhenPassedWhiteSpaceErrorKey_ThenThrowsException()
@@ -79,7 +79,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         }
 
         /// <summary>
-        /// Givens the create when passed null argument name then throws exception.
+        /// Given the create when passed null argument name then throws exception.
         /// </summary>
         [Test]
         public void GivenCreate_WhenPassedNullArgumentName_ThenThrowsException()
@@ -97,7 +97,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         }
 
         /// <summary>
-        /// Givens the create when passed empty argument name then throws exception.
+        /// Given the create when passed empty argument name then throws exception.
         /// </summary>
         [Test]
         public void GivenCreate_WhenPassedEmptyArgumentName_ThenThrowsException()
@@ -115,7 +115,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         }
 
         /// <summary>
-        /// Givens the create when passed white space argument name then throws exception.
+        /// Given the create when passed white space argument name then throws exception.
         /// </summary>
         [Test]
         public void GivenCreate_WhenPassedWhiteSpaceArgumentName_ThenThrowsException()
@@ -133,7 +133,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         }
 
         /// <summary>
-        /// Givens the argument name when accessed after construction then returns constructed value.
+        /// Given the argument name when accessed after construction then returns constructed value.
         /// </summary>
         [Test]
         public void GivenArgumentName_WhenAccessedAfterConstruction_ThenReturnsConstructedValue()
@@ -149,7 +149,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         }
 
         /// <summary>
-        /// Givens the key when accessed after construction then returns constructed value.
+        /// Given the key when accessed after construction then returns constructed value.
         /// </summary>
         [Test]
         public void GivenKey_WhenAccessedAfterConstruction_ThenReturnsConstructedValue()

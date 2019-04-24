@@ -20,7 +20,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
     [TestFixture]
     public class DurationUnitTests
     {
-        private static readonly PositiveInteger ValidHours = new PositiveInteger(4);
+        private static readonly Hours ValidHours = new Hours(4);
         private static readonly PositiveInteger ValidMinutes = new PositiveInteger(16);
 
         /// <summary>Given the constructor when passed null hours then throws exception.</summary>
@@ -28,7 +28,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
         public void GivenConstructor_WhenPassedNullHours_ThenThrowsException()
         {
             // ARRANGE
-            const PositiveInteger nullHours = null;
+            const Hours nullHours = null;
 
             // ACT
             Action actual = () => new Duration(nullHours, ValidMinutes);
@@ -66,6 +66,22 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
 
             // ASSERT
             actual.Should().NotThrow<ArgumentNullException>("because no exception should be thrown for a valid values");
+        }
+
+        /// <summary>Given the get hash code when for two different values then they differ.</summary>
+        [Test]
+        public void GivenGetHashCode_WhenForTwoDifferentValues_ThenTheyDiffer()
+        {
+            // ARRANGE
+            var duration1 = new Duration(ValidHours, new Minutes(5));
+            var duration2 = new Duration(ValidHours, new Minutes(6));
+
+            // ACT
+            var actual1 = duration1.GetHashCode();
+            var actual2 = duration2.GetHashCode();
+
+            // ASSERT
+            actual1.Should().NotBe(actual2, "because the hash codes should differ for different values");
         }
 
         /// <summary>
@@ -174,7 +190,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
         public void GivenIsEqualTo_WhenSuppliedDifferentHours_ThenReturnsFalse()
         {
             // ARRANGE
-            var differentHours = new PositiveInteger(5);
+            var differentHours = new Hours(5);
             var duration1 = new Duration(ValidHours, ValidMinutes);
             var duration2 = new Duration(differentHours, ValidMinutes);
 

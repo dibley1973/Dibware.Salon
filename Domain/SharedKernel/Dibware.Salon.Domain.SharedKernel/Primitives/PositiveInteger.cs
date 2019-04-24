@@ -8,6 +8,7 @@
 //-----------------------------------------------------------------------
 
 using System;
+using Dibware.Salon.Domain.SharedKernel.BaseClasses;
 using Dibware.Salon.Domain.SharedKernel.Guards;
 
 namespace Dibware.Salon.Domain.SharedKernel.Primitives
@@ -15,7 +16,8 @@ namespace Dibware.Salon.Domain.SharedKernel.Primitives
     /// <summary>
     /// Represents a zero or positive integer
     /// </summary>
-    public class PositiveInteger
+    /// <seealso cref="ValueObject{T}" />
+    public class PositiveInteger : ValueObject<PositiveInteger>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PositiveInteger"/> class.
@@ -34,5 +36,34 @@ namespace Dibware.Salon.Domain.SharedKernel.Primitives
         /// <summary>Gets the value.</summary>
         /// <value>The value.</value>
         public int Value { get; }
+
+        /// <summary>
+        /// Override this method with the derived implementation of `Equals`.
+        /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns>
+        /// Returns <c>true</c> if it equals; otherwise <c>false</c>.
+        /// </returns>
+        protected override bool EqualsCore(PositiveInteger other)
+        {
+            return Value.Equals(other.Value);
+        }
+
+        /// <summary>
+        /// Override this method with the derived implementation of `GetsHashCode`.
+        /// </summary>
+        /// <returns>
+        /// Returns a <see cref="T:System.Int32" /> representation of the hash code
+        /// </returns>
+        protected override int GetHashCodeCore()
+        {
+            unchecked
+            {
+                int hashCode = Value.GetHashCode();
+                hashCode = hashCode * 373;
+
+                return hashCode;
+            }
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         /// </summary>
         /// <param name="hours">The hours.</param>
         /// <param name="minutes">The minutes.</param>
-        public Duration(PositiveInteger hours, PositiveInteger minutes)
+        public Duration(Hours hours, PositiveInteger minutes)
         {
             Ensure.IsNotNull(hours, (ArgumentName)nameof(hours));
             Ensure.IsNotNull(minutes, (ArgumentName)nameof(minutes));
@@ -39,7 +39,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
 
         /// <summary>Gets the hours passed in the duration.</summary>
         /// <value>The number of hours</value>
-        public PositiveInteger Hours { get; }
+        public Hours Hours { get; }
 
         /// <summary> Gets the minutes passed in the duration following after the last complete hour. </summary>
         /// <value> The number of minutes. </value>
@@ -61,7 +61,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         }
 
         /// <summary>Override this method with the derived implementation of `GetsHashCode`.</summary>
-        /// <returns>Returns a <see cref="T:System.Int32"/> representation of the has code</returns>
+        /// <returns>Returns a <see cref="T:System.Int32"/> representation of the hash code</returns>
         protected override int GetHashCodeCore()
         {
             unchecked
