@@ -125,11 +125,6 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
                 return true;
             }
 
-            if (ReferenceHelper.BothReferencesAreNull(primary.Value, secondary.Value))
-            {
-                return true;
-            }
-
             return primary.Value.Equals(secondary.Value);
         }
 

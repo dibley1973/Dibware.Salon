@@ -76,6 +76,41 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
         }
 
         /// <summary>
+        /// Given the equals for maybe when both maybes being empty then returns true.
+        /// </summary>
+        [Test]
+        public void GivenEqualsForMaybe_WhenBothMaybesBeingEmpty_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var emptyMaybe1 = Maybe<FakeEntity>.Empty;
+            var emptyMaybe2 = Maybe<FakeEntity>.Empty;
+
+            // ACT
+            var actual = emptyMaybe1.Equals(emptyMaybe2);
+
+            // ASSERT
+            actual.Should().BeTrue("because both maybes are empty");
+        }
+
+        /// <summary>
+        /// Given the equals for maybe when one maybe is empty ans other is not then returns false.
+        /// </summary>
+        [Test]
+        public void GivenEqualsForMaybe_WhenOneMaybeIsEmptyAnsOtherIsNot_ThenReturnsFalse()
+        {
+            // ARRANGE
+            var emptyMaybe1 = Maybe<FakeEntity>.Empty;
+            var fakeEntity1 = new FakeEntity();
+            var fakeEntityOrNothing1 = Maybe<FakeEntity>.Wrap(fakeEntity1);
+
+            // ACT
+            var actual = emptyMaybe1.Equals(fakeEntityOrNothing1);
+
+            // ASSERT
+            actual.Should().BeFalse("because one maybe is empty and the other is not");
+        }
+
+        /// <summary>
         /// Given value for a default <see cref="Maybe{T}"/> throws exception.
         /// </summary>
         [Test]
@@ -446,6 +481,23 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
 
             // ASSERT
             actual.Should().BeTrue("because both entities are the same reference");
+        }
+
+        /// <summary>
+        /// Given the is equal to when supplied with both wrap null references then returns true.
+        /// </summary>
+        [Test]
+        public void GivenIsEqualTo_WhenSuppliedWithBothWrapNullReferences_ThenReturnsTrue()
+        {
+            // ARRANGE
+            Maybe<FakeEntity> maybeWithNullFakeEntity1 = Maybe<FakeEntity>.Wrap(null);
+            Maybe<FakeEntity> maybeWithNullFakeEntity2 = Maybe<FakeEntity>.Wrap(null);
+
+            // ACT
+            var actual = maybeWithNullFakeEntity1 == maybeWithNullFakeEntity2;
+
+            // ASSERT
+            actual.Should().BeTrue("because both entities wrap a null reference");
         }
 
         /// <summary>

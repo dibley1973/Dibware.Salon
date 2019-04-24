@@ -107,17 +107,13 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
         /// </returns>
         public override bool Equals(object obj)
         {
-            if (obj is TNotNullable)
+            if (obj is TNotNullable value)
             {
-                var value = (TNotNullable)obj;
-
                 return Equals(value);
             }
 
-            if (obj is NotNull<TNotNullable>)
+            if (obj is NotNull<TNotNullable> notNullable)
             {
-                var notNullable = (NotNull<TNotNullable>)obj;
-
                 return Equals(notNullable.Value);
             }
 
