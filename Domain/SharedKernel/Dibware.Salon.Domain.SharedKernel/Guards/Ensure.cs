@@ -204,5 +204,27 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
         {
             if (!validConditionCallBackPredicate()) throw new InvalidCastException(errorMessageCallback());
         }
+
+        /// <summary>  Ensures that the specified value is not negative.</summary>
+        /// <param name="value">The value.</param>
+        /// <param name="argumentName">Name of the argument.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the specified value is negative
+        /// </exception>
+        [DebuggerHidden]
+        [DebuggerStepThrough]
+        public static void IsNotNegative(int value, ArgumentName argumentName)
+        {
+            if (IsNegative(value)) throw new ArgumentOutOfRangeException(argumentName, value, EnsureErrorKeys.ArgumentIsNotInRange);
+        }
+
+        /// <summary>Determines whether the specified value is negative, or not.</summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified value is negative; otherwise, <c>false</c>.</returns>
+        private static bool IsNegative(int value)
+        {
+            return value < 0;
+        }
     }
 }

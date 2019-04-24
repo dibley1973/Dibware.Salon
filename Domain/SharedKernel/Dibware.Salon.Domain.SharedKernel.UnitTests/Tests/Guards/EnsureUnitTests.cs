@@ -420,5 +420,46 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
             // ASSERT
             action.Should().Throw<InvalidCastException>();
         }
+
+        /// <summary>
+        /// Given the ensure is not negative when passed a negative value then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenEnsureIsNotNegative_WhenPassedANegativeValue_ThenThrowsException()
+        {
+            // ARRANGE
+            const string argumentName = "arg1";
+            const int argumentNegativeValue = -1;
+            var expectedMessage =
+                $"{EnsureErrorKeys.ArgumentIsNotInRange}\r\nParameter name: {argumentName}\r\nActual value was {argumentNegativeValue}.";
+
+            // ACT
+            Action action = () => Ensure.IsNotNegative(argumentNegativeValue, (ArgumentName)argumentName);
+
+            // ASSERT
+            action.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage(expectedMessage);
+        }
+
+        /// <summary>
+        /// Given the ensure is not negative when passed a non negative value then does not throw exception.
+        /// </summary>
+        [Test]
+        public void GivenEnsureIsNotNegative_WhenPassedANonNegativeValue_ThenDoesNotThrowException()
+        {
+            // ARRANGE
+            const string argumentName = "arg1";
+            const int argumentValue1 = 0;
+            const int argumentValue2 = 1;
+
+            // ACT
+            Action action1 = () => Ensure.IsNotNegative(argumentValue1, (ArgumentName)argumentName);
+            Action action2 = () => Ensure.IsNotNegative(argumentValue2, (ArgumentName)argumentName);
+
+            // ASSERT
+            action1.Should().NotThrow<ArgumentNullException>();
+            action2.Should().NotThrow<ArgumentNullException>();
+        }
     }
 }
