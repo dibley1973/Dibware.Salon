@@ -33,6 +33,6 @@ namespace Dibware.Salon.Domain.SharedKernel.Primitives
 
         /// <summary>Gets the value.</summary>
         /// <value>The value.</value>
-        private int Value { get; }
+        public int Value { get; }
     }
 }

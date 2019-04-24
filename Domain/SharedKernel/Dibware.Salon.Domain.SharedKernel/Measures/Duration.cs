@@ -22,24 +22,31 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         /// <summary>
         /// Initializes a new instance of the <see cref="Duration"/> class.
         /// </summary>
-        /// <param name="hour">The hour.</param>
-        /// <param name="minute">The minute.</param>
-        public Duration(PositiveInteger hour, PositiveInteger minute)
+        /// <param name="hours">The hours.</param>
+        /// <param name="minutes">The minutes.</param>
+        public Duration(PositiveInteger hours, PositiveInteger minutes)
         {
-            Ensure.IsNotNull(hour, (ArgumentName)nameof(hour));
-            Ensure.IsNotNull(minute, (ArgumentName)nameof(minute));
+            Ensure.IsNotNull(hours, (ArgumentName)nameof(hours));
+            Ensure.IsNotNull(minutes, (ArgumentName)nameof(minutes));
 
-            Hour = hour;
-            Minute = minute;
+            Hours = hours;
+            Minutes = minutes;
         }
 
-        /// <summary>Gets the hour.</summary>
-        /// <value>The hour.</value>
-        public PositiveInteger Hour { get; }
+        /// <summary>Gets the number of minutes in an hour.</summary>
+        /// <value>The minutes in hour.</value>
+        public static PositiveInteger NumberOfMinutesInAnHour => new PositiveInteger(60);
 
-        /// <summary> Gets the minute. </summary>
-        /// <value> The minute. </value>
-        public PositiveInteger Minute { get; }
+        /// <summary>Gets the hours passed in the duration.</summary>
+        /// <value>The number of hours</value>
+        public PositiveInteger Hours { get; }
+
+        /// <summary> Gets the minutes passed in the duration following after the last complete hour. </summary>
+        /// <value> The number of minutes. </value>
+        public PositiveInteger Minutes { get; }
+
+        // TODO: Uncomment when Positive integer addition implementation is ready
+        //public PositiveInteger TotalMinutes() => (Hours * NumberOfMinutesInAnHour + Minutes);
 
         /// <summary>
         /// Override this method with the derived implementation of `Equals`.
@@ -50,7 +57,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         /// </returns>
         protected override bool EqualsCore(Duration other)
         {
-            return Hour == other.Hour && Minute == other.Minute;
+            return Hours == other.Hours && Minutes == other.Minutes;
         }
 
         /// <summary>Override this method with the derived implementation of `GetsHashCode`.</summary>
@@ -59,8 +66,8 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         {
             unchecked
             {
-                int hashCode = Hour.GetHashCode();
-                hashCode = (hashCode * 397) ^ Minute.GetHashCode();
+                int hashCode = Hours.GetHashCode();
+                hashCode = (hashCode * 397) ^ Minutes.GetHashCode();
 
                 return hashCode;
             }

@@ -6,9 +6,7 @@
 // </copyright>
 
 using System;
-using Dibware.Salon.Domain.SharedKernel.Amplifiers;
 using Dibware.Salon.Domain.SharedKernel.Primitives;
-using Dibware.Salon.Domain.SharedKernel.UnitTests.Fakes;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -46,12 +44,29 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Primitives
             const int argumentValue2 = 1;
 
             // ACT
-            Action action1 = () => new PositiveInteger(argumentValue1);
-            Action action2 = () => new PositiveInteger(argumentValue2);
+            Action actual1 = () => new PositiveInteger(argumentValue1);
+            Action actual2 = () => new PositiveInteger(argumentValue2);
 
             // ASSERT
-            action1.Should().NotThrow<ArgumentNullException>();
-            action2.Should().NotThrow<ArgumentNullException>();
+            actual2.Should().NotThrow<ArgumentNullException>("because no exception should be thrown for a valid value");
+            actual1.Should().NotThrow<ArgumentNullException>("because no exception should be thrown for a valid value");
+        }
+
+        /// <summary>
+        /// Given the value when accessed after construction then returns constructed value.
+        /// </summary>
+        [Test]
+        public void GivenValue_WhenAccessedAfterConstruction_ThenReturnsConstructedValue()
+        {
+            // ARRANGE
+            const int argumentValue1 = 11;
+            var positiveInteger = new PositiveInteger(argumentValue1);
+
+            // ACT
+            var actual = positiveInteger.Value;
+
+            // ASSERT
+            actual.Should().Be(argumentValue1, "because the value should match the constructed value");
         }
     }
 }
