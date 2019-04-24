@@ -23,10 +23,44 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
     public class CheckUnitTests
     {
         /// <summary>
-        /// Given the Check function is not null when passed a null object then returns fail result.
+        /// Given the is not null for string argument result when passed a null object then returns fail result.
         /// </summary>
         [Test]
-        public void GivenIsNotNullResult_WhenPassedANullObject_ThenReturnsFailResult()
+        public void GivenIsNotNullForStringArgumentResult_WhenPassedANullObject_ThenReturnsFailResult()
+        {
+            // ARRANGE
+            var argumentName = "arg1";
+
+            // ACT
+            var actual = Check.IsNotNull(null, argumentName);
+
+            // ASSERT
+            actual.IsFailure.Should().BeTrue();
+            actual.Error.Should().Be(argumentName);
+        }
+
+        /// <summary>
+        /// Given the check is not null for string argument result when passed a not null object then returns success result.
+        /// </summary>
+        [Test]
+        public void GivenCheckIsNotNullForStringArgumentResult_WhenPassedANotNullObject_ThenReturnsSuccessResult()
+        {
+            // ARRANGE
+            var argumentName = "arg1";
+            var argumentValue = new StringBuilder();
+
+            // ACT
+            var actual = Check.IsNotNull(argumentValue, argumentName);
+
+            // ASSERT
+            actual.IsSuccess.Should().BeTrue();
+        }
+
+        /// <summary>
+        /// Given the Check function is not null (for argument name) when passed a null object then returns fail result.
+        /// </summary>
+        [Test]
+        public void GivenCheckIsNotNullForArgumentNameResult_WhenPassedANullObject_ThenReturnsFailResult()
         {
             // ARRANGE
             var argumentName = (ArgumentName)"arg1";
@@ -41,10 +75,10 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         }
 
         /// <summary>
-        /// Given the Check function is not null when passed a not-null object then returns success result.
+        /// Given the Check function is not null (for argument name) when passed a not-null object then returns success result.
         /// </summary>
         [Test]
-        public void GivenCheckIsNotNull_WhenPassedANotNullObject_ThenReturnsSuccessResult()
+        public void GivenCheckIsNotNullForArgumentNameResult_WhenPassedANotNullObject_ThenReturnsSuccessResult()
         {
             // ARRANGE
             var argumentName = (ArgumentName)"arg1";
@@ -273,10 +307,13 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
             var item1 = Guid.Empty;
             var item2 = Guid.Empty;
             var errorMessage = "NotTrue";
-            Func<bool> isTrueCallback = () => { return item1 == item2; };
+            bool IsTrueCallback()
+            {
+                return item1 == item2;
+            }
 
             // ACT
-            var actual = Check.IsTrue(isTrueCallback, errorMessage);
+            var actual = Check.IsTrue(IsTrueCallback, errorMessage);
 
             // ASSERT
             actual.IsSuccess.Should().BeTrue();
@@ -292,10 +329,13 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
             var item1 = Guid.NewGuid();
             var item2 = Guid.NewGuid();
             var errorMessage = "NotTrue";
-            Func<bool> isTrueCallback = () => { return item1 == item2; };
+            bool IsTrueCallback()
+            {
+                return item1 == item2;
+            }
 
             // ACT
-            var actual = Check.IsTrue(isTrueCallback, errorMessage);
+            var actual = Check.IsTrue(IsTrueCallback, errorMessage);
 
             // ASSERT
             actual.IsSuccess.Should().BeFalse();
@@ -312,10 +352,13 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
             var item1 = Guid.Empty;
             var item2 = Guid.Empty;
             var errorMessage = "NotFalse";
-            Func<bool> isFalseCallback = () => { return item1 == item2; };
+            bool IsFalseCallback()
+            {
+                return item1 == item2;
+            }
 
             // ACT
-            var actual = Check.IsFalse(isFalseCallback, errorMessage);
+            var actual = Check.IsFalse(IsFalseCallback, errorMessage);
 
             // ASSERT
             actual.IsSuccess.Should().BeFalse();
@@ -332,10 +375,13 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
             var item1 = Guid.NewGuid();
             var item2 = Guid.NewGuid();
             var errorMessage = "NotFalse";
-            Func<bool> isFalseCallback = () => { return item1 == item2; };
+            bool IsFalseCallback()
+            {
+                return item1 == item2;
+            }
 
             // ACT
-            var actual = Check.IsFalse(isFalseCallback, errorMessage);
+            var actual = Check.IsFalse(IsFalseCallback, errorMessage);
 
             // ASSERT
             actual.IsSuccess.Should().BeTrue();

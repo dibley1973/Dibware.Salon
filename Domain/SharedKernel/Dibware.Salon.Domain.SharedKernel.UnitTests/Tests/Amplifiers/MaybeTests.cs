@@ -161,7 +161,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
         }
 
         /// <summary>
-        /// Givens the to string method when maybe is populated then returns same as wrapped object.
+        /// Given the to string method when maybe is populated then returns same as wrapped object.
         /// </summary>
         [Test]
         public void GivenTheToStringMethod_WhenMaybeIsPopulated_ThenReturnsSameAsWrappedObject()
@@ -325,9 +325,9 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
             actual.Should().BeTrue("because they are the same references");
         }
 
-        /// <summary>Given the is equal to when one has value andthe other does not then returnsfalse.</summary>
+        /// <summary>Given the is equal to when one has value and the other does not then returns false.</summary>
         [Test]
-        public void GivenIsEqualTo_WhenOneHasValueAndtheOtherDoesNot_ThenReturnsfalse()
+        public void GivenIsEqualTo_WhenOneHasValueAndTheOtherDoesNot_ThenReturnsFalse()
         {
             // ARRANGE
             var product1 = FakeEntityData.CreateEmptyProduct();
@@ -342,6 +342,148 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers
             // ASSERT
             actual1.Should().BeFalse("because they first has a value and the other does not");
             actual2.Should().BeFalse("because they second has a value and the other does not");
+        }
+
+        /// <summary>
+        /// Given the is equal to when comparing maybe to wrapped type and both are same then returns true.
+        /// </summary>
+        [Test]
+        public void GivenIsEqualTo_WhenComparingMaybeToWrappedTypeAndBothAreSame_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var product1 = FakeEntityData.CreateEmptyProduct();
+            Maybe<FakeEntity> maybe1 = product1;
+
+            // ACT
+            var actual1 = maybe1 == product1;
+
+            // ASSERT
+            actual1.Should().BeTrue("because they maybe contains the same as the product");
+        }
+
+        /// <summary>
+        /// Given the is equal to when comparing maybe to wrapped type to a different type then returns false.
+        /// </summary>
+        [Test]
+        public void GivenIsEqualTo_WhenComparingMaybeToWrappedTypeToADifferentType_ThenReturnsFalse()
+        {
+            // ARRANGE
+            var product1 = FakeEntityData.CreateProductNo2();
+            var product2 = FakeEntityData.CreateProductNo3();
+            Maybe<FakeEntity> maybe1 = product1;
+
+            // ACT
+            var actual1 = maybe1 == product2;
+
+            // ASSERT
+            actual1.Should().BeFalse("because they are different products");
+        }
+
+        /// <summary>
+        /// Given the is equal to when comparing empty maybe to wrapped type to a different type then returns false.
+        /// </summary>
+        [Test]
+        public void GivenIsEqualTo_WhenComparingEmptyMaybeToWrappedTypeToADifferentType_ThenReturnsFalse()
+        {
+            // ARRANGE
+            var product1 = FakeEntityData.CreateProductNo2();
+            var maybe1 = Maybe<FakeEntity>.Empty;
+
+            // ACT
+            var actual1 = maybe1 == product1;
+
+            // ASSERT
+            actual1.Should().BeFalse("because they are different products");
+        }
+
+        /// <summary>
+        /// Given the is not equal to when comparing maybe to wrapped type and both are same then returns true.
+        /// </summary>
+        [Test]
+        public void GivenIsNotEqualTo_WhenComparingMaybeToWrappedTypeAndBothAreSame_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var product1 = FakeEntityData.CreateEmptyProduct();
+            Maybe<FakeEntity> maybe1 = product1;
+
+            // ACT
+            var actual1 = maybe1 != product1;
+
+            // ASSERT
+            actual1.Should().BeFalse("because they maybe contains the same as the product");
+        }
+
+        /// <summary>
+        /// Given the is not equal to when comparing maybe to wrapped type to a different type then returns false.
+        /// </summary>
+        [Test]
+        public void GivenIsNotEqualTo_WhenComparingMaybeToWrappedTypeToADifferentType_ThenReturnsFalse()
+        {
+            // ARRANGE
+            var product1 = FakeEntityData.CreateProductNo2();
+            var product2 = FakeEntityData.CreateProductNo3();
+            Maybe<FakeEntity> maybe1 = product1;
+
+            // ACT
+            var actual1 = maybe1 != product2;
+
+            // ASSERT
+            actual1.Should().BeTrue("because they are different products");
+        }
+
+        /// <summary>
+        /// Given the is equal to when supplied with both null reference then returns true.
+        /// </summary>
+        [Test]
+        public void GivenIsEqualTo_WhenSuppliedWithBothNullReferences_ThenReturnsTrue()
+        {
+            // ARRANGE
+            Maybe<FakeEntity> nullMaybeFakeEntity1 = null;
+            Maybe<FakeEntity> nullMaybeFakeEntity2 = null;
+
+            // ACT
+            var actual = nullMaybeFakeEntity1 == nullMaybeFakeEntity2;
+
+            // ASSERT
+            actual.Should().BeTrue("because both entities are the same reference");
+        }
+
+        /// <summary>
+        /// Given the is not equal to when supplied with same reference then returns false.
+        /// </summary>
+        [Test]
+        public void GivenIsNotEqualTo_WhenSuppliedWithSameReference_ThenReturnsFalse()
+        {
+            // ARRANGE
+            var fakeEntity1 = new FakeEntity();
+            var fakeEntity2 = fakeEntity1;
+            var notNullFakeEntity1 = Maybe<FakeEntity>.Wrap(fakeEntity1);
+            var notNullFakeEntity2 = Maybe<FakeEntity>.Wrap(fakeEntity2);
+
+            // ACT
+            var actual = notNullFakeEntity1 != notNullFakeEntity2;
+
+            // ASSERT
+            actual.Should().BeFalse("because both entities are the same reference");
+        }
+
+        /// <summary>
+        /// Given the is not equal to when supplied with different reference then returns true.
+        /// </summary>
+        [Test]
+        public void GivenIsNotEqualTo_WhenSuppliedWithDifferentReference_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var fakeEntity1 = new FakeEntity();
+            var fakeEntity2 = new FakeEntity();
+            var notNullFakeEntity1 = Maybe<FakeEntity>.Wrap(fakeEntity1);
+            var notNullFakeEntity2 = Maybe<FakeEntity>.Wrap(fakeEntity2);
+
+            // ACT
+            var actual = notNullFakeEntity1 != notNullFakeEntity2;
+
+            // ASSERT
+            actual.Should().BeTrue("because both entities are the same reference");
         }
 
         /// <summary>
