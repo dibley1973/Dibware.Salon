@@ -72,6 +72,23 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
+        /// Tests Equals when other is different entity type returns false.
+        /// </summary>
+        [Test]
+        public void GivenEquals_WhenOtherIsDifferentEntityType_ReturnsFalse()
+        {
+            // ARRANGE
+            var product1 = FakeEntityData.CreateProductNo2();
+            object product2 = FakeEntityData.CreateProductType2(5);
+
+            // ACT
+            var actual = product1.Equals(product2);
+
+            // ASSERT
+            actual.Should().BeFalse();
+        }
+
+        /// <summary>
         /// Test Equals when other is same reference returns true.
         /// </summary>
         [Test]
