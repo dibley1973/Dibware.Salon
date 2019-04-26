@@ -26,15 +26,6 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.TestData
         }
 
         /// <summary>
-        /// Creates an empty <see cref="FakeValueObject"/>.
-        /// </summary>
-        /// <returns>Returns an <see cref="FakeValueObject"/>.</returns>
-        public static FakeValueObject CreateEmptyFakeValueObject()
-        {
-            return new FakeValueObject("0", "0");
-        }
-
-        /// <summary>
         /// Creates the <see cref="FakeValueObject"/> No. 1.
         /// </summary>
         /// <returns>Returns an <see cref="FakeValueObject"/>.</returns>

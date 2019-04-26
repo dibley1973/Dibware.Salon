@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="FakeEntity.cs" company="Dibware">
+// <copyright file="FakeEntity2.cs" company="Dibware">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -12,22 +12,15 @@ using Dibware.Salon.Domain.SharedKernel.BaseClasses;
 namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Fakes
 {
     /// <summary>
-    /// Represents a fake entity for testing purposes only
+    /// Represents a fake entity #2 for testing purposes only
     /// </summary>
-    internal sealed class FakeEntity : Entity
+    internal sealed class FakeEntity2 : Entity
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FakeEntity"/> class.
-        /// </summary>
-        public FakeEntity()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FakeEntity"/> class.
+        /// Initializes a new instance of the <see cref="FakeEntity2"/> class.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        public FakeEntity(long id)
+        public FakeEntity2(long id)
         {
             Id = id;
         }

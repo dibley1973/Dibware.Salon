@@ -10,7 +10,6 @@
 using System;
 using System.Collections.Generic;
 using Dibware.Salon.Domain.SharedKernel.Guards;
-using Dibware.Salon.Domain.SharedKernel.Helpers;
 
 namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
 {
@@ -64,12 +63,6 @@ namespace Dibware.Salon.Domain.SharedKernel.Amplifiers
         /// </returns>
         public static bool operator ==(NotNull<TNotNullable> primary, NotNull<TNotNullable> secondary)
         {
-            if (ReferenceHelper.BothReferencesAreNull(primary.Value, secondary.Value))
-                return true;
-
-            if (ReferenceHelper.OneOrTheOtherReferenceIsNull(primary.Value, secondary.Value))
-                return false;
-
             return primary.Value == secondary.Value;
         }
 

@@ -49,12 +49,6 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Fakes
         public string Name => _name;
 
         /// <summary>
-        /// Gets the code and name concatenated.
-        /// </summary>
-        /// <value>The code and name.</value>
-        public string CodeAndName => string.Concat(Code, ":", Name);
-
-        /// <summary>
         /// Determines whether the specified <see cref="FakeValueObject"/>, is equal to this instance.
         /// </summary>
         /// <param name="other">The other <see cref="FakeValueObject"/>.</param>

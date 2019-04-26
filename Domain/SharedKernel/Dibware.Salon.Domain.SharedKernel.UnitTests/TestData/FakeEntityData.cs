@@ -63,5 +63,17 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.TestData
         {
             return new FakeEntity(id);
         }
+
+        /// <summary>
+        /// Creates a <see cref="FakeEntity2"/> with the specified identity.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        /// Returns a <see cref="FakeEntity2"/>.
+        /// </returns>
+        public static FakeEntity2 CreateProductType2(int id)
+        {
+            return new FakeEntity2(id);
+        }
     }
 }

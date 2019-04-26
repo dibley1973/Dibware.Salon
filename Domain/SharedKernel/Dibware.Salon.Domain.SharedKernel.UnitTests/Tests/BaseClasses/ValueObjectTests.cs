@@ -220,6 +220,25 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
+        /// Given the is equal to when given same type both null reference returns true.
+        /// </summary>
+        [Test]
+        public void GivenIsEqualTo_WhenGivenSameTypeBothNullReference_ReturnsTrue()
+        {
+            // ARRANGE
+            const FakeValueObject nullValueObject1 = null;
+            const FakeValueObject nullValueObject2 = null;
+
+            // ACT
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+            var actual = nullValueObject1 == nullValueObject2;
+
+            // ASSERT
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+            actual.Should().BeTrue();
+        }
+
+        /// <summary>
         /// Given the is equal to when given same type different reference same values returns true.
         /// </summary>
         [Test]

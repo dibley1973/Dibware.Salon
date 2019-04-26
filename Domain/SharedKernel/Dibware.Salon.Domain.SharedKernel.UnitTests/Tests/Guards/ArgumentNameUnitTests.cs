@@ -21,7 +21,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
     public class ArgumentNameUnitTests
     {
         /// <summary>
-        /// Givens the create when passed null value then returns fail result.
+        /// Given the create when passed null value then returns fail result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenPassedNullValue_ThenReturnsFailResult()
@@ -38,7 +38,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         }
 
         /// <summary>
-        /// Givens the create when passed empty value then returns fail result.
+        /// Given the create when passed empty value then returns fail result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenPassedEmptyValue_ThenReturnsFailResult()
@@ -55,7 +55,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         }
 
         /// <summary>
-        /// Givens the create when passed white space value then returns fail result.
+        /// Given the create when passed white space value then returns fail result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenPassedWhiteSpaceValue_ThenReturnsFailResult()
@@ -72,7 +72,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         }
 
         /// <summary>
-        /// Givens the create when passed value too long then returns fail result.
+        /// Given the create when passed value too long then returns fail result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenPassedValueTooLong_ThenReturnsFailResult()
@@ -89,7 +89,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         }
 
         /// <summary>
-        /// Givens the create when passed value at maximum length then returns success result.
+        /// Given the create when passed value at maximum length then returns success result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenPassedValueAtMaximumLength_ThenReturnsSuccessResult()
@@ -105,7 +105,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         }
 
         /// <summary>
-        /// Givens the name of the explicit operator when cast from valid value then returns constructed argument.
+        /// Given the name of the explicit operator when cast from valid value then returns constructed argument.
         /// </summary>
         [Test]
         public void GivenExplicitOperator_WhenCastFromValidValue_ThenReturnsConstructedArgumentName()
@@ -122,7 +122,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         }
 
         /// <summary>
-        /// Givens the implicit operator when cast to string then returns value.
+        /// Given the implicit operator when cast to string then returns value.
         /// </summary>
         [Test]
         public void GivenImplicitOperator_WhenCastToString_ThenReturnsValue()

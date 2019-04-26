@@ -39,5 +39,10 @@ namespace Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys
         /// The key for when the value is not null, empty or white space.
         /// </summary>
         public const string ArgumentIsNotNullEmptyOrWhiteSpace = "ArgumentIsNotNullEmptyOrWhiteSpace";
+
+        /// <summary>
+        /// The key for when the value is not in valid range.
+        /// </summary>
+        public const string ArgumentIsNotInRange = "ArgumentIsNotInRange";
     }
 }

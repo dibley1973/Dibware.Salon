@@ -72,6 +72,23 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
+        /// Tests Equals when other is different entity type returns false.
+        /// </summary>
+        [Test]
+        public void GivenEquals_WhenOtherIsDifferentEntityType_ReturnsFalse()
+        {
+            // ARRANGE
+            var product1 = FakeEntityData.CreateProductNo2();
+            object product2 = FakeEntityData.CreateProductType2(5);
+
+            // ACT
+            var actual = product1.Equals(product2);
+
+            // ASSERT
+            actual.Should().BeFalse();
+        }
+
+        /// <summary>
         /// Test Equals when other is same reference returns true.
         /// </summary>
         [Test]
@@ -137,6 +154,38 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.BaseClasses
 
             // ASSERT
             actual.Should().BeTrue();
+        }
+
+        /// <summary>Given the get hash code when for same entities then they are the same.</summary>
+        [Test]
+        public void GivenGetHashCode_WhenForSameEntities_ThenTheyAreTheSame()
+        {
+            // ARRANGE
+            var productNo2 = FakeEntityData.CreateProductNo2();
+            var productNo3 = FakeEntityData.CreateProductNo3();
+
+            // ACT
+            var actual1 = productNo2.GetHashCode();
+            var actual2 = productNo3.GetHashCode();
+
+            // ASSERT
+            actual1.Should().NotBe(actual2, "because the hash codes should be the same for identical entities");
+        }
+
+        /// <summary>Given the get hash code when for two different entities then they differ.</summary>
+        [Test]
+        public void GivenGetHashCode_WhenForTwoDifferentEntities_ThenTheyDiffer()
+        {
+            // ARRANGE
+            var productNo2 = FakeEntityData.CreateProductNo2();
+            var productNo3 = FakeEntityData.CreateProductNo3();
+
+            // ACT
+            var actual1 = productNo2.GetHashCode();
+            var actual2 = productNo3.GetHashCode();
+
+            // ASSERT
+            actual1.Should().NotBe(actual2, "because the hash codes should differ for different values");
         }
 
         /// <summary>
