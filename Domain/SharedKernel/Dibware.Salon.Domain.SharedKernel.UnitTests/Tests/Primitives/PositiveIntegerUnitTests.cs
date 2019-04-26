@@ -53,6 +53,202 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Primitives
         }
 
         /// <summary>
+        /// Given the add when supplied with null value then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenAdd_WhenSuppliedWithNullValue_ThenThrowsException()
+        {
+            // ARRANGE
+            var positiveInteger = new PositiveInteger(3);
+            const PositiveInteger nullPositiveInteger = null;
+
+            // ACT
+            Action actual = () => positiveInteger.Add(nullPositiveInteger);
+
+            // ASSERT
+            actual.Should().Throw<ArgumentNullException>("because a null value cannot be added");
+        }
+
+        /// <summary>
+        /// Given the add when supplied with two values exceeding maximum int value then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenAdd_WhenSuppliedWithTwoValuesExceedingMaximumIntValue_ThenThrowsException()
+        {
+            // ARRANGE
+            var positiveInteger1 = new PositiveInteger(int.MaxValue);
+            var positiveInteger2 = new PositiveInteger(1);
+
+            // ACT
+            Action actual = () => positiveInteger1.Add(positiveInteger2);
+
+            // ASSERT
+            actual.Should()
+                .Throw<ArgumentOutOfRangeException>("because two values summing more than maximum int value cannot be summed");
+        }
+
+        /// <summary>
+        /// Given the add when supplied with two values not exceeding maximum int value then returns new instance.
+        /// </summary>
+        [Test]
+        public void GivenAdd_WhenSuppliedWithTwoValuesNotExceedingMaximumIntValue_ThenReturnsNewInstance()
+        {
+            // ARRANGE
+            var positiveInteger1 = new PositiveInteger(int.MaxValue - 1);
+            var positiveInteger2 = new PositiveInteger(1);
+
+            // ACT
+            var actual = positiveInteger1.Add(positiveInteger2);
+
+            // ASSERT
+            actual.Value.Should().Be(int.MaxValue, "because the sum should be correct");
+            actual.Should().NotBeSameAs(positiveInteger1, "because the reference must not be the same as the first");
+            actual.Should().NotBeSameAs(positiveInteger2, "because the reference must not be the same as the second");
+        }
+
+        /// <summary>
+        /// Given can add when supplied with two values exceeding maximum int value then returns false.
+        /// </summary>
+        [Test]
+        public void GivenCanAdd_WhenSuppliedWithTwoValuesExceedingMaximumIntValue_ThenReturnsFalse()
+        {
+            // ARRANGE
+            var positiveInteger1 = new PositiveInteger(int.MaxValue);
+            var positiveInteger2 = new PositiveInteger(1);
+
+            // ACT
+            var actual = positiveInteger1.CanAdd(positiveInteger2);
+
+            // ASSERT
+            actual.Should().BeFalse("because two values summing more than maximum int value cannot be summed");
+        }
+
+        /// <summary>
+        /// Given can add when supplied with two values not exceeding maximum int value then returns true.
+        /// </summary>
+        [Test]
+        public void GivenCanAdd_WhenSuppliedWithTwoValuesNotExceedingMaximumIntValue_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var positiveInteger1 = new PositiveInteger(int.MaxValue - 1);
+            var positiveInteger2 = new PositiveInteger(1);
+
+            // ACT
+            var actual = positiveInteger1.CanAdd(positiveInteger2);
+
+            // ASSERT
+            actual.Should().BeTrue("because two values summing less than or equal to maximum int value can be summed");
+        }
+
+        /// <summary>
+        /// Given can subtract when supplied with two values subtracting to below zero value then returns false.
+        /// </summary>
+        [Test]
+        public void GivenCanAdd_WhenSuppliedWithTwoValuesBelowMinimumIntValue_ThenReturnsFalse()
+        {
+            // ARRANGE
+            var positiveInteger1 = new PositiveInteger(0);
+            var positiveInteger2 = new PositiveInteger(1);
+
+            // ACT
+            var actual = positiveInteger1.CanSubtract(positiveInteger2);
+
+            // ASSERT
+            actual.Should().BeFalse("because two values subtracting to below minimum int value cannot be subtracted");
+        }
+
+        /// <summary>
+        /// Given can subtract when supplied with two values subtracting above or equal to zero value then returns true.
+        /// </summary>
+        [Test]
+        public void GivenCanSubtract_WhenSuppliedWithTwoValuesNotBelowMaximumIntValue_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var positiveInteger1 = new PositiveInteger(1);
+            var positiveInteger2 = new PositiveInteger(1);
+
+            // ACT
+            var actual = positiveInteger1.CanSubtract(positiveInteger2);
+
+            // ASSERT
+            actual.Should().BeTrue("because two values subtracting above or equal to minimum value can be subtracted");
+        }
+
+        /// <summary>
+        /// Given the maximum value when accessed then returns maximum int value.
+        /// </summary>
+        [Test]
+        public void GivenMaximumValue_WhenAccessed_ThenReturnsMaximumIntValue()
+        {
+            // ASSERT
+            PositiveInteger.MaximumValue.Should().Be(int.MaxValue);
+        }
+
+        /// <summary>
+        /// Given the minimum value when accessed then returns zero.
+        /// </summary>
+        [Test]
+        public void GivenMaximumValue_WhenAccessed_ThenReturnsZero()
+        {
+            // ASSERT
+            PositiveInteger.MinimumValue.Should().Be(0);
+        }
+
+        /// <summary>
+        /// Given the subtract when supplied with null value then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenSubtract_WhenSuppliedWithNullValue_ThenThrowsException()
+        {
+            // ARRANGE
+            var positiveInteger = new PositiveInteger(3);
+            const PositiveInteger nullPositiveInteger = null;
+
+            // ACT
+            Action actual = () => positiveInteger.Subtract(nullPositiveInteger);
+
+            // ASSERT
+            actual.Should().Throw<ArgumentNullException>("because a null value cannot be subtracted");
+        }
+
+        /// <summary>
+        /// Given the subtract when supplied with two values below minimum int value then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenSubtract_WhenSuppliedWithTwoValuesBelowMinimumIntValue_ThenThrowsException()
+        {
+            // ARRANGE
+            var positiveInteger1 = new PositiveInteger(0);
+            var positiveInteger2 = new PositiveInteger(1);
+
+            // ACT
+            Action actual = () => positiveInteger1.Subtract(positiveInteger2);
+
+            // ASSERT
+            actual.Should()
+                .Throw<ArgumentOutOfRangeException>("because two values subtracting more than minimum int value cannot be summed");
+        }
+
+        /// <summary>
+        /// Given the subtract when supplied with two values not below minimum int value then returns new instance.
+        /// </summary>
+        [Test]
+        public void GivenSubtract_WhenSuppliedWithTwoValuesNotBelowMinimumIntValue_ThenReturnsNewInstance()
+        {
+            // ARRANGE
+            var positiveInteger1 = new PositiveInteger(1);
+            var positiveInteger2 = new PositiveInteger(1);
+
+            // ACT
+            var actual = positiveInteger1.Subtract(positiveInteger2);
+
+            // ASSERT
+            actual.Value.Should().Be(0, "because the subtraction should be correct");
+            actual.Should().NotBeSameAs(positiveInteger1, "because the reference must not be the same as the first");
+            actual.Should().NotBeSameAs(positiveInteger2, "because the reference must not be the same as the second");
+        }
+
+        /// <summary>
         /// Given the value when accessed after construction then returns constructed value.
         /// </summary>
         [Test]

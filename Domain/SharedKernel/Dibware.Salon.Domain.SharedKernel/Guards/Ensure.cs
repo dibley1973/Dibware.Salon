@@ -9,6 +9,7 @@
 
 using System;
 using System.Diagnostics;
+using Dibware.Salon.Domain.SharedKernel.CommonValueObjects;
 using Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys;
 
 namespace Dibware.Salon.Domain.SharedKernel.Guards
@@ -30,7 +31,8 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
         /// </exception>
         public static void IsNotDefault<T>(T value, ArgumentName argumentName)
         {
-            if (value.Equals(default(T))) throw new ArgumentNullException(argumentName, EnsureErrorKeys.ArgumentIsDefault);
+            if (value.Equals(default(T)))
+                throw new ArgumentNullException(argumentName, EnsureErrorKeys.ArgumentIsDefault);
         }
 
         /// <summary>
@@ -43,7 +45,8 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
         [DebuggerStepThrough]
         public static void IsNotNull(object value, ArgumentName argumentName)
         {
-            if (value == null) throw new ArgumentNullException(argumentName, EnsureErrorKeys.ArgumentIsNull);
+            if (value == null)
+                throw new ArgumentNullException(argumentName, EnsureErrorKeys.ArgumentIsNull);
         }
 
         /// <summary>
@@ -56,7 +59,8 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
         [DebuggerStepThrough]
         public static void IsNotNullOrEmpty(string value, ArgumentName argumentName)
         {
-            if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(argumentName, EnsureErrorKeys.ArgumentIsNotNullOrEmpty);
+            if (string.IsNullOrEmpty(value))
+                throw new ArgumentNullException(argumentName, EnsureErrorKeys.ArgumentIsNotNullOrEmpty);
         }
 
         /// <summary>
@@ -70,7 +74,8 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
         [DebuggerStepThrough]
         public static void IsNotNullEmptyOrWhiteSpace(string value, string errorMessage)
         {
-            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(errorMessage);
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentNullException(errorMessage);
         }
 
         /// <summary>
@@ -84,7 +89,8 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
         [DebuggerStepThrough]
         public static void IsNotNullEmptyOrWhiteSpace(string value, ArgumentName argumentName)
         {
-            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(argumentName, EnsureErrorKeys.ArgumentIsNullEmptyOrWhiteSpace);
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentNullException(argumentName, EnsureErrorKeys.ArgumentIsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
@@ -102,7 +108,8 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
         [DebuggerStepThrough]
         public static void IsNotInvalidOperation(bool validCondition, string message)
         {
-            if (!validCondition) throw new InvalidOperationException(message);
+            if (!validCondition)
+                throw new InvalidOperationException(message);
         }
 
         /// <summary>
@@ -122,7 +129,8 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
         [DebuggerStepThrough]
         public static void IsNotInvalidOperation(Func<bool> validConditionCallBackPredicate, string message)
         {
-            if (!validConditionCallBackPredicate()) throw new InvalidOperationException(message);
+            if (!validConditionCallBackPredicate())
+                throw new InvalidOperationException(message);
         }
 
         /// <summary>
@@ -140,7 +148,8 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
         [DebuggerStepThrough]
         public static void IsNotInvalidCast(bool validCondition, string message)
         {
-            if (!validCondition) throw new InvalidCastException(message);
+            if (!validCondition)
+                throw new InvalidCastException(message);
         }
 
         /// <summary>
@@ -160,7 +169,8 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
         [DebuggerStepThrough]
         public static void IsNotInvalidCast(bool validCondition, Func<string> errorMessageCallback)
         {
-            if (!validCondition) throw new InvalidCastException(errorMessageCallback());
+            if (!validCondition)
+                throw new InvalidCastException(errorMessageCallback());
         }
 
         /// <summary>
@@ -180,7 +190,8 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
         [DebuggerStepThrough]
         public static void IsNotInvalidCast(Func<bool> validConditionCallBackPredicate, string message)
         {
-            if (!validConditionCallBackPredicate()) throw new InvalidCastException(message);
+            if (!validConditionCallBackPredicate())
+                throw new InvalidCastException(message);
         }
 
         /// <summary>
@@ -202,10 +213,28 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
         [DebuggerStepThrough]
         public static void IsNotInvalidCast(Func<bool> validConditionCallBackPredicate, Func<string> errorMessageCallback)
         {
-            if (!validConditionCallBackPredicate()) throw new InvalidCastException(errorMessageCallback());
+            if (!validConditionCallBackPredicate())
+                throw new InvalidCastException(errorMessageCallback());
         }
 
-        /// <summary>  Ensures that the specified value is not negative.</summary>
+        /// <summary>
+        /// Determines whether [is not greater than int maximum value] [the specified value].
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="argumentName">Name of the argument.</param>
+        /// <param name="message">The message.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the value is greater than <see cref="int.MaxValue"/>
+        /// </exception>
+        [DebuggerHidden]
+        [DebuggerStepThrough]
+        public static void IsNotGreaterThanIntMaxValue(long value, ArgumentName argumentName, ShortDescription message)
+        {
+            if (IsValueGreaterThanMaximumIntValue(value))
+                throw new ArgumentOutOfRangeException(argumentName, value, message);
+        }
+
+        /// <summary> Ensures that the specified value is not negative.</summary>
         /// <param name="value">The value.</param>
         /// <param name="argumentName">Name of the argument.</param>
         /// <exception cref="ArgumentOutOfRangeException">
@@ -215,16 +244,45 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
         [DebuggerStepThrough]
         public static void IsNotNegative(int value, ArgumentName argumentName)
         {
-            if (IsNegative(value)) throw new ArgumentOutOfRangeException(argumentName, value, EnsureErrorKeys.ArgumentIsNotInRange);
+            if (IsNegative(value))
+                throw new ArgumentOutOfRangeException(argumentName, value, EnsureErrorKeys.ArgumentIsNotInRange);
+        }
+
+        /// <summary> Ensures that the specified value is not negative.</summary>
+        /// <param name="value">The value.</param>
+        /// <param name="argumentName">Name of the argument.</param>
+        /// <param name="message">The message which describes the reason.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the specified value is negative
+        /// </exception>
+        [DebuggerHidden]
+        [DebuggerStepThrough]
+        public static void IsNotNegative(int value, ArgumentName argumentName, ShortDescription message)
+        {
+            if (IsNegative(value))
+                throw new ArgumentOutOfRangeException(argumentName, value, message);
         }
 
         /// <summary>Determines whether the specified value is negative, or not.</summary>
         /// <param name="value">The value.</param>
         /// <returns>
-        ///   <c>true</c> if the specified value is negative; otherwise, <c>false</c>.</returns>
+        /// <c>true</c> if the specified value is negative; otherwise, <c>false</c>.
+        /// </returns>
         private static bool IsNegative(int value)
         {
             return value < 0;
+        }
+
+        /// <summary>
+        /// Determines whether the specified value is greater than the maximum int value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// <c>true</c> if the specified value is greater than the maximum int value; otherwise, <c>false</c>.
+        /// </returns>
+        private static bool IsValueGreaterThanMaximumIntValue(long value)
+        {
+            return value > int.MaxValue;
         }
     }
 }
