@@ -33,20 +33,19 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
             Minutes = minutes;
         }
 
-        /// <summary>Gets the number of minutes in an hour.</summary>
-        /// <value>The minutes in hour.</value>
-        public static PositiveInteger NumberOfMinutesInAnHour => new PositiveInteger(60);
-
         /// <summary>Gets the hours passed in the duration.</summary>
-        /// <value>The number of hours</value>
+        /// <value>The number of hours as a <see cref="PositiveInteger"/></value>
         public Hours Hours { get; }
 
         /// <summary> Gets the minutes passed in the duration following after the last complete hour. </summary>
-        /// <value> The number of minutes. </value>
+        /// <value> The number of minutes as a <see cref="PositiveInteger"/>. </value>
         public PositiveInteger Minutes { get; }
 
-        // TODO: Uncomment when Positive integer addition implementation is ready
-        //public PositiveInteger TotalMinutes() => (Hours * NumberOfMinutesInAnHour + Minutes);
+        /// <summary>
+        /// Calculates the total number of minutes.
+        /// </summary>
+        /// <returns>The total number of minutes as a <see cref="PositiveInteger"/></returns>
+        public PositiveInteger TotalNumberOfMinutes() => Hours.TotalNumberOfMinutes().Add(Minutes);
 
         /// <summary>
         /// Override this method with the derived implementation of `Equals`.

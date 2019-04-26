@@ -123,7 +123,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
         public void GivenNumberOfMinutesInAnHour_WhenAccessed_ThenShouldBeSixty()
         {
             // ARRANGE
-            var duration = Duration.NumberOfMinutesInAnHour;
+            var duration = Hours.NumberOfMinutesInAnHour;
 
             // ACT
             var actual = duration.Value;
