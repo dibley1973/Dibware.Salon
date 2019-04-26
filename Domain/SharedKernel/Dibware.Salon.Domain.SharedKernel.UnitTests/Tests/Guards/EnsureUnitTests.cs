@@ -9,6 +9,7 @@
 
 using System;
 using System.Text;
+using Dibware.Salon.Domain.SharedKernel.CommonValueObjects;
 using Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys;
 using Dibware.Salon.Domain.SharedKernel.Guards;
 using FluentAssertions;
@@ -456,6 +457,50 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
             // ACT
             Action action1 = () => Ensure.IsNotNegative(argumentValue1, (ArgumentName)argumentName);
             Action action2 = () => Ensure.IsNotNegative(argumentValue2, (ArgumentName)argumentName);
+
+            // ASSERT
+            action1.Should().NotThrow<ArgumentNullException>();
+            action2.Should().NotThrow<ArgumentNullException>();
+        }
+
+        /// <summary>
+        /// Given the ensure is not negative with message when passed a negative value then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenEnsureIsNotNegativeWithMessage_WhenPassedANegativeValue_ThenThrowsException()
+        {
+            // ARRANGE
+            const string argumentName = "arg1";
+            const string message = "Its wrong";
+            const int argumentNegativeValue = -1;
+            var expectedMessage =
+                $"Its wrong\r\nParameter name: {argumentName}\r\nActual value was {argumentNegativeValue}.";
+
+            // ACT
+            Action action = () => Ensure.IsNotNegative(argumentNegativeValue, (ArgumentName)argumentName, (ShortDescription)message);
+
+            // ASSERT
+            action.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage(expectedMessage);
+        }
+
+        /// <summary>
+        /// Given the ensure is not negative with message when passed a non negative value then does not throw exception.
+        /// </summary>
+        [Test]
+        public void GivenEnsureIsNotNegativeWithMessage_WhenPassedANonNegativeValue_ThenDoesNotThrowException()
+        {
+            // ARRANGE
+            const string argumentName = "arg1";
+            const string message1 = "Its wrong";
+            const string message2 = "Its wrong too";
+            const int argumentValue1 = 0;
+            const int argumentValue2 = 1;
+
+            // ACT
+            Action action1 = () => Ensure.IsNotNegative(argumentValue1, (ArgumentName)argumentName, (ShortDescription)message1);
+            Action action2 = () => Ensure.IsNotNegative(argumentValue2, (ArgumentName)argumentName, (ShortDescription)message2);
 
             // ASSERT
             action1.Should().NotThrow<ArgumentNullException>();
