@@ -87,5 +87,24 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
             // ASSERT
             actual.Should().Throw<ArgumentOutOfRangeException>("because a 25 hours value is not permitted");
         }
+
+        /// <summary>
+        /// Given the total number of minutes when accessed then returns number of hours times sixty.
+        /// </summary>
+        /// <param name="hoursValue">The hours value.</param>
+        [Test]
+        public void GivenTotalNumberOfMinutes_WhenAccessed_ThenReturnsNumberOfHoursTimesSixty(
+            [Values(0, 1, 2, 12, 24)] int hoursValue)
+        {
+            // ARRANGE
+            var hours = new Hours(hoursValue);
+            var expected = hoursValue * 60;
+
+            // ACT
+            var actual = hours.TotalNumberOfMinutes().Value;
+
+            // ASSERT
+            actual.Should().Be(expected, "because the number of minutes should be 60x the number of hours");
+        }
     }
 }

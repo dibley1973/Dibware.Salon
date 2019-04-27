@@ -35,18 +35,18 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         public static PositiveInteger NumberOfMinutesInAnHour => new PositiveInteger(60);
 
         /// <summary>
-        /// Totals the number of minutes.
-        /// </summary>
-        /// <returns></returns>
-        public PositiveInteger TotalNumberOfMinutes()
-        {
-            return new PositiveInteger(Value * Hours.NumberOfMinutesInAnHour.Value);
-        }
-
-        /// <summary>
         /// Gets the maximum number of hours upper boundary for the limit.
         /// </summary>
         /// <value>The upper boundary.</value>
         protected override int UpperBoundary => 24;
+
+        /// <summary>
+        /// Totals the number of minutes.
+        /// </summary>
+        /// <returns>The total number of minutes as a <see cref="PositiveInteger"/></returns>
+        public PositiveInteger TotalNumberOfMinutes()
+        {
+            return new PositiveInteger(Value * Hours.NumberOfMinutesInAnHour.Value);
+        }
     }
 }
