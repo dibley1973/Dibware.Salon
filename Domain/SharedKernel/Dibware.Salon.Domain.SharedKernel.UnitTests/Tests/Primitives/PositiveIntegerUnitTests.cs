@@ -335,6 +335,69 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Primitives
         }
 
         /// <summary>
+        /// Given the subtraction operator when supplied with first argument null then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenSubtractionOperator_WhenSuppliedWithFirstArgumentNull_ThenThrowsException()
+        {
+            // ARRANGE
+            const PositiveInteger nullPositiveInteger = null;
+            var positiveInteger = new PositiveInteger(3);
+            PositiveInteger result = null;
+
+            // ACT
+            Action actual = () =>
+            {
+                result = nullPositiveInteger - positiveInteger;
+            };
+
+            // ASSERT
+            actual.Should().Throw<ArgumentNullException>("because a null first argument is not permitted");
+            result.Should().BeNull("because it should never have been set");
+        }
+
+        /// <summary>
+        /// Given the subtraction operator when supplied with second argument null then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenSubtractionOperator_WhenSuppliedWithSecondArgumentNull_ThenThrowsException()
+        {
+            // ARRANGE
+            const PositiveInteger nullPositiveInteger = null;
+            var positiveInteger = new PositiveInteger(3);
+            PositiveInteger result = null;
+
+            // ACT
+            Action actual = () =>
+            {
+                result = positiveInteger - nullPositiveInteger;
+            };
+
+            // ASSERT
+            actual.Should().Throw<ArgumentNullException>("because a null second argument is not permitted");
+            result.Should().BeNull("because it should never have been set");
+        }
+
+        /// <summary>
+        /// Given the subtraction operator when supplied with two values not below minimum int value then returns new instance.
+        /// </summary>
+        [Test]
+        public void GivenSubtractionOperator_WhenSuppliedWithTwoValuesNotBelowMinimumIntValue_ThenReturnsNewInstance()
+        {
+            // ARRANGE
+            var positiveInteger1 = new PositiveInteger(1);
+            var positiveInteger2 = new PositiveInteger(1);
+
+            // ACT
+            var actual = positiveInteger1 - positiveInteger2;
+
+            // ASSERT
+            actual.Value.Should().Be(0, "because the subtraction operatorion should be correct");
+            actual.Should().NotBeSameAs(positiveInteger1, "because the reference must not be the same as the first");
+            actual.Should().NotBeSameAs(positiveInteger2, "because the reference must not be the same as the second");
+        }
+
+        /// <summary>
         /// Given the value when accessed after construction then returns constructed value.
         /// </summary>
         [Test]
