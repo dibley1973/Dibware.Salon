@@ -173,7 +173,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Primitives
 
         /// <summary>Gets the added calculated value.</summary>
         /// <param name="other">The other <see cref="PositiveInteger"/> whose value is to be added.</param>
-        /// <returns>Returns an <see cref="int"/> representation of the calculated value.</returns>
+        /// <returns>Returns an <see cref="long"/> representation of the calculated value.</returns>
         private long GetAddedCalculatedValue(PositiveInteger other)
         {
             return (long)Value + other.Value;
@@ -186,7 +186,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Primitives
         /// <returns>Returns a <see cref="ShortDescription"/> representation of the message</returns>
         private ShortDescription GetCalculatedValueIsNegativeMessage(PositiveInteger other)
         {
-            return (ShortDescription)$"{PrimitiveErrorkeys.CalculatedValueIsNegative} ( {Value} - {other.Value} )";
+            return (ShortDescription)$"{PrimitiveErrorKeys.CalculatedValueIsNegative} ( {Value} - {other.Value} )";
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Primitives
         /// <returns>Returns a <see cref="ShortDescription"/> representation of the message</returns>
         private ShortDescription GetCalculatedValueIsGreaterThanIntMaxValueMessage(PositiveInteger other)
         {
-            return (ShortDescription)$"{PrimitiveErrorkeys.CalculatedValueIsGreaterThanIntMax} ( {Value} + {other.Value} 0";
+            return (ShortDescription)$"{PrimitiveErrorKeys.CalculatedValueIsGreaterThanIntMax} ( {Value} + {other.Value} )";
         }
 
         /// <summary>Gets the subtract calculated value.</summary>

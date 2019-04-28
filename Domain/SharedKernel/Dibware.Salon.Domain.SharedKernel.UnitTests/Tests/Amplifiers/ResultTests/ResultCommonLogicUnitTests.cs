@@ -20,7 +20,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers.ResultTes
     public class ResultCommonLogicUnitTests
     {
         /// <summary>
-        /// Givens the constructor when not failed with error message then throws exception.
+        /// Given the constructor when not failed with error message then throws exception.
         /// </summary>
         [Test]
         public void GivenConstructor_WhenNotFailedWithErrorMessage_ThenThrowsException()

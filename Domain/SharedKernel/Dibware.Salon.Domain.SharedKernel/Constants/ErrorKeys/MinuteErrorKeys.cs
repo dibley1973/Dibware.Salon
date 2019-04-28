@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="PrimitiveErrorKeys.cs" company="Dibware">
+// <copyright file="MinuteErrorKeys.cs" company="Dibware">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -10,19 +10,14 @@
 namespace Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys
 {
     /// <summary>
-    /// Represents the keys strings for Primitives errors, which can be converted by the UI
+    /// Represents the keys strings for Minute errors, which can be converted by the UI
     /// to meaningful messages;
     /// </summary>
-    public static class PrimitiveErrorKeys
+    public static class MinuteErrorKeys
     {
         /// <summary>
-        /// The key for when the calculated value is negative
+        /// The key for when the calculated value is greater than maximum value
         /// </summary>
-        public const string CalculatedValueIsNegative = "CalculatedValueIsNegative";
-
-        /// <summary>
-        /// The key for when the calculated value is greater than <see cref="int.MaxValue"/>
-        /// </summary>
-        public const string CalculatedValueIsGreaterThanIntMax = "CalculatedValueIsGreaterThanIntMax";
+        public const string CalculatedValueIsGreaterThanMax = "CalculatedValueIsGreaterThanMax";
     }
 }
