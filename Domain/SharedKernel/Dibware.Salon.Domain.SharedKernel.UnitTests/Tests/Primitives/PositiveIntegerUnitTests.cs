@@ -53,6 +53,92 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Primitives
         }
 
         /// <summary>
+        /// Given the addition operator when supplied with first argument null then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenAdditionOperator_WhenSuppliedWithFirstArgumentNull_ThenThrowsException()
+        {
+            // ARRANGE
+            const PositiveInteger nullPositiveInteger = null;
+            var positiveInteger = new PositiveInteger(3);
+            PositiveInteger result = null;
+
+            // ACT
+            Action actual = () =>
+            {
+                result = nullPositiveInteger + positiveInteger;
+            };
+
+            // ASSERT
+            actual.Should().Throw<ArgumentNullException>("because a null first argument is not permitted");
+            result.Should().BeNull("because it should never have been set");
+        }
+
+        /// <summary>
+        /// Given the addition operator when supplied with second argument null then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenAdditionOperator_WhenSuppliedWithSecondArgumentNull_ThenThrowsException()
+        {
+            // ARRANGE
+            const PositiveInteger nullPositiveInteger = null;
+            var positiveInteger = new PositiveInteger(3);
+            PositiveInteger result = null;
+
+            // ACT
+            Action actual = () =>
+            {
+                result = positiveInteger + nullPositiveInteger;
+            };
+
+            // ASSERT
+            actual.Should().Throw<ArgumentNullException>("because a null second argument is not permitted");
+            result.Should().BeNull("because it should never have been set");
+        }
+
+        /// <summary>
+        /// Given the addition operator when supplied with two values exceeding maximum int value then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenAdditionOperator_WhenSuppliedWithTwoValuesExceedingMaximumIntValue_ThenThrowsException()
+        {
+            // ARRANGE
+            var positiveInteger1 = new PositiveInteger(int.MaxValue);
+            var positiveInteger2 = new PositiveInteger(1);
+            PositiveInteger result = null;
+
+            // ACT
+            Action actual = () =>
+            {
+                result = positiveInteger1 + positiveInteger2;
+            };
+
+            // ASSERT
+            actual.Should()
+                .Throw<ArgumentOutOfRangeException>("because two values summing more than maximum int value cannot be summed");
+            result.Should().BeNull("because it should never have been set");
+        }
+
+        /// <summary>
+        /// Given the addition operator when supplied with two values not exceeding maximum int value then returns new instance.
+        /// </summary>
+        [Test]
+        public void GivenAdditionOperator_WhenSuppliedWithTwoValuesNotExceedingMaximumIntValue_ThenReturnsNewInstance()
+        {
+            // ARRANGE
+            var positiveInteger1 = new PositiveInteger(int.MaxValue - 1);
+            var positiveInteger2 = new PositiveInteger(1);
+
+            // ACT
+            var actual = positiveInteger1 + positiveInteger2;
+
+            // ASSERT
+            actual.Value.Should().Be(int.MaxValue, "because the sum should be correct");
+            actual.Should().NotBeSameAs(positiveInteger1, "because the reference must not be the same as the first");
+            actual.Should().NotBeSameAs(positiveInteger2, "because the reference must not be the same as the second");
+        }
+
+        /// <summary>
         /// Given the add when supplied with null value then throws exception.
         /// </summary>
         [Test]

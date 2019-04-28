@@ -48,6 +48,39 @@ namespace Dibware.Salon.Domain.SharedKernel.Primitives
         public int Value { get; }
 
         /// <summary>
+        /// Implementation of the + operator. Adds the values of the two specified instances
+        /// </summary>
+        /// <param name="primary">The primary.</param>
+        /// <param name="secondary">The secondary.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
+        public static PositiveInteger operator +(PositiveInteger primary, PositiveInteger secondary)
+        {
+            Ensure.IsNotNull(primary, (ArgumentName)nameof(primary));
+            Ensure.IsNotNull(secondary, (ArgumentName)nameof(secondary));
+
+            return primary.Add(secondary);
+        }
+
+        /// <summary>
+        /// Implementation of the - operator. Subtracts the value of the second of the two specified
+        /// instances, from the first
+        /// </summary>
+        /// <param name="primary">The primary.</param>
+        /// <param name="secondary">The secondary.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
+        public static PositiveInteger operator -(PositiveInteger primary, PositiveInteger secondary)
+        {
+            Ensure.IsNotNull(primary, (ArgumentName)nameof(primary));
+            Ensure.IsNotNull(secondary, (ArgumentName)nameof(secondary));
+
+            return primary.Subtract(secondary);
+        }
+
+        /// <summary>
         /// Adds the specified value to this instance.
         /// </summary>
         /// <param name="other">The other whose value is to be added.</param>
