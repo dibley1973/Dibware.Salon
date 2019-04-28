@@ -7,7 +7,6 @@
 
 using System;
 using Dibware.Salon.Domain.SharedKernel.Measures;
-using Dibware.Salon.Domain.SharedKernel.Primitives;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -21,7 +20,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
     public class DurationUnitTests
     {
         private static readonly Hours ValidHours = new Hours(4);
-        private static readonly PositiveInteger ValidMinutes = new PositiveInteger(16);
+        private static readonly MinutesPastAnHour ValidMinutes = new MinutesPastAnHour(16);
 
         /// <summary>Given the constructor when passed null hours then throws exception.</summary>
         [Test]
@@ -44,7 +43,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
         public void GivenConstructor_WhenPassedNullMinutes_ThenThrowsException()
         {
             // ARRANGE
-            const PositiveInteger nullMinutes = null;
+            const MinutesPastAnHour nullMinutes = null;
 
             // ACT
             Action actual = () => new Duration(ValidHours, nullMinutes);
@@ -73,8 +72,8 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
         public void GivenGetHashCode_WhenForTwoDifferentValues_ThenTheyDiffer()
         {
             // ARRANGE
-            var duration1 = new Duration(ValidHours, new Minutes(5));
-            var duration2 = new Duration(ValidHours, new Minutes(6));
+            var duration1 = new Duration(ValidHours, new MinutesPastAnHour(5));
+            var duration2 = new Duration(ValidHours, new MinutesPastAnHour(6));
 
             // ACT
             var actual1 = duration1.GetHashCode();
@@ -131,23 +130,6 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
             // ASSERT
             actual.Should().Be(60, "because there are sixty minutes in an hour");
         }
-
-        ///// <summary>
-        ///// Given the total minutes when called after construction then returns a the result of a calculation based
-        ///// upon the constructed hours.
-        ///// </summary>
-        //[Test]
-        //public void GivenTotalMinutes_WhenCalledAfterConstruction_ThenReturnsConstructedHours()
-        //{
-        //    // ARRANGE
-        //    var duration = new Duration(ValidHours, ValidMinutes);
-
-        //    // ACT
-        //    var actual = duration.TotalMinutes();
-
-        //    // ASSERT
-        //    actual.Should().Be(ValidMinutes, "because the value should match the constructed value");
-        //}
 
         /// <summary>
         /// Given the is equal to when supplied same reference then returns true.
@@ -208,7 +190,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
         public void GivenIsEqualTo_WhenSuppliedDifferentMinutes_ThenReturnsFalse()
         {
             // ARRANGE
-            var differentMinutes = new PositiveInteger(15);
+            var differentMinutes = new MinutesPastAnHour(15);
             var duration1 = new Duration(ValidHours, ValidMinutes);
             var duration2 = new Duration(ValidHours, differentMinutes);
 
@@ -217,6 +199,36 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
 
             // ASSERT
             actual.Should().BeFalse("because the minutes differ");
+        }
+
+        /// <summary>
+        /// Given the total number of minutes when accessed after construction then correctly calculates minutes for all hours and minutes combined.
+        /// </summary>
+        [Test]
+        public void GivenTotalNumberOfMinutes_WhenAccessedAfterConstruction_ThenCorrectlyCalculatesMinutesForAllHoursAndMinutesCombined()
+        {
+            // ARRANGE
+            var tenMinuteDuration = new Duration(new Hours(0), new MinutesPastAnHour(10));
+            var oneHourDuration = new Duration(new Hours(1), new MinutesPastAnHour(0));
+            var oneHourTenMinuteDuration = new Duration(new Hours(1), new MinutesPastAnHour(10));
+            var twoHoursFifteenMinutesDuration = new Duration(new Hours(2), new MinutesPastAnHour(15));
+
+            const int tenMinuteDurationExpected = 10;
+            const int oneHourDurationExpected = 60;
+            const int oneHourTenMinuteDurationExpected = 70;
+            var twoHoursFifteenMinutesDurationInMinutes = new Minutes(135);
+
+            // ACT
+            var actualForTenMinuteDuration = tenMinuteDuration.TotalNumberOfMinutes().Value;
+            var actualForOneHourDuration = oneHourDuration.TotalNumberOfMinutes().Value;
+            var actualForOneHourTenMinuteDuration = oneHourTenMinuteDuration.TotalNumberOfMinutes().Value;
+            var actualForTwoHoursFifteenMinutesDuration = twoHoursFifteenMinutesDuration.TotalNumberOfMinutes();
+
+            // ASSERT
+            actualForTenMinuteDuration.Should().Be(tenMinuteDurationExpected);
+            actualForOneHourDuration.Should().Be(oneHourDurationExpected);
+            actualForOneHourTenMinuteDuration.Should().Be(oneHourTenMinuteDurationExpected);
+            actualForTwoHoursFifteenMinutesDuration.Should().Be(twoHoursFifteenMinutesDurationInMinutes);
         }
     }
 }

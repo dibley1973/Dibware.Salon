@@ -24,7 +24,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         /// </summary>
         /// <param name="hours">The hours.</param>
         /// <param name="minutes">The minutes.</param>
-        public Duration(Hours hours, PositiveInteger minutes)
+        public Duration(Hours hours, MinutesPastAnHour minutes)
         {
             Ensure.IsNotNull(hours, (ArgumentName)nameof(hours));
             Ensure.IsNotNull(minutes, (ArgumentName)nameof(minutes));
@@ -39,13 +39,13 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
 
         /// <summary> Gets the minutes passed in the duration following after the last complete hour. </summary>
         /// <value> The number of minutes as a <see cref="PositiveInteger"/>. </value>
-        public PositiveInteger Minutes { get; }
+        public MinutesPastAnHour Minutes { get; }
 
         /// <summary>
         /// Calculates the total number of minutes.
         /// </summary>
         /// <returns>The total number of minutes as a <see cref="PositiveInteger"/></returns>
-        public PositiveInteger TotalNumberOfMinutes() => Hours.TotalNumberOfMinutes().Add(Minutes);
+        public Minutes TotalNumberOfMinutes() => new Minutes(GetTotalNumberOfMinutes().Value);
 
         /// <summary>
         /// Override this method with the derived implementation of `Equals`.
@@ -70,6 +70,13 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
 
                 return hashCode;
             }
+        }
+
+        /// <summary>Gets the total number of minutes.</summary>
+        /// <returns>Returns a <see cref="PositiveInteger"/> representing the total number of minutes.</returns>
+        private PositiveInteger GetTotalNumberOfMinutes()
+        {
+            return Hours.TotalNumberOfMinutes().Add(Minutes);
         }
     }
 }

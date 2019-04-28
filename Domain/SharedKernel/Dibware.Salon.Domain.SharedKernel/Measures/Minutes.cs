@@ -7,15 +7,14 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System;
 using Dibware.Salon.Domain.SharedKernel.Primitives;
 
 namespace Dibware.Salon.Domain.SharedKernel.Measures
 {
     /// <summary>
-    /// Represents a measure of minutes with a maximum limit of 60
+    /// Represents a measure of minutes
     /// </summary>
-    public sealed class Minutes : LimitedPositiveInteger
+    public class Minutes : PositiveInteger
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Minutes"/> class.
@@ -24,16 +23,6 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         public Minutes(int value)
             : base(value)
         {
-            if (ValueExceedsUpperBoundary)
-            {
-                throw new ArgumentOutOfRangeException(nameof(value), $"Value os {value} exceeds {UpperBoundary}");
-            }
         }
-
-        /// <summary>
-        /// Gets the maximum number of minutes upper boundary for the limit.
-        /// </summary>
-        /// <value>The upper boundary.</value>
-        protected override int UpperBoundary => 59;
     }
 }

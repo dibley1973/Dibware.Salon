@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="MinutesUnitTests.cs" company="Dibware">
+// <copyright file="MinutesPastAnHourUnitTests.cs" company="Dibware">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -16,10 +16,10 @@ using NUnit.Framework;
 namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
 {
     /// <summary>
-    /// Provides unit tests for the <see cref="Minutes"/> class.
+    /// Provides unit tests for the <see cref="MinutesPastAnHour"/> class.
     /// </summary>
     [TestFixture]
-    public class MinutesUnitTests
+    public class MinutesPastAnHourUnitTests
     {
         /// <summary>
         /// Given the constructor when passed negative number then throws exception.
@@ -31,7 +31,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
             const int negativeValue = -1;
 
             // ACT
-            Action actual = () => new Minutes(negativeValue);
+            Action actual = () => new MinutesPastAnHour(negativeValue);
 
             // ASSERT
             actual.Should().Throw<ArgumentOutOfRangeException>("because a negative minutes value is not permitted");
@@ -47,7 +47,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
             const int negativeValue = 0;
 
             // ACT
-            Action actual = () => new Minutes(negativeValue);
+            Action actual = () => new MinutesPastAnHour(negativeValue);
 
             // ASSERT
             actual.Should().NotThrow("because a zero minutes value is permitted");
@@ -64,8 +64,8 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
             const int topLimitValue = 59;
 
             // ACT
-            Action actual1 = () => new Minutes(lowLimitValue);
-            Action actual2 = () => new Minutes(topLimitValue);
+            Action actual1 = () => new MinutesPastAnHour(lowLimitValue);
+            Action actual2 = () => new MinutesPastAnHour(topLimitValue);
 
             // ASSERT
             actual1.Should().NotThrow("because a 1 minutes value is permitted");
@@ -82,7 +82,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
             const int negativeValue = 60;
 
             // ACT
-            Action actual = () => new Minutes(negativeValue);
+            Action actual = () => new MinutesPastAnHour(negativeValue);
 
             // ASSERT
             actual.Should().Throw<ArgumentOutOfRangeException>("because a 25 minutes value is not permitted");

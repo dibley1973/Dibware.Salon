@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="Hours.cs" company="Dibware">
+// <copyright file="MinutesPastAnHour.cs" company="Dibware">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -13,15 +13,15 @@ using Dibware.Salon.Domain.SharedKernel.Primitives;
 namespace Dibware.Salon.Domain.SharedKernel.Measures
 {
     /// <summary>
-    /// Represents a measure of hours with a maximum limit of 24
+    /// Represents a measure of minutes with a maximum limit of 60
     /// </summary>
-    public sealed class Hours : LimitedPositiveInteger
+    public sealed class MinutesPastAnHour : LimitedPositiveInteger
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Hours"/> class.
+        /// Initializes a new instance of the <see cref="MinutesPastAnHour"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
-        public Hours(int value)
+        public MinutesPastAnHour(int value)
             : base(value)
         {
             if (ValueExceedsUpperBoundary)
@@ -30,23 +30,10 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
             }
         }
 
-        /// <summary>Gets the number of minutes in an hour.</summary>
-        /// <value>The minutes in hour.</value>
-        public static PositiveInteger NumberOfMinutesInAnHour => new PositiveInteger(60);
-
         /// <summary>
-        /// Gets the maximum number of hours upper boundary for the limit.
+        /// Gets the maximum number of minutes upper boundary for the limit.
         /// </summary>
         /// <value>The upper boundary.</value>
-        protected override int UpperBoundary => 24;
-
-        /// <summary>
-        /// Totals the number of minutes.
-        /// </summary>
-        /// <returns>The total number of minutes as a <see cref="Minutes"/></returns>
-        public Minutes TotalNumberOfMinutes()
-        {
-            return new Minutes(Value * NumberOfMinutesInAnHour.Value);
-        }
+        protected override int UpperBoundary => 59;
     }
 }
