@@ -124,7 +124,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Primitives
         }
 
         /// <summary>
-        /// Subtracts the specified value.
+        /// Subtracts the specified value from this instance.
         /// </summary>
         /// <param name="other">The other whose value is to be added.</param>
         /// <exception cref="ArgumentNullException">thrown if value is null.</exception>
@@ -171,6 +171,14 @@ namespace Dibware.Salon.Domain.SharedKernel.Primitives
             }
         }
 
+        /// <summary>Gets the subtract calculated value.</summary>
+        /// <param name="other">The other <see cref="PositiveInteger"/> whose value is to be subtracted.</param>
+        /// <returns>Returns an <see cref="int"/> representation of the calculated value.</returns>
+        protected int GetSubtractCalculatedValue(PositiveInteger other)
+        {
+            return Value - other.Value;
+        }
+
         /// <summary>Gets the added calculated value.</summary>
         /// <param name="other">The other <see cref="PositiveInteger"/> whose value is to be added.</param>
         /// <returns>Returns an <see cref="long"/> representation of the calculated value.</returns>
@@ -197,14 +205,6 @@ namespace Dibware.Salon.Domain.SharedKernel.Primitives
         private ShortDescription GetCalculatedValueIsGreaterThanIntMaxValueMessage(PositiveInteger other)
         {
             return (ShortDescription)$"{PrimitiveErrorKeys.CalculatedValueIsGreaterThanIntMax} ( {Value} + {other.Value} )";
-        }
-
-        /// <summary>Gets the subtract calculated value.</summary>
-        /// <param name="other">The other <see cref="PositiveInteger"/> whose value is to be subtracted.</param>
-        /// <returns>Returns an <see cref="int"/> representation of the calculated value.</returns>
-        private int GetSubtractCalculatedValue(PositiveInteger other)
-        {
-            return Value - other.Value;
         }
     }
 }

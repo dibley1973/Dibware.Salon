@@ -230,7 +230,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Primitives
         /// Given can subtract when supplied with two values subtracting to below zero value then returns false.
         /// </summary>
         [Test]
-        public void GivenCanAdd_WhenSuppliedWithTwoValuesBelowMinimumIntValue_ThenReturnsFalse()
+        public void GivenCanSubtract_WhenSuppliedWithTwoValuesBelowMinimumIntValue_ThenReturnsFalse()
         {
             // ARRANGE
             var positiveInteger1 = new PositiveInteger(0);

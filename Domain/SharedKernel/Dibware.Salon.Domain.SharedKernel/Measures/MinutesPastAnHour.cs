@@ -92,6 +92,38 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         }
 
         /// <summary>
+        /// Determines whether this instance can subtract the specified other.
+        /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns>
+        ///   <c>true</c> if this instance can subtract the specified other; otherwise, <c>false</c>.
+        /// </returns>
+        public bool CanSubtract(MinutesPastAnHour other)
+        {
+            return GetSubtractCalculatedValue(other) >= MinimumValue;
+        }
+
+        /// <summary>
+        /// Subtracts the specified value from this instance.
+        /// </summary>
+        /// <param name="other">The other whose value is to be subtracted.</param>
+        /// <returns>
+        /// Returns a newly constructed <see cref="T:Dibware.Salon.Domain.SharedKernel.Primitives.PositiveInteger" /> with the calculated values
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">other</exception>
+        public MinutesPastAnHour Subtract(MinutesPastAnHour other)
+        {
+            Ensure.IsNotNull(other, (ArgumentName)nameof(other));
+
+            if (CanSubtract(other))
+            {
+                return new MinutesPastAnHour(GetSubtractCalculatedValue(other));
+            }
+
+            throw new ArgumentOutOfRangeException((ArgumentName)nameof(other), other.Value, GetCalculatedValueIsNegativeMessage(other));
+        }
+
+        /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
@@ -118,6 +150,16 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         private ShortDescription GetCalculatedValueIsGreaterThanMaxValueMessage(MinutesPastAnHour other)
         {
             return (ShortDescription)$"{MinuteErrorKeys.CalculatedValueIsGreaterThanMax} ( {Value} + {other.Value} = {GetAddedCalculatedValue(other).Value}, Max: {UpperBoundary} )";
+        }
+
+        /// <summary>
+        /// Gets the calculated value is negative message.
+        /// </summary>
+        /// <param name="other">The other <see cref="PositiveInteger"/> whose value is to be subtracted.</param>
+        /// <returns>Returns a <see cref="ShortDescription"/> representation of the message</returns>
+        private ShortDescription GetCalculatedValueIsNegativeMessage(PositiveInteger other)
+        {
+            return (ShortDescription)$"{PrimitiveErrorKeys.CalculatedValueIsNegative} ( {Value} - {other.Value} )";
         }
     }
 }

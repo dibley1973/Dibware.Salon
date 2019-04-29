@@ -195,6 +195,94 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
         }
 
         /// <summary>
+        /// Given can subtract when supplied with two values subtracting to below zero value then returns false.
+        /// </summary>
+        [Test]
+        public void GivenCanSubtract_WhenSuppliedWithTwoValuesBelowMinimumIntValue_ThenReturnsFalse()
+        {
+            // ARRANGE
+            var initialMinutesPastAnHour = new MinutesPastAnHour(0);
+            var otherMinutesPastAnHour = new MinutesPastAnHour(1);
+
+            // ACT
+            var actual = initialMinutesPastAnHour.CanSubtract(otherMinutesPastAnHour);
+
+            // ASSERT
+            actual.Should().BeFalse("because two values subtracting to below minimum int value cannot be subtracted");
+        }
+
+        /// <summary>
+        /// Given can subtract when supplied with two values subtracting above or equal to zero value then returns true.
+        /// </summary>
+        [Test]
+        public void GivenCanSubtract_WhenSuppliedWithTwoValuesNotBelowMaximumIntValue_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var initialMinutesPastAnHour = new MinutesPastAnHour(1);
+            var otherMinutesPastAnHour = new MinutesPastAnHour(1);
+
+            // ACT
+            var actual = initialMinutesPastAnHour.CanSubtract(otherMinutesPastAnHour);
+
+            // ASSERT
+            actual.Should().BeTrue("because two values subtracting above or equal to minimum value can be subtracted");
+        }
+
+        /// <summary>
+        /// Given the subtract when supplied with null value then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenSubtract_WhenSuppliedWithNullValue_ThenThrowsException()
+        {
+            // ARRANGE
+            var minutesPastAnHour = new MinutesPastAnHour(3);
+            const MinutesPastAnHour nullMinutesPastAnHour = null;
+
+            // ACT
+            Action actual = () => minutesPastAnHour.Subtract(nullMinutesPastAnHour);
+
+            // ASSERT
+            actual.Should().Throw<ArgumentNullException>("because a null value cannot be subtracted");
+        }
+
+        /// <summary>
+        /// Given the subtract when supplied with two values below minimum int value then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenSubtract_WhenSuppliedWithTwoValuesBelowMinimumIntValue_ThenThrowsException()
+        {
+            // ARRANGE
+            var minutesPastAnHour1 = new MinutesPastAnHour(0);
+            var minutesPastAnHour2 = new MinutesPastAnHour(1);
+
+            // ACT
+            Action actual = () => minutesPastAnHour1.Subtract(minutesPastAnHour2);
+
+            // ASSERT
+            actual.Should()
+                .Throw<ArgumentOutOfRangeException>("because two values subtracting more than minimum int value cannot be summed");
+        }
+
+        /// <summary>
+        /// Given the subtract when supplied with two values not below minimum int value then returns new instance.
+        /// </summary>
+        [Test]
+        public void GivenSubtract_WhenSuppliedWithTwoValuesNotBelowMinimumIntValue_ThenReturnsNewInstance()
+        {
+            // ARRANGE
+            var minutesPastAnHour1 = new MinutesPastAnHour(1);
+            var minutesPastAnHour2 = new MinutesPastAnHour(1);
+
+            // ACT
+            var actual = minutesPastAnHour1.Subtract(minutesPastAnHour2);
+
+            // ASSERT
+            actual.Value.Should().Be(0, "because the subtraction should be correct");
+            actual.Should().NotBeSameAs(minutesPastAnHour1, "because the reference must not be the same as the first");
+            actual.Should().NotBeSameAs(minutesPastAnHour2, "because the reference must not be the same as the second");
+        }
+
+        /// <summary>
         /// Given to string when accessed after construction then returns correct formatted text.
         /// </summary>
         [Test]
