@@ -52,7 +52,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         /// Gets the maximum number of minutes upper boundary for the limit.
         /// </summary>
         /// <value>The upper boundary.</value>
-        protected override int UpperBoundary => 59;
+        public override int UpperBoundary => 59;
 
         /// <summary>
         /// Adds the value of the specified other to the value of this instance.

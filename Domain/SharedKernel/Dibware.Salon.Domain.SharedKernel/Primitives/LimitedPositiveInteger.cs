@@ -25,7 +25,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Primitives
 
         /// <summary>Gets the upper boundary for the limit.</summary>
         /// <value>The upper boundary.</value>
-        protected abstract int UpperBoundary { get; }
+        public abstract int UpperBoundary { get; }
 
         /// <summary>Gets a value indicating whether the value exceeds the upper boundary.</summary>
         /// <value>

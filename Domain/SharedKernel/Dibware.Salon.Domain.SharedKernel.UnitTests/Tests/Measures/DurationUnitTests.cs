@@ -21,6 +21,39 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
     {
         private static readonly Hours ValidHours = new Hours(4);
         private static readonly MinutesPastAnHour ValidMinutes = new MinutesPastAnHour(16);
+        private static readonly object[] DurationAdditionData =
+        {
+            new object[]
+            {
+                new Duration(new Hours(0), new MinutesPastAnHour(0)),
+                new Duration(new Hours(0), new MinutesPastAnHour(0)),
+                new Duration(new Hours(0), new MinutesPastAnHour(0))
+            },
+            new object[]
+            {
+                new Duration(new Hours(1), new MinutesPastAnHour(0)),
+                new Duration(new Hours(2), new MinutesPastAnHour(0)),
+                new Duration(new Hours(3), new MinutesPastAnHour(0))
+            },
+            new object[]
+            {
+                new Duration(new Hours(0), new MinutesPastAnHour(4)),
+                new Duration(new Hours(0), new MinutesPastAnHour(5)),
+                new Duration(new Hours(0), new MinutesPastAnHour(9))
+            },
+            new object[]
+            {
+                new Duration(new Hours(1), new MinutesPastAnHour(4)),
+                new Duration(new Hours(2), new MinutesPastAnHour(5)),
+                new Duration(new Hours(3), new MinutesPastAnHour(9))
+            },
+            new object[]
+            {
+                new Duration(new Hours(1), new MinutesPastAnHour(59)),
+                new Duration(new Hours(1), new MinutesPastAnHour(2)),
+                new Duration(new Hours(3), new MinutesPastAnHour(1))
+            }
+        };
 
         /// <summary>Given the constructor when passed null hours then throws exception.</summary>
         [Test]
@@ -65,6 +98,43 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
 
             // ASSERT
             actual.Should().NotThrow<ArgumentNullException>("because no exception should be thrown for a valid values");
+        }
+
+        /// <summary>
+        /// Givens the add when supplied null other then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenAdd_WhenSuppliedNullOther_ThenThrowsException()
+        {
+            // ARRANGE
+            var duration1 = new Duration(ValidHours, new MinutesPastAnHour(5));
+            const Duration nullDuration = null;
+
+            // ACT
+            Action actual = () => duration1.Add(nullDuration);
+
+            // ASSERT
+            actual.Should().Throw<ArgumentNullException>("because a null other duration is not permitted");
+        }
+
+        /// <summary>
+        /// Givens the add when supplied valid other then returns constructed duration with correct value.
+        /// </summary>
+        /// <param name="duration1">The duration1.</param>
+        /// <param name="duration2">The duration2.</param>
+        /// <param name="expectedDuration">The expected duration.</param>
+        [Test]
+        [TestCaseSource(nameof(DurationAdditionData))]
+        public void GivenAdd_WhenSuppliedValidOther_ThenReturnsConstructedDurationWithCorrectValue(
+            Duration duration1,
+            Duration duration2,
+            Duration expectedDuration)
+        {
+            // ACT
+            var actual = duration1.Add(duration2);
+
+            // ASSERT
+            actual.Should().Be(expectedDuration, "because the addition of the two durations should equal the result");
         }
 
         /// <summary>Given the get hash code when for two different values then they differ.</summary>
@@ -229,6 +299,24 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
             actualForOneHourDuration.Should().Be(oneHourDurationExpected);
             actualForOneHourTenMinuteDuration.Should().Be(oneHourTenMinuteDurationExpected);
             actualForTwoHoursFifteenMinutesDuration.Should().Be(twoHoursFifteenMinutesDurationInMinutes);
+        }
+
+        /// <summary>
+        /// Given to string when accessed after construction then returns correct formatted text.
+        /// </summary>
+        [Test]
+        public void GivenToString_WhenAccessedAfterConstruction_ThenReturnsCorrectFormattedText()
+        {
+            // ARRANGE
+            var minutes = new MinutesPastAnHour(55);
+            var hours = new Hours(7);
+            var minutesPastAnHour = new Duration(hours, minutes);
+
+            // ACT
+            var actual = minutesPastAnHour.ToString();
+
+            // ASSERT
+            actual.Should().Be("Hours: 7, Minutes: 55");
         }
     }
 }

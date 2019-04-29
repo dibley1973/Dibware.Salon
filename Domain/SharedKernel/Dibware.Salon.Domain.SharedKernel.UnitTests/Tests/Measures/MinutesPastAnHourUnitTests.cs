@@ -297,5 +297,18 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
             // ASSERT
             actual.Should().Be("Value: 30");
         }
+
+        /// <summary>
+        /// Givens the upper boundary when accessed then returns fifty nine.
+        /// </summary>
+        [Test]
+        public void GivenUpperBoundary_WhenAccessed_ThenReturnsFiftyNine()
+        {
+            // ACT
+            var actual = new MinutesPastAnHour(2).UpperBoundary;
+
+            // ASSERT
+            actual.Should().Be(59, "because 59 is the upper boundary");
+        }
     }
 }

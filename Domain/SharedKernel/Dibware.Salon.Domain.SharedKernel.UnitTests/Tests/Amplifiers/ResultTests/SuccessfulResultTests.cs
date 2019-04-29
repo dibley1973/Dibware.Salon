@@ -137,16 +137,18 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers.ResultTes
         public void GivenAGenericResult_WhenAccessingError_ThenAnExceptionIsThrown()
         {
             // ARRANGE
-            Result<FakeEntity> result = Result.Ok(FakeEntityData.CreateEmptyProduct());
+            var result = Result.Ok(FakeEntityData.CreateEmptyProduct());
+            string error = null;
 
             // ACT
             Action action = () =>
             {
-                var error = result.Error;
+                error = result.Error;
             };
 
             // ASSERT
             action.Should().Throw<InvalidOperationException>();
+            error.Should().BeNull("because no error should be set.");
         }
     }
 }

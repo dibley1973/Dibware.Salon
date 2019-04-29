@@ -106,5 +106,21 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
             // ASSERT
             actual.Should().Be(expected, "because the number of minutes should be 60x the number of hours");
         }
+
+        /// <summary>
+        /// Given to string when accessed after construction then returns correct formatted text.
+        /// </summary>
+        [Test]
+        public void GivenToString_WhenAccessedAfterConstruction_ThenReturnsCorrectFormattedText()
+        {
+            // ARRANGE
+            var minutesPastAnHour = new Hours(14);
+
+            // ACT
+            var actual = minutesPastAnHour.ToString();
+
+            // ASSERT
+            actual.Should().Be("Value: 14");
+        }
     }
 }

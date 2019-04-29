@@ -24,6 +24,9 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         /// </summary>
         /// <param name="hours">The hours.</param>
         /// <param name="minutes">The minutes.</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown if the value of hours or minutes is null.
+        /// </exception>
         public Duration(Hours hours, MinutesPastAnHour minutes)
         {
             Ensure.IsNotNull(hours, (ArgumentName)nameof(hours));
@@ -40,6 +43,59 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         /// <summary> Gets the minutes passed in the duration following after the last complete hour. </summary>
         /// <value> The number of minutes as a <see cref="PositiveInteger"/>. </value>
         public MinutesPastAnHour Minutes { get; }
+
+        /// <summary>Adds the specified other.</summary>
+        /// <param name="other">The other.</param>
+        /// <returns>
+        /// Returns a newly constructed <see cref="Duration"/> with summed values.
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">Thrown if the value of other is null.</exception>
+        public Duration Add(Duration other)
+        {
+            Ensure.IsNotNull(other, (ArgumentName)nameof(other));
+
+            MinutesPastAnHour summedMinutes;
+            Hours summedHours;
+
+            if (Minutes.CanAdd(other.Minutes))
+            {
+                summedMinutes = Minutes
+                    .Add(other.Minutes);
+
+                PositiveInteger otherHours = other.Hours;
+                PositiveInteger workingHours = Hours
+                    .Add(otherHours);
+                summedHours = new Hours(workingHours.Value);
+            }
+            else
+            {
+                PositiveInteger workingMinutes = Minutes;
+                PositiveInteger otherMinutes = other.Minutes;
+                PositiveInteger working = workingMinutes
+                    .Add(otherMinutes)
+                    .Subtract(new PositiveInteger(Minutes.UpperBoundary + 1));
+                summedMinutes = new MinutesPastAnHour(working.Value);
+
+                PositiveInteger otherHours = other.Hours;
+                PositiveInteger workingHours = Hours
+                    .Add(otherHours)
+                    .Add(new PositiveInteger(1));
+                summedHours = new Hours(workingHours.Value);
+            }
+
+            return new Duration(summedHours, summedMinutes);
+        }
+
+        /// <summary>
+        /// Returns a <see cref="string" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return $"{nameof(Hours)}: {Hours.Value}, {nameof(Minutes)}: {Minutes.Value}";
+        }
 
         /// <summary>
         /// Calculates the total number of minutes.

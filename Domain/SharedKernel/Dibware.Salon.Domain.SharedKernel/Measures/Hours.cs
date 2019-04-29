@@ -38,7 +38,18 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         /// Gets the maximum number of hours upper boundary for the limit.
         /// </summary>
         /// <value>The upper boundary.</value>
-        protected override int UpperBoundary => 24;
+        public override int UpperBoundary => 24;
+
+        /// <summary>
+        /// Returns a <see cref="string" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return $"{nameof(Value)}: {Value}";
+        }
 
         /// <summary>
         /// Totals the number of minutes.
