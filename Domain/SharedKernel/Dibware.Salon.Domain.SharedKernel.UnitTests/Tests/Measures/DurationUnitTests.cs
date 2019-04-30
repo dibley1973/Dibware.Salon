@@ -101,7 +101,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
         }
 
         /// <summary>
-        /// Givens the add when supplied null other then throws exception.
+        /// Given the add when supplied null other then throws exception.
         /// </summary>
         [Test]
         public void GivenAdd_WhenSuppliedNullOther_ThenThrowsException()
@@ -118,7 +118,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
         }
 
         /// <summary>
-        /// Givens the add when supplied valid other then returns constructed duration with correct value.
+        /// Given the add when supplied valid other then returns constructed duration with correct value.
         /// </summary>
         /// <param name="duration1">The duration1.</param>
         /// <param name="duration2">The duration2.</param>
@@ -132,6 +132,26 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
         {
             // ACT
             var actual = duration1.Add(duration2);
+
+            // ASSERT
+            actual.Should().Be(expectedDuration, "because the addition of the two durations should equal the result");
+        }
+
+        /// <summary>
+        /// Given the addition operator when supplied valid other then returns constructed duration with correct value.
+        /// </summary>
+        /// <param name="duration1">The duration1.</param>
+        /// <param name="duration2">The duration2.</param>
+        /// <param name="expectedDuration">The expected duration.</param>
+        [Test]
+        [TestCaseSource(nameof(DurationAdditionData))]
+        public void GivenAdditionOperator_WhenSuppliedValidOther_ThenReturnsConstructedDurationWithCorrectValue(
+            Duration duration1,
+            Duration duration2,
+            Duration expectedDuration)
+        {
+            // ACT
+            var actual = duration1 + duration2;
 
             // ASSERT
             actual.Should().Be(expectedDuration, "because the addition of the two durations should equal the result");

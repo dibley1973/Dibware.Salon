@@ -299,7 +299,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
         }
 
         /// <summary>
-        /// Givens the upper boundary when accessed then returns fifty nine.
+        /// Given the upper boundary when accessed then returns fifty nine.
         /// </summary>
         [Test]
         public void GivenUpperBoundary_WhenAccessed_ThenReturnsFiftyNine()

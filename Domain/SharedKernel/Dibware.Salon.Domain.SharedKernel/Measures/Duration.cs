@@ -9,6 +9,7 @@
 
 using Dibware.Salon.Domain.SharedKernel.BaseClasses;
 using Dibware.Salon.Domain.SharedKernel.Guards;
+using Dibware.Salon.Domain.SharedKernel.Measures.Factories;
 using Dibware.Salon.Domain.SharedKernel.Primitives;
 
 namespace Dibware.Salon.Domain.SharedKernel.Measures
@@ -44,6 +45,22 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         /// <value> The number of minutes as a <see cref="PositiveInteger"/>. </value>
         public MinutesPastAnHour Minutes { get; }
 
+        /// <summary>
+        /// Implementation of the + operator. Adds the values of the two specified instances
+        /// </summary>
+        /// <param name="primary">The primary.</param>
+        /// <param name="secondary">The secondary.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
+        public static Duration operator +(Duration primary, Duration secondary)
+        {
+            Ensure.IsNotNull(primary, (ArgumentName)nameof(primary));
+            Ensure.IsNotNull(secondary, (ArgumentName)nameof(secondary));
+
+            return primary.Add(secondary);
+        }
+
         /// <summary>Adds the specified other.</summary>
         /// <param name="other">The other.</param>
         /// <returns>
@@ -54,36 +71,11 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         {
             Ensure.IsNotNull(other, (ArgumentName)nameof(other));
 
-            MinutesPastAnHour summedMinutes;
-            Hours summedHours;
+            var strategy = DurationStrategiesFactory.GetDurationAdditionStrategy(MinutesCanBeAdded(other));
 
-            if (Minutes.CanAdd(other.Minutes))
-            {
-                summedMinutes = Minutes
-                    .Add(other.Minutes);
+            var duration = strategy.Add(this, other);
 
-                PositiveInteger otherHours = other.Hours;
-                PositiveInteger workingHours = Hours
-                    .Add(otherHours);
-                summedHours = new Hours(workingHours.Value);
-            }
-            else
-            {
-                PositiveInteger workingMinutes = Minutes;
-                PositiveInteger otherMinutes = other.Minutes;
-                PositiveInteger working = workingMinutes
-                    .Add(otherMinutes)
-                    .Subtract(new PositiveInteger(Minutes.UpperBoundary + 1));
-                summedMinutes = new MinutesPastAnHour(working.Value);
-
-                PositiveInteger otherHours = other.Hours;
-                PositiveInteger workingHours = Hours
-                    .Add(otherHours)
-                    .Add(new PositiveInteger(1));
-                summedHours = new Hours(workingHours.Value);
-            }
-
-            return new Duration(summedHours, summedMinutes);
+            return duration;
         }
 
         /// <summary>
@@ -133,6 +125,16 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         private PositiveInteger GetTotalNumberOfMinutes()
         {
             return Hours.TotalNumberOfMinutes().Add(Minutes);
+        }
+
+        /// <summary>Gets a value indicating if minutes can be added, or not.</summary>
+        /// <param name="other">The other.</param>
+        /// <returns>
+        /// Returns <c>true</c> if the minutes can be added; otherwise <c>false</c>.
+        /// </returns>
+        private bool MinutesCanBeAdded(Duration other)
+        {
+            return Minutes.CanAdd(other.Minutes);
         }
     }
 }
