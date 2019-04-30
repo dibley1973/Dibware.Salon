@@ -44,7 +44,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures.Factories
 
             // ASSERT
             actual.Should()
-                .BeOfType<DurationAdditionWithMinuteCarryOverStrategy>($"because a {nameof(DurationAdditionWithMinuteCarryOverStrategy)} is expected");
+                .BeOfType<CarryOverMinuteDurationAdditionStrategy>($"because a {nameof(CarryOverMinuteDurationAdditionStrategy)} is expected");
         }
     }
 }

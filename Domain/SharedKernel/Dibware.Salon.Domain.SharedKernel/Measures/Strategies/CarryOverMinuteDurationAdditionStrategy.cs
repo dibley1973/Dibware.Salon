@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="DurationAdditionWithMinuteCarryOverStrategy.cs" company="Dibware">
+// <copyright file="CarryOverMinuteDurationAdditionStrategy.cs" company="Dibware">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -17,7 +17,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures.Strategies
     /// with carry-over for minutes
     /// </summary>
     /// <seealso cref="IDurationAdditionStrategy" />
-    public class DurationAdditionWithMinuteCarryOverStrategy : IDurationAdditionStrategy
+    public class CarryOverMinuteDurationAdditionStrategy : IDurationAdditionStrategy
     {
         /// <summary>
         /// Adds the value of the specified secondary <see cref="Duration" />
@@ -31,6 +31,9 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures.Strategies
         public Duration Add(Duration primary, Duration secondary)
         {
             Ensure.IsNotNull(secondary, (ArgumentName)nameof(secondary));
+            Ensure.IsTrue(
+                () => !primary.Minutes.CanAdd(secondary.Minutes),
+                $"This strategy should not be used when adding secondary minutes to primary minutes is possible. Consider using {nameof(BasicDurationAdditionStrategy)}");
 
             PositiveInteger workingMinutes = primary.Minutes;
             PositiveInteger otherMinutes = secondary.Minutes;

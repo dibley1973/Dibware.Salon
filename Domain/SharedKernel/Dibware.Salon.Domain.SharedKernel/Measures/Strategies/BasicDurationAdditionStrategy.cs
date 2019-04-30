@@ -31,6 +31,9 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures.Strategies
         public Duration Add(Duration primary, Duration secondary)
         {
             Ensure.IsNotNull(secondary, (ArgumentName)nameof(secondary));
+            Ensure.IsTrue(
+                () => primary.Minutes.CanAdd(secondary.Minutes),
+                $"Cannot add secondary minutes to primary minutes. Consider using {nameof(CarryOverMinuteDurationAdditionStrategy)}");
 
             var summedMinutes = primary.Minutes
                 .Add(secondary.Minutes);

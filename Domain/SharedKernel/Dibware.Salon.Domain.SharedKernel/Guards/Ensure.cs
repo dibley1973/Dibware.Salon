@@ -263,6 +263,46 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
                 throw new ArgumentOutOfRangeException(argumentName, value, message);
         }
 
+        /// <summary>
+        /// Ensures that the specified callBack predicate returns <c>true</c>, if it does then
+        /// a success result is returned, otherwise a fail result is returned.
+        /// </summary>
+        /// <param name="callBackPredicate">
+        /// The predicate which this function should call to determine what result to return.
+        /// </param>
+        /// <param name="errorMessage">
+        /// The error message which the exception carries in the event that the callback
+        /// returns <c>false</c>.
+        /// </param>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown if the result of the specified callback predicate is <c>false</c>
+        /// </exception>
+        public static void IsTrue(Func<bool> callBackPredicate, string errorMessage)
+        {
+            if (!callBackPredicate())
+                throw new InvalidOperationException(errorMessage);
+        }
+
+        /// <summary>
+        /// Ensures that the specified callBack predicate returns <c>false</c>, if it does then
+        /// a success result is returned, otherwise a fail result is returned.
+        /// </summary>
+        /// <param name="callBackPredicate">
+        /// The predicate which this function should call to determine what result to return.
+        /// </param>
+        /// <param name="errorMessage">
+        /// The error message which the exception carries in the event that the callback
+        /// returns <c>true</c>.
+        /// </param>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown if the result of the specified callback predicate is <c>true</c>
+        /// </exception>
+        public static void IsFalse(Func<bool> callBackPredicate, string errorMessage)
+        {
+            if (callBackPredicate())
+                throw new InvalidOperationException(errorMessage);
+        }
+
         /// <summary>Determines whether the specified value is negative, or not.</summary>
         /// <param name="value">The value.</param>
         /// <returns>

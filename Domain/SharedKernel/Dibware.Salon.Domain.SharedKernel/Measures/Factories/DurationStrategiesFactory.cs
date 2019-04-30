@@ -22,7 +22,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures.Factories
             new Dictionary<bool, IDurationAdditionStrategy>
             {
                 { DurationMinuteAddingBehaviour.CanAddMinutes, new BasicDurationAdditionStrategy() },
-                { DurationMinuteAddingBehaviour.CannotAddMinutes, new DurationAdditionWithMinuteCarryOverStrategy() }
+                { DurationMinuteAddingBehaviour.CannotAddMinutes, new CarryOverMinuteDurationAdditionStrategy() }
             };
 
         /// <summary>
