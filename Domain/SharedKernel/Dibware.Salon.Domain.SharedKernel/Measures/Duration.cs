@@ -107,6 +107,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         {
             Ensure.IsNotNull(other, (ArgumentName)nameof(other));
 
+            // TODO: Move this logic into a strategy
             int workingMinutes = Minutes - other.Minutes;
             int workingHours = Hours - other.Hours;
 
