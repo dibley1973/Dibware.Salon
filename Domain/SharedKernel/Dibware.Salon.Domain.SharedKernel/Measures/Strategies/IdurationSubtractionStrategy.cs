@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="IDurationAdditionStrategy.cs" company="Dibware">
+// <copyright file="IDurationSubtractionStrategy.cs" company="Dibware">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -10,18 +10,18 @@
 namespace Dibware.Salon.Domain.SharedKernel.Measures.Strategies
 {
     /// <summary>
-    /// Defines the expected members of an addition strategy for a <see cref="Duration"/>
+    /// Defines the expected members of a subtraction strategy for a <see cref="Duration"/>
     /// </summary>
-    public interface IDurationAdditionStrategy
+    public interface IDurationSubtractionStrategy
     {
-        /// <summary>Adds the value of the specified secondary <see cref="Duration"/>
-        /// to the specified primary <see cref="Duration"/>.</summary>
+        /// <summary>Subtracts the value of the specified secondary <see cref="Duration"/>
+        /// from the specified primary <see cref="Duration"/>.</summary>
         /// <param name="primary">The primary <see cref="Duration"/>.</param>
         /// <param name="secondary">The secondary <see cref="Duration"/>.</param>
         /// <returns>Returns a newly constructed <see cref="Duration"/> with summed values.</returns>
         /// <exception cref="System.ArgumentNullException">
         /// Thrown if the value of primary or secondary is null.
         /// </exception>
-        Duration Add(Duration primary, Duration secondary);
+        Duration Subtract(Duration primary, Duration secondary);
     }
 }

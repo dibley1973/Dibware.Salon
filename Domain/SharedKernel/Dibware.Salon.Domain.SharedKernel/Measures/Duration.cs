@@ -7,6 +7,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
 using Dibware.Salon.Domain.SharedKernel.BaseClasses;
 using Dibware.Salon.Domain.SharedKernel.Guards;
 using Dibware.Salon.Domain.SharedKernel.Measures.Factories;
@@ -61,6 +62,23 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
             return primary.Add(secondary);
         }
 
+        /// <summary>
+        /// Implementation of the - operator. Subtracts the values of the secondary
+        /// specified <see cref="Duration"/> from the first specified <see cref="Duration"/>.
+        /// </summary>
+        /// <param name="primary">The primary.</param>
+        /// <param name="secondary">The secondary.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
+        public static Duration operator -(Duration primary, Duration secondary)
+        {
+            Ensure.IsNotNull(primary, (ArgumentName)nameof(primary));
+            Ensure.IsNotNull(secondary, (ArgumentName)nameof(secondary));
+
+            return primary.Subtract(secondary);
+        }
+
         /// <summary>Adds the specified other.</summary>
         /// <param name="other">The other.</param>
         /// <returns>
@@ -76,6 +94,34 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
             var duration = strategy.Add(this, other);
 
             return duration;
+        }
+
+        /// <summary>Subtracts the value of the specified secondary <see cref="Duration"/>
+        /// from the specified primary <see cref="Duration"/>.</summary>
+        /// <param name="other">The secondary <see cref="Duration"/>.</param>
+        /// <returns>Returns a newly constructed <see cref="Duration"/> with summed values.</returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown if the value of primary or secondary is null.
+        /// </exception>
+        public Duration Subtract(Duration other)
+        {
+            Ensure.IsNotNull(other, (ArgumentName)nameof(other));
+
+            int workingMinutes = Minutes - other.Minutes;
+            int workingHours = Hours - other.Hours;
+
+            if (workingMinutes < 0)
+            {
+                workingMinutes = workingMinutes + Minutes.UpperBoundary;
+                workingHours = workingHours - 1;
+            }
+
+            if (workingHours < 0)
+            {
+                throw new ArgumentOutOfRangeException((ArgumentName)nameof(other), "message");
+            }
+
+            return new Duration(new Hours(workingHours), new MinutesPastAnHour(workingMinutes));
         }
 
         /// <summary>

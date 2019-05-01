@@ -24,5 +24,15 @@ namespace Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys
         /// The key for when the calculated value is greater than <see cref="int.MaxValue"/>
         /// </summary>
         public const string CalculatedValueIsGreaterThanIntMax = "CalculatedValueIsGreaterThanIntMax";
+
+        /// <summary>
+        /// The key for when an invalid cast from null was attempted
+        /// </summary>
+        public const string InvalidCastFromNull = "InvalidCastFromNull";
+
+        /// <summary>
+        /// The key for when an invalid cast to int was attempted
+        /// </summary>
+        public const string InvalidCastToInt = "InvalidCastToInt";
     }
 }

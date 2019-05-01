@@ -48,6 +48,24 @@ namespace Dibware.Salon.Domain.SharedKernel.Primitives
         public int Value { get; }
 
         /// <summary>
+        /// Performs an implicit conversion from <see cref="PositiveInteger"/> to <see cref="int"/>.
+        /// </summary>
+        /// <param name="positiveInteger">The positive integer.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
+        /// <exception cref="InvalidCastException">
+        /// Thrown if the specified <see cref="PositiveInteger"/> is null;
+        /// </exception>
+        public static implicit operator int(PositiveInteger positiveInteger)
+        {
+            if (positiveInteger == null)
+                return 0;
+
+            return positiveInteger.Value;
+        }
+
+        /// <summary>
         /// Implementation of the + operator. Adds the values of the two specified instances
         /// </summary>
         /// <param name="primary">The primary.</param>

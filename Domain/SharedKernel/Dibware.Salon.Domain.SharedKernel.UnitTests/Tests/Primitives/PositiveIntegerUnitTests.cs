@@ -392,9 +392,42 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Primitives
             var actual = positiveInteger1 - positiveInteger2;
 
             // ASSERT
-            actual.Value.Should().Be(0, "because the subtraction operatorion should be correct");
+            actual.Value.Should().Be(0, "because the subtraction operation should be correct");
             actual.Should().NotBeSameAs(positiveInteger1, "because the reference must not be the same as the first");
             actual.Should().NotBeSameAs(positiveInteger2, "because the reference must not be the same as the second");
+        }
+
+        /// <summary>
+        /// Given the implicit conversion to int when supplied with null then returns zero.
+        /// </summary>
+        [Test]
+        public void GivenImplicitConversionToInt_WhenSuppliedWithNull_ThenReturnsZero()
+        {
+            // ARRANGE
+            const PositiveInteger nullPositiveInteger = null;
+
+            // ACT
+            int actual = nullPositiveInteger;
+
+            // ASSERT
+            actual.Should().Be(0, "because a null PositiveInteger casts to a null int");
+        }
+
+        /// <summary>
+        /// Given the implicit conversion to int when supplied with valid positive integer then returns positive integer value.
+        /// </summary>
+        [Test]
+        public void GivenImplicitConversionToInt_WhenSuppliedWithValidPositiveInteger_ThenReturnsPositiveIntegerValue()
+        {
+            // ARRANGE
+            var expected = 7;
+            PositiveInteger positiveInteger = new PositiveInteger(expected);
+
+            // ACT
+            int actual = positiveInteger;
+
+            // ASSERT
+            actual.Should().Be(expected, "because the cast value should match the constructed value");
         }
 
         /// <summary>
