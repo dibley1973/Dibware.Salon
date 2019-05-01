@@ -253,11 +253,14 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         public void GivenIsNotInvalidOperation_WhenPassedFunctionWhichReturnsTrueValue_ThenDoesNotThrowException()
         {
             // ARRANGE
-            Func<bool> conditionCallback = () => { return true; };
             var errorMessage = "IsInvalidOperation";
+            bool ConditionCallback()
+            {
+                return true;
+            }
 
             // ACT
-            Action action = () => Ensure.IsNotInvalidOperation(conditionCallback, errorMessage);
+            Action action = () => Ensure.IsNotInvalidOperation(ConditionCallback, errorMessage);
 
             // ASSERT
             action.Should().NotThrow<InvalidOperationException>();
@@ -271,11 +274,14 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         public void GivenIsNotInvalidOperation_WhenPassedFunctionWhichReturnsFalseValue_ThenThrowsException()
         {
             // ARRANGE
-            Func<bool> conditionCallback = () => { return false; };
             var errorMessage = "IsInvalidOperation";
+            bool ConditionCallback()
+            {
+                return false;
+            }
 
             // ACT
-            Action action = () => Ensure.IsNotInvalidOperation(conditionCallback, errorMessage);
+            Action action = () => Ensure.IsNotInvalidOperation(ConditionCallback, errorMessage);
 
             // ASSERT
             action.Should().Throw<InvalidOperationException>();
@@ -324,10 +330,10 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         {
             // ARRANGE
             const bool condition = true;
-            Func<string> errorMessageCallback = () => "IsInvalidCast";
+            string ErrorMessageCallback() => "IsInvalidCast";
 
             // ACT
-            Action action = () => Ensure.IsNotInvalidCast(condition, errorMessageCallback);
+            Action action = () => Ensure.IsNotInvalidCast(condition, ErrorMessageCallback);
 
             // ASSERT
             action.Should().NotThrow<InvalidCastException>();
@@ -342,10 +348,10 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         {
             // ARRANGE
             const bool condition = false;
-            Func<string> errorMessageCallback = () => "IsInvalidCast";
+            string ErrorMessageCallback() => "IsInvalidCast";
 
             // ACT
-            Action action = () => Ensure.IsNotInvalidCast(condition, errorMessageCallback);
+            Action action = () => Ensure.IsNotInvalidCast(condition, ErrorMessageCallback);
 
             // ASSERT
             action.Should().Throw<InvalidCastException>();
@@ -359,11 +365,14 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         public void GivenIsNotInvalidCast_WhenPassedFunctionWhichReturnsTrueValue_ThenDoesNotThrowException()
         {
             // ARRANGE
-            Func<bool> conditionCallback = () => { return true; };
             var errorMessage = "IsInvalidCast";
+            bool ConditionCallback()
+            {
+                return true;
+            }
 
             // ACT
-            Action action = () => Ensure.IsNotInvalidCast(conditionCallback, errorMessage);
+            Action action = () => Ensure.IsNotInvalidCast(ConditionCallback, errorMessage);
 
             // ASSERT
             action.Should().NotThrow<InvalidCastException>();
@@ -376,11 +385,14 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         public void GivenIsNotInvalidCast_WhenPassedFunctionWhichReturnsFalseValue_ThenThrowsException()
         {
             // ARRANGE
-            Func<bool> conditionCallback = () => { return false; };
             var errorMessage = "IsInvalidCast";
+            bool ConditionCallback()
+            {
+                return false;
+            }
 
             // ACT
-            Action action = () => Ensure.IsNotInvalidCast(conditionCallback, errorMessage);
+            Action action = () => Ensure.IsNotInvalidCast(ConditionCallback, errorMessage);
 
             // ASSERT
             action.Should().Throw<InvalidCastException>();
@@ -394,11 +406,14 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         public void GivenIsNotInvalidCast_WhenPassedFunctionWhichReturnsTrueAndFunctionWhichReturnsMessageValue_ThenDoesNotThrowException()
         {
             // ARRANGE
-            Func<bool> conditionCallback = () => { return true; };
-            Func<string> errorMessageCallback = () => "IsInvalidCast";
+            string ErrorMessageCallback() => "IsInvalidCast";
+            bool ConditionCallback()
+            {
+                return true;
+            }
 
             // ACT
-            Action action = () => Ensure.IsNotInvalidCast(conditionCallback, errorMessageCallback);
+            Action action = () => Ensure.IsNotInvalidCast(ConditionCallback, ErrorMessageCallback);
 
             // ASSERT
             action.Should().NotThrow<InvalidCastException>();
@@ -412,11 +427,14 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
         public void GivenIsNotInvalidCast_WhenPassedFunctionWhichReturnsFalseAndFunctionWhichReturnsMessageValue_ThenThrowsException()
         {
             // ARRANGE
-            Func<bool> conditionCallback = () => { return false; };
-            Func<string> errorMessageCallback = () => "IsInvalidCast";
+            string ErrorMessageCallback() => "IsInvalidCast";
+            bool ConditionCallback()
+            {
+                return false;
+            }
 
             // ACT
-            Action action = () => Ensure.IsNotInvalidCast(conditionCallback, errorMessageCallback);
+            Action action = () => Ensure.IsNotInvalidCast(ConditionCallback, ErrorMessageCallback);
 
             // ASSERT
             action.Should().Throw<InvalidCastException>();
@@ -505,6 +523,80 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
             // ASSERT
             action1.Should().NotThrow<ArgumentNullException>();
             action2.Should().NotThrow<ArgumentNullException>();
+        }
+
+        /// <summary>Given the ensure is true callback when result is true then does not throw exception.</summary>
+        [Test]
+        public void GivenEnsureIsTrueCallback_WhenResultIsTrue_ThenDoesNotThrowException()
+        {
+            // ARRANGE
+            var errorMessage = "NotTrue";
+            bool IsTrueCallback()
+            {
+                return true;
+            }
+
+            // ACT
+            Action actual = () => Ensure.IsTrue(IsTrueCallback, errorMessage);
+
+            // ASSERT
+            actual.Should().NotThrow("because callback result was true");
+        }
+
+        /// <summary>Given the ensure is true callback when result is false then throws exception.</summary>
+        [Test]
+        public void GivenEnsureIsTrueCallback_WhenResultIsFalse_ThenThrowsException()
+        {
+            // ARRANGE
+            var errorMessage = "NotTrue";
+            bool IsTrueCallback()
+            {
+                return false;
+            }
+
+            // ACT
+            Action actual = () => Ensure.IsTrue(IsTrueCallback, errorMessage);
+
+            // ASSERT
+            actual.Should().Throw<InvalidOperationException>("because callback result was false")
+                .WithMessage(errorMessage);
+        }
+
+        /// <summary>Given the ensure is false callback when result is false then does not throw exception.</summary>
+        [Test]
+        public void GivenEnsureIsFalseCallback_WhenResultIsFalse_ThenDoesNotThrowException()
+        {
+            // ARRANGE
+            var errorMessage = "NotFalse";
+            bool IsFalseCallback()
+            {
+                return false;
+            }
+
+            // ACT
+            Action actual = () => Ensure.IsFalse(IsFalseCallback, errorMessage);
+
+            // ASSERT
+            actual.Should().NotThrow("because callback result was false");
+        }
+
+        /// <summary>Given the ensure is false callback when result is true then throws exception.</summary>
+        [Test]
+        public void GivenEnsureIsFalseCallback_WhenResultIsTrue_ThenThrowsException()
+        {
+            // ARRANGE
+            var errorMessage = "NotFalse";
+            bool IsFalseCallback()
+            {
+                return true;
+            }
+
+            // ACT
+            Action actual = () => Ensure.IsFalse(IsFalseCallback, errorMessage);
+
+            // ASSERT
+            actual.Should().Throw<InvalidOperationException>("because callback result was true")
+                .WithMessage(errorMessage);
         }
     }
 }

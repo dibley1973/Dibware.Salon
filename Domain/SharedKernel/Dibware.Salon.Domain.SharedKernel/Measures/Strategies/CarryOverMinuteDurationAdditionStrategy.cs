@@ -31,8 +31,8 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures.Strategies
         public Duration Add(Duration primary, Duration secondary)
         {
             Ensure.IsNotNull(secondary, (ArgumentName)nameof(secondary));
-            Ensure.IsTrue(
-                () => !primary.Minutes.CanAdd(secondary.Minutes),
+            Ensure.IsFalse(
+                () => primary.Minutes.CanAdd(secondary.Minutes),
                 $"This strategy should not be used when adding secondary minutes to primary minutes is possible. Consider using {nameof(BasicDurationAdditionStrategy)}");
 
             PositiveInteger workingMinutes = primary.Minutes;
