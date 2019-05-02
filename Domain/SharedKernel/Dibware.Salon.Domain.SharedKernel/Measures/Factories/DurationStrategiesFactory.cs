@@ -25,6 +25,13 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures.Factories
                 { DurationMinuteAddingBehaviour.CannotAddMinutes, new CarryOverMinuteDurationAdditionStrategy() }
             };
 
+        private static readonly Dictionary<bool, IDurationSubtractionStrategy> DurationSubtractionStrategies =
+            new Dictionary<bool, IDurationSubtractionStrategy>
+            {
+                { DurationMinuteSubtractingBehaviour.CanSubtractMinutes, new BasicDurationSubtractionStrategy() },
+                { DurationMinuteSubtractingBehaviour.CannotSubtractMinutes, new CarryOverMinuteDurationSubtractionStrategy() }
+            };
+
         /// <summary>
         /// Gets the duration addition strategy for the specified state.
         /// </summary>
@@ -35,6 +42,18 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures.Factories
         public static IDurationAdditionStrategy GetDurationAdditionStrategy(bool canAddMinutes)
         {
             return DurationAdditionStrategies[canAddMinutes];
+        }
+
+        /// <summary>
+        /// Gets the duration subtraction strategy for the specified state.
+        /// </summary>
+        /// <param name="canSubtractMinutes">Set to <c>true</c> if minutes can be subtracted; otherwise <c>false</c>.</param>
+        /// <returns>
+        /// Returns a correct <see cref="IDurationSubtractionStrategy"/> for the specified state.
+        /// </returns>
+        public static IDurationSubtractionStrategy GetDurationSubtractionStrategy(bool canSubtractMinutes)
+        {
+            return DurationSubtractionStrategies[canSubtractMinutes];
         }
     }
 }

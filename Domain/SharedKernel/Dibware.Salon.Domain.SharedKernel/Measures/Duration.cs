@@ -107,6 +107,12 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         {
             Ensure.IsNotNull(other, (ArgumentName)nameof(other));
 
+            var strategy = DurationStrategiesFactory.GetDurationSubtractionStrategy(MinutesCanBeSubtracted(other));
+
+            var duration = strategy.Subtract(this, other);
+
+            return duration;
+
             // TODO: Move this logic into a strategy
             int workingMinutes = Minutes - other.Minutes;
             int workingHours = Hours - other.Hours;
@@ -182,6 +188,16 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         private bool MinutesCanBeAdded(Duration other)
         {
             return Minutes.CanAdd(other.Minutes);
+        }
+
+        /// <summary>Gets a value indicating if minutes can be subtracted, or not.</summary>
+        /// <param name="other">The other.</param>
+        /// <returns>
+        /// Returns <c>true</c> if the minutes can be added; otherwise <c>false</c>.
+        /// </returns>
+        private bool MinutesCanBeSubtracted(Duration other)
+        {
+            return Minutes.CanSubtract(other.Minutes);
         }
     }
 }
