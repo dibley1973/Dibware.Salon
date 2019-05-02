@@ -7,6 +7,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using Dibware.Salon.Domain.SharedKernel.Guards;
+
 namespace Dibware.Salon.Domain.SharedKernel.Measures.Strategies
 {
     /// <summary>
@@ -30,7 +32,21 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures.Strategies
         /// </exception>
         public Duration Subtract(Duration primary, Duration secondary)
         {
-            throw new System.NotImplementedException();
+            Ensure.IsNotNull(primary, (ArgumentName)nameof(primary));
+            Ensure.IsNotNull(secondary, (ArgumentName)nameof(secondary));
+            Ensure.IsTrue(
+                () => primary.Minutes.CanSubtract(secondary.Minutes),
+                $"Cannot subtract secondary minutes to primary minutes. Consider using {nameof(CarryOverMinuteDurationSubtractionStrategy)}");
+
+            var subtractedMinutes = primary.Minutes
+                .Subtract(secondary.Minutes);
+
+            var workingHours = primary.Hours
+                .Subtract(secondary.Hours);
+
+            var subtractedHours = new Hours(workingHours.Value);
+
+            return new Duration(subtractedHours, subtractedMinutes);
         }
     }
 }

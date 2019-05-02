@@ -1,4 +1,4 @@
-﻿// <copyright file="DurationAdditionWithMinuteCarryOverStrategyUnitTests.cs" company="Dibware">
+﻿// <copyright file="CarryOverMinuteDurationAdditionStrategyUnitTests.cs" company="Dibware">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -17,7 +17,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures.Strategies
     /// Provides unit tests for the <see cref="CarryOverMinuteDurationAdditionStrategy"/> class.
     /// </summary>
     [TestFixture]
-    public class DurationAdditionWithMinuteCarryOverStrategyUnitTests
+    public class CarryOverMinuteDurationAdditionStrategyUnitTests
     {
         private static readonly object[] ValidDurationAdditionData =
         {
@@ -62,6 +62,42 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures.Strategies
                 new Duration(new Hours(3), new MinutesPastAnHour(9))
             }
         };
+
+        /// <summary>
+        /// Given the add when supplied with null primary then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenAdd_WhenSuppliedWithNullPrimary_ThenThrowsException()
+        {
+            // ARRANGE
+            const Duration nullDuration = null;
+            var validDuration = new Duration(new Hours(2), new MinutesPastAnHour(10));
+            var strategy = new CarryOverMinuteDurationAdditionStrategy();
+
+            // ACT
+            Action actual = () => strategy.Add(nullDuration, validDuration);
+
+            // ASSERT
+            actual.Should().Throw<ArgumentNullException>("because a null primary duration is not permitted");
+        }
+
+        /// <summary>
+        /// Given the add when supplied with null secondary then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenAdd_WhenSuppliedWithNullSecondary_ThenThrowsException()
+        {
+            // ARRANGE
+            const Duration nullDuration = null;
+            var validDuration = new Duration(new Hours(2), new MinutesPastAnHour(10));
+            var strategy = new CarryOverMinuteDurationAdditionStrategy();
+
+            // ACT
+            Action actual = () => strategy.Add(validDuration, nullDuration);
+
+            // ASSERT
+            actual.Should().Throw<ArgumentNullException>("because a null secondary duration is not permitted");
+        }
 
         /// <summary>
         /// Given the add when supplied valid other then returns constructed duration with correct value.

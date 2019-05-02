@@ -46,5 +46,33 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures.Factories
             actual.Should()
                 .BeOfType<CarryOverMinuteDurationAdditionStrategy>($"because a {nameof(CarryOverMinuteDurationAdditionStrategy)} is expected");
         }
+
+        /// <summary>
+        /// Given the get duration subtraction strategy when passed true then returns basic duration subtraction strategy.
+        /// </summary>
+        [Test]
+        public void GivenGetDurationSubTractionStrategy_WhenPassedTrue_ThenReturnsBasicDurationSubTractionStrategy()
+        {
+            // ACT
+            var actual = DurationStrategiesFactory.GetDurationSubtractionStrategy(true);
+
+            // ASSERT
+            actual.Should()
+                .BeOfType<BasicDurationSubtractionStrategy>($"because a {nameof(BasicDurationSubtractionStrategy)} is expected");
+        }
+
+        /// <summary>
+        /// Given the get duration subtraction strategy when passed false then returns duration subtraction with minute carry over strategy.
+        /// </summary>
+        [Test]
+        public void GivenGetDurationSubTractionStrategy_WhenPassedFalse_ThenReturnsDurationSubTractionWithMinuteCarryOverStrategy()
+        {
+            // ACT
+            var actual = DurationStrategiesFactory.GetDurationSubtractionStrategy(false);
+
+            // ASSERT
+            actual.Should()
+                .BeOfType<CarryOverMinuteDurationSubtractionStrategy>($"because a {nameof(CarryOverMinuteDurationSubtractionStrategy)} is expected");
+        }
     }
 }

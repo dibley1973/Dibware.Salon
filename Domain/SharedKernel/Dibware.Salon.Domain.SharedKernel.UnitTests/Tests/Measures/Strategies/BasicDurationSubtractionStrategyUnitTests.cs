@@ -1,4 +1,4 @@
-﻿// <copyright file="BasicDurationAdditionStrategyUnitTests.cs" company="Dibware">
+﻿// <copyright file="BasicDurationSubtractionStrategyUnitTests.cs" company="Dibware">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -14,12 +14,12 @@ using NUnit.Framework;
 namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures.Strategies
 {
     /// <summary>
-    /// Provides unit tests for the <see cref="BasicDurationAdditionStrategy"/> class.
+    /// Provides unit tests for the <see cref="BasicDurationSubtractionStrategy"/> class.
     /// </summary>
     [TestFixture]
-    public class BasicDurationAdditionStrategyUnitTests
+    public class BasicDurationSubtractionStrategyUnitTests
     {
-        private static readonly object[] ValidDurationAdditionData =
+        private static readonly object[] ValidDurationSubtractionData =
         {
             new object[]
             {
@@ -29,111 +29,105 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures.Strategies
             },
             new object[]
             {
-                new Duration(new Hours(1), new MinutesPastAnHour(0)),
+                new Duration(new Hours(10), new MinutesPastAnHour(0)),
                 new Duration(new Hours(2), new MinutesPastAnHour(0)),
-                new Duration(new Hours(3), new MinutesPastAnHour(0))
+                new Duration(new Hours(8), new MinutesPastAnHour(0))
             },
             new object[]
             {
-                new Duration(new Hours(0), new MinutesPastAnHour(4)),
-                new Duration(new Hours(0), new MinutesPastAnHour(5)),
-                new Duration(new Hours(0), new MinutesPastAnHour(9))
-            },
-            new object[]
-            {
-                new Duration(new Hours(1), new MinutesPastAnHour(4)),
-                new Duration(new Hours(2), new MinutesPastAnHour(5)),
-                new Duration(new Hours(3), new MinutesPastAnHour(9))
+                new Duration(new Hours(0), new MinutesPastAnHour(8)),
+                new Duration(new Hours(0), new MinutesPastAnHour(3)),
+                new Duration(new Hours(0), new MinutesPastAnHour(5))
             }
         };
 
-        private static readonly object[] InvalidDurationAdditionData =
+        private static readonly object[] InvalidDurationSubtractionData =
         {
             new object[]
             {
-                new Duration(new Hours(1), new MinutesPastAnHour(59)),
-                new Duration(new Hours(1), new MinutesPastAnHour(2)),
-                new Duration(new Hours(3), new MinutesPastAnHour(1))
+                new Duration(new Hours(2), new MinutesPastAnHour(10)),
+                new Duration(new Hours(1), new MinutesPastAnHour(12)),
+                new Duration(new Hours(0), new MinutesPastAnHour(58))
             }
         };
 
         /// <summary>
-        /// Given the add when supplied with null primary then throws exception.
+        /// Given the subtract when supplied with null primary then throws exception.
         /// </summary>
         [Test]
-        public void GivenAdd_WhenSuppliedWithNullPrimary_ThenThrowsException()
+        public void GivenSubtract_WhenSuppliedWithNullPrimary_ThenThrowsException()
         {
             // ARRANGE
             const Duration nullDuration = null;
             var validDuration = new Duration(new Hours(2), new MinutesPastAnHour(10));
-            var strategy = new BasicDurationAdditionStrategy();
+            var strategy = new BasicDurationSubtractionStrategy();
 
             // ACT
-            Action actual = () => strategy.Add(nullDuration, validDuration);
+            Action actual = () => strategy.Subtract(nullDuration, validDuration);
 
             // ASSERT
             actual.Should().Throw<ArgumentNullException>("because a null primary duration is not permitted");
         }
 
         /// <summary>
-        /// Given the add when supplied with null secondary then throws exception.
+        /// Given the subtract when supplied with null secondary then throws exception.
         /// </summary>
         [Test]
-        public void GivenAdd_WhenSuppliedWithNullSecondary_ThenThrowsException()
+        public void GivenSubtract_WhenSuppliedWithNullSecondary_ThenThrowsException()
         {
             // ARRANGE
             const Duration nullDuration = null;
             var validDuration = new Duration(new Hours(2), new MinutesPastAnHour(10));
-            var strategy = new BasicDurationAdditionStrategy();
+            var strategy = new BasicDurationSubtractionStrategy();
 
             // ACT
-            Action actual = () => strategy.Add(validDuration, nullDuration);
+            Action actual = () => strategy.Subtract(validDuration, nullDuration);
 
             // ASSERT
             actual.Should().Throw<ArgumentNullException>("because a null secondary duration is not permitted");
         }
 
         /// <summary>
-        /// Given the add when supplied valid other then returns constructed duration with correct value.
+        /// Given the subtract when supplied valid durations then returns constructed duration with correct value.
         /// </summary>
         /// <param name="duration1">The duration1.</param>
         /// <param name="duration2">The duration2.</param>
         /// <param name="expectedDuration">The expected duration.</param>
         [Test]
-        [TestCaseSource(nameof(ValidDurationAdditionData))]
-        public void GivenAdd_WhenSuppliedValidDurations_ThenReturnsConstructedDurationWithCorrectValue(
+        [TestCaseSource(nameof(ValidDurationSubtractionData))]
+        public void GivenSubtract_WhenSuppliedValidDurations_ThenReturnsConstructedDurationWithCorrectValue(
             Duration duration1,
             Duration duration2,
             Duration expectedDuration)
         {
             // ARRANGE
-            var strategy = new BasicDurationAdditionStrategy();
+            var strategy = new BasicDurationSubtractionStrategy();
 
             // ACT
-            var actual = strategy.Add(duration1, duration2);
+            var actual = strategy.Subtract(duration1, duration2);
 
             // ASSERT
             actual.Should().Be(expectedDuration, "because the addition of the two durations should equal the result");
         }
 
         /// <summary>
-        /// Given the add when supplied invalid durations then throws exception.
+        /// Given the subtract when supplied invalid durations then throws exception.
         /// </summary>
         /// <param name="duration1">The duration1.</param>
         /// <param name="duration2">The duration2.</param>
         /// <param name="expectedDuration">The expected duration.</param>
         [Test]
-        [TestCaseSource(nameof(InvalidDurationAdditionData))]
-        public void GivenAdd_WhenSuppliedInvalidDurations_ThenThrowsException(
+        [TestCaseSource(nameof(InvalidDurationSubtractionData))]
+        public void GivenSubtract_WhenSuppliedInvalidDurations_ThenThrowsException(
             Duration duration1,
             Duration duration2,
             Duration expectedDuration)
         {
             // ARRANGE
-            var strategy = new BasicDurationAdditionStrategy();
+            var strategy = new BasicDurationSubtractionStrategy();
 
             // ACT
-            Action actual = () => strategy.Add(duration1, duration2);
+            Action actual = () => strategy.Subtract(duration1, duration2);
 
             // ASSERT
             actual.Should().Throw<InvalidOperationException>("because minutes of the two specified durations can not be added");

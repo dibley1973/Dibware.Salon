@@ -30,6 +30,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures.Strategies
         /// </returns>
         public Duration Add(Duration primary, Duration secondary)
         {
+            Ensure.IsNotNull(primary, (ArgumentName)nameof(primary));
             Ensure.IsNotNull(secondary, (ArgumentName)nameof(secondary));
             Ensure.IsTrue(
                 () => primary.Minutes.CanAdd(secondary.Minutes),
