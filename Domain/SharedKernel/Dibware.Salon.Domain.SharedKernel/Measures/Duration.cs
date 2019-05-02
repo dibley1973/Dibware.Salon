@@ -7,7 +7,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System;
 using Dibware.Salon.Domain.SharedKernel.BaseClasses;
 using Dibware.Salon.Domain.SharedKernel.Guards;
 using Dibware.Salon.Domain.SharedKernel.Measures.Factories;
@@ -114,6 +113,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
             return duration;
 
             // TODO: Move this logic into a strategy
+            /*
             int workingMinutes = Minutes - other.Minutes;
             int workingHours = Hours - other.Hours;
 
@@ -129,6 +129,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
             }
 
             return new Duration(new Hours(workingHours), new MinutesPastAnHour(workingMinutes));
+            */
         }
 
         /// <summary>
