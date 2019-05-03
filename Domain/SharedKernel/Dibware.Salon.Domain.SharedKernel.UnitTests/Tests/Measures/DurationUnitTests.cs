@@ -21,7 +21,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
     {
         private static readonly Hours ValidHours = new Hours(4);
         private static readonly MinutesPastAnHour ValidMinutes = new MinutesPastAnHour(16);
-        private static readonly object[] DurationAdditionData =
+        private static readonly object[] ValidDurationAdditionData =
         {
             new object[]
             {
@@ -52,6 +52,50 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
                 new Duration(new Hours(1), new MinutesPastAnHour(59)),
                 new Duration(new Hours(1), new MinutesPastAnHour(2)),
                 new Duration(new Hours(3), new MinutesPastAnHour(1))
+            }
+        };
+
+        private static readonly object[] ValidDurationSubtractionData =
+        {
+            new object[]
+            {
+                new Duration(new Hours(0), new MinutesPastAnHour(0)),
+                new Duration(new Hours(0), new MinutesPastAnHour(0)),
+                new Duration(new Hours(0), new MinutesPastAnHour(0))
+            },
+            new object[]
+            {
+                new Duration(new Hours(10), new MinutesPastAnHour(0)),
+                new Duration(new Hours(2), new MinutesPastAnHour(0)),
+                new Duration(new Hours(8), new MinutesPastAnHour(0))
+            },
+            new object[]
+            {
+                new Duration(new Hours(0), new MinutesPastAnHour(8)),
+                new Duration(new Hours(0), new MinutesPastAnHour(3)),
+                new Duration(new Hours(0), new MinutesPastAnHour(5))
+            },
+            new object[]
+            {
+                new Duration(new Hours(1), new MinutesPastAnHour(10)),
+                new Duration(new Hours(0), new MinutesPastAnHour(12)),
+                new Duration(new Hours(0), new MinutesPastAnHour(58))
+            },
+            new object[]
+            {
+                new Duration(new Hours(2), new MinutesPastAnHour(10)),
+                new Duration(new Hours(1), new MinutesPastAnHour(12)),
+                new Duration(new Hours(0), new MinutesPastAnHour(58))
+            }
+        };
+
+        private static readonly object[] InvalidDurationSubtractionData =
+        {
+            new object[]
+            {
+                new Duration(new Hours(0), new MinutesPastAnHour(5)),
+                new Duration(new Hours(0), new MinutesPastAnHour(8)),
+                new Duration(new Hours(0), new MinutesPastAnHour(0))
             }
         };
 
@@ -124,7 +168,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
         /// <param name="duration2">The duration2.</param>
         /// <param name="expectedDuration">The expected duration.</param>
         [Test]
-        [TestCaseSource(nameof(DurationAdditionData))]
+        [TestCaseSource(nameof(ValidDurationAdditionData))]
         public void GivenAdd_WhenSuppliedValidOther_ThenReturnsConstructedDurationWithCorrectValue(
             Duration duration1,
             Duration duration2,
@@ -144,7 +188,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
         /// <param name="duration2">The duration2.</param>
         /// <param name="expectedDuration">The expected duration.</param>
         [Test]
-        [TestCaseSource(nameof(DurationAdditionData))]
+        [TestCaseSource(nameof(ValidDurationAdditionData))]
         public void GivenAdditionOperator_WhenSuppliedValidOther_ThenReturnsConstructedDurationWithCorrectValue(
             Duration duration1,
             Duration duration2,
@@ -206,16 +250,95 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
         }
 
         /// <summary>
+        /// Given the subtract when supplied null other then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenSubtract_WhenSuppliedNullOther_ThenThrowsException()
+        {
+            // ARRANGE
+            var duration1 = new Duration(ValidHours, new MinutesPastAnHour(5));
+            const Duration nullDuration = null;
+
+            // ACT
+            Action actual = () => duration1.Subtract(nullDuration);
+
+            // ASSERT
+            actual.Should().Throw<ArgumentNullException>("because a null other duration is not permitted");
+        }
+
+        /// <summary>
+        /// Given the subtract when supplied valid other then returns constructed duration with correct value.
+        /// </summary>
+        /// <param name="duration1">The duration1.</param>
+        /// <param name="duration2">The duration2.</param>
+        /// <param name="expectedDuration">The expected duration.</param>
+        [Test]
+        [TestCaseSource(nameof(ValidDurationSubtractionData))]
+        public void GivenSubtract_WhenSuppliedValidOther_ThenReturnsConstructedDurationWithCorrectValue(
+            Duration duration1,
+            Duration duration2,
+            Duration expectedDuration)
+        {
+            // ACT
+            var actual = duration1.Subtract(duration2);
+
+            // ASSERT
+            actual.Should().Be(expectedDuration, "because the subtraction of the two durations should equal the result");
+        }
+
+        /// <summary>
+        /// Given the subtract when supplied invalid durations then throws exception.
+        /// </summary>
+        /// <param name="duration1">The duration1.</param>
+        /// <param name="duration2">The duration2.</param>
+        /// <param name="expectedDuration">The expected duration.</param>
+        [Test]
+        [TestCaseSource(nameof(InvalidDurationSubtractionData))]
+        public void GivenSubtract_WhenSuppliedInvalidDurations_ThenThrowsException(
+            Duration duration1,
+            Duration duration2,
+            Duration expectedDuration)
+        {
+            // ARRANGE
+
+            // ACT
+            Action actual = () => duration1.Subtract(duration2);
+
+            // ASSERT
+            actual.Should().Throw<ArgumentOutOfRangeException>("because minutes of the two specified durations could be subtracted");
+        }
+
+        /// <summary>
+        /// Given the subtraction operator when supplied valid other then returns constructed duration with correct value.
+        /// </summary>
+        /// <param name="duration1">The duration1.</param>
+        /// <param name="duration2">The duration2.</param>
+        /// <param name="expectedDuration">The expected duration.</param>
+        [Test]
+        [TestCaseSource(nameof(ValidDurationSubtractionData))]
+        public void GivenSubtractionOperator_WhenSuppliedValidOther_ThenReturnsConstructedDurationWithCorrectValue(
+            Duration duration1,
+            Duration duration2,
+            Duration expectedDuration)
+        {
+            // ACT
+            var actual = duration1 - duration2;
+
+            // ASSERT
+            actual.Should().Be(expectedDuration, "because the subtraction of the two durations should equal the result");
+        }
+
+        /// <summary>
         /// Given the number of minutes in an hour when accessed then should be sixty.
         /// </summary>
         [Test]
         public void GivenNumberOfMinutesInAnHour_WhenAccessed_ThenShouldBeSixty()
         {
             // ARRANGE
-            var duration = Hours.NumberOfMinutesInAnHour;
+            var numberOfMinutesInAnHour = Hours.NumberOfMinutesInAnHour;
 
             // ACT
-            var actual = duration.Value;
+            var actual = numberOfMinutesInAnHour.Value;
 
             // ASSERT
             actual.Should().Be(60, "because there are sixty minutes in an hour");
