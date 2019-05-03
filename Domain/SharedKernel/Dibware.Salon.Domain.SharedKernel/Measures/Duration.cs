@@ -111,25 +111,6 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
             var duration = strategy.Subtract(this, other);
 
             return duration;
-
-            // TODO: Move this logic into a strategy
-            /*
-            int workingMinutes = Minutes - other.Minutes;
-            int workingHours = Hours - other.Hours;
-
-            if (workingMinutes < 0)
-            {
-                workingMinutes = workingMinutes + Minutes.UpperBoundary;
-                workingHours = workingHours - 1;
-            }
-
-            if (workingHours < 0)
-            {
-                throw new ArgumentOutOfRangeException((ArgumentName)nameof(other), "message");
-            }
-
-            return new Duration(new Hours(workingHours), new MinutesPastAnHour(workingMinutes));
-            */
         }
 
         /// <summary>
