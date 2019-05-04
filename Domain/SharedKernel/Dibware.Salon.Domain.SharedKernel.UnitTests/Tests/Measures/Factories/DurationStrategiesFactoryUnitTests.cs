@@ -48,13 +48,13 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures.Factories
         }
 
         /// <summary>
-        /// Given the get duration subtraction strategy when passed true then returns basic duration subtraction strategy.
+        /// Given the get duration sub traction strategy when passed basic duration addition strategy indicator then returns basic duration sub traction strategy.
         /// </summary>
         [Test]
-        public void GivenGetDurationSubTractionStrategy_WhenPassedTrue_ThenReturnsBasicDurationSubTractionStrategy()
+        public void GivenGetDurationSubTractionStrategy_WhenPassedBasicDurationAdditionStrategyIndicator_ThenReturnsBasicDurationSubTractionStrategy()
         {
             // ACT
-            var actual = DurationStrategiesFactory.GetDurationSubtractionStrategy(true);
+            var actual = DurationStrategiesFactory.GetDurationSubtractionStrategy(DurationSubtractionStrategyIndicator.BasicDurationAdditionStrategy);
 
             // ASSERT
             actual.Should()
@@ -62,17 +62,31 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures.Factories
         }
 
         /// <summary>
-        /// Given the get duration subtraction strategy when passed false then returns duration subtraction with minute carry over strategy.
+        /// Given the get duration sub traction strategy when passed carry over minute duration subtraction strategy indicator then returns duration sub traction with minute carry over strategy.
         /// </summary>
         [Test]
-        public void GivenGetDurationSubTractionStrategy_WhenPassedFalse_ThenReturnsDurationSubTractionWithMinuteCarryOverStrategy()
+        public void GivenGetDurationSubTractionStrategy_WhenPassedCarryOverMinuteDurationSubtractionStrategyIndicator_ThenReturnsDurationSubTractionWithMinuteCarryOverStrategy()
         {
             // ACT
-            var actual = DurationStrategiesFactory.GetDurationSubtractionStrategy(false);
+            var actual = DurationStrategiesFactory.GetDurationSubtractionStrategy(DurationSubtractionStrategyIndicator.CarryOverMinuteDurationSubtractionStrategy);
 
             // ASSERT
             actual.Should()
                 .BeOfType<CarryOverMinuteDurationSubtractionStrategy>($"because a {nameof(CarryOverMinuteDurationSubtractionStrategy)} is expected");
+        }
+
+        /// <summary>
+        /// Given the get duration sub traction strategy when passed zero duration subtraction strategy indicator then returns zero duration subtraction strategy.
+        /// </summary>
+        [Test]
+        public void GivenGetDurationSubTractionStrategy_WhenPassedZeroDurationSubtractionStrategyIndicator_ThenReturnsZeroDurationSubtractionStrategy()
+        {
+            // ACT
+            var actual = DurationStrategiesFactory.GetDurationSubtractionStrategy(DurationSubtractionStrategyIndicator.ZeroDurationSubtractionStrategy);
+
+            // ASSERT
+            actual.Should()
+                .BeOfType<ZeroDurationSubtractionStrategy>($"because a {nameof(CarryOverMinuteDurationSubtractionStrategy)} is expected");
         }
     }
 }

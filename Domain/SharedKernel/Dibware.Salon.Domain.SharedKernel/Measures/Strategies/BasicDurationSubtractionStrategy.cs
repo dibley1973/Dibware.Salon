@@ -15,9 +15,17 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures.Strategies
     /// Defines the strategy for subtraction of two <see cref="Duration"/> objects
     /// without carry-over for minutes. <seealso cref="CarryOverMinuteDurationSubtractionStrategy"/>.
     /// </summary>
-    /// <seealso cref="IDurationAdditionStrategy" />
+    /// <seealso cref="IDurationSubtractionStrategy" />
     public class BasicDurationSubtractionStrategy : IDurationSubtractionStrategy
     {
+        /// <summary>
+        /// Gets a value indicating whether this instance can subtract.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance can subtract; otherwise, <c>false</c>.
+        /// </value>
+        public bool CanSubtract => true;
+
         /// <summary>
         /// Subtracts the value of the specified secondary <see cref="Duration"/>
         /// from the specified primary <see cref="Duration"/>. Does not cater for

@@ -48,6 +48,10 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         {
         }
 
+        /// <summary> Gets a special case <see cref="MinutesPastAnHour"/> where the value is zero.</summary>
+        /// <value>The zero.</value>
+        public static MinutesPastAnHour Zero => new MinutesPastAnHour(0);
+
         /// <summary>
         /// Gets the maximum number of minutes upper boundary for the limit.
         /// </summary>

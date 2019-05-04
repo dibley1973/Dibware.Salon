@@ -94,8 +94,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
             new object[]
             {
                 new Duration(new Hours(0), new MinutesPastAnHour(5)),
-                new Duration(new Hours(0), new MinutesPastAnHour(8)),
-                new Duration(new Hours(0), new MinutesPastAnHour(0))
+                new Duration(new Hours(0), new MinutesPastAnHour(8))
             }
         };
 
@@ -201,6 +200,46 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
             actual.Should().Be(expectedDuration, "because the addition of the two durations should equal the result");
         }
 
+        /// <summary>
+        /// Given the subtract when supplied valid other then returns true.
+        /// </summary>
+        /// <param name="duration1">The duration1.</param>
+        /// <param name="duration2">The duration2.</param>
+        /// <param name="expectedDuration">The expected duration.</param>
+        [Test]
+        [TestCaseSource(nameof(ValidDurationSubtractionData))]
+        public void GivenCanSubtract_WhenSuppliedValidOther_ThenReturnsConstructedDurationWithCorrectValue(
+            Duration duration1,
+            Duration duration2,
+            Duration expectedDuration)
+        {
+            // ACT
+            var actual = duration1.CanSubtract(duration2);
+
+            // ASSERT
+            actual.Should().Be(true, "because the subtraction of the two durations should equal the result");
+        }
+
+        /// <summary>
+        /// Given the can subtract when supplied invalid durations then returns false.
+        /// </summary>
+        /// <param name="duration1">The duration1.</param>
+        /// <param name="duration2">The duration2.</param>
+        [Test]
+        [TestCaseSource(nameof(InvalidDurationSubtractionData))]
+        public void GivenCanSubtract_WhenSuppliedInvalidDurations_ThenThrowsException(
+            Duration duration1,
+            Duration duration2)
+        {
+            // ARRANGE
+
+            // ACT
+            var actual = duration1.CanSubtract(duration2);
+
+            // ASSERT
+            actual.Should().Be(false, "because the subtraction of the two durations should equal the zero duration result");
+        }
+
         /// <summary>Given the get hash code when for two different values then they differ.</summary>
         [Test]
         public void GivenGetHashCode_WhenForTwoDifferentValues_ThenTheyDiffer()
@@ -291,21 +330,19 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
         /// </summary>
         /// <param name="duration1">The duration1.</param>
         /// <param name="duration2">The duration2.</param>
-        /// <param name="expectedDuration">The expected duration.</param>
         [Test]
         [TestCaseSource(nameof(InvalidDurationSubtractionData))]
         public void GivenSubtract_WhenSuppliedInvalidDurations_ThenThrowsException(
             Duration duration1,
-            Duration duration2,
-            Duration expectedDuration)
+            Duration duration2)
         {
             // ARRANGE
 
             // ACT
-            Action actual = () => duration1.Subtract(duration2);
+            var actual = duration1.Subtract(duration2);
 
             // ASSERT
-            actual.Should().Throw<ArgumentOutOfRangeException>("because minutes of the two specified durations could be subtracted");
+            actual.Should().Be(Duration.Zero, "because the subtraction of the two durations should equal the zero duration result");
         }
 
         /// <summary>
@@ -460,6 +497,25 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
 
             // ASSERT
             actual.Should().Be("Hours: 7, Minutes: 55");
+        }
+
+        /// <summary>
+        /// Given the special case zero property, when accessed, then returns
+        /// zero value <see cref="Duration"/>.
+        /// </summary>
+        [Test]
+        public void GivenSpecialCaseZero_WhenAccessed_ThenReturnsZeroValueHour()
+        {
+            // ARRANGE
+            var duration = Duration.Zero;
+
+            // ACT
+            var actualHours = duration.Hours.Value;
+            var actualMinutes = duration.Minutes.Value;
+
+            // ASSERT
+            actualHours.Should().Be(0, "because a value of zero is expected");
+            actualMinutes.Should().Be(0, "because a value of zero is expected");
         }
     }
 }

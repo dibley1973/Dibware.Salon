@@ -122,5 +122,21 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
             // ASSERT
             actual.Should().Be("Value: 14");
         }
+
+        /// <summary>
+        /// Givens the special case zero property, when accessed, then returns zero value hour.
+        /// </summary>
+        [Test]
+        public void GivenSpecialCaseZero_WhenAccessed_ThenReturnsZeroValueHour()
+        {
+            // ARRANGE
+            var hours = Hours.Zero;
+
+            // ACT
+            var actual = hours.Value;
+
+            // ASSERT
+            actual.Should().Be(0, "because a value of zero is expected");
+        }
     }
 }

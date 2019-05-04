@@ -63,7 +63,7 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
         /// </returns>
         bool IEquatable<T>.Equals(T other)
         {
-            if (ReferenceEquals(other, null))
+            if (other is null)
                 return false;
 
             return EqualsCore(other);

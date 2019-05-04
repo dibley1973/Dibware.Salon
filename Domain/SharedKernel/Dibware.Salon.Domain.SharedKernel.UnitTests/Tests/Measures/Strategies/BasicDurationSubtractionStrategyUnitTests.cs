@@ -107,7 +107,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures.Strategies
             var actual = strategy.Subtract(duration1, duration2);
 
             // ASSERT
-            actual.Should().Be(expectedDuration, "because the addition of the two durations should equal the result");
+            actual.Should().Be(expectedDuration, "because the subtraction of the two durations should equal the result");
         }
 
         /// <summary>

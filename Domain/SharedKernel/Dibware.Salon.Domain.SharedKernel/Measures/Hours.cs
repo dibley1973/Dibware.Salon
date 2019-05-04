@@ -34,6 +34,10 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         /// <value>The minutes in hour.</value>
         public static PositiveInteger NumberOfMinutesInAnHour => new PositiveInteger(60);
 
+        /// <summary> Gets a special case <see cref="Hours"/> where the value is zero.</summary>
+        /// <value>The zero.</value>
+        public static Hours Zero => new Hours(0);
+
         /// <summary>
         /// Gets the maximum number of hours upper boundary for the limit.
         /// </summary>

@@ -106,12 +106,14 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Amplifiers.ResultTes
         {
             // ARRANGE
             var result = Result.Fail<FakeEntity>("Error message");
+            FakeEntity dummy = null;
 
             // ACT
-            Action action = () => { FakeEntity dummy = result.Value; };
+            Action action = () => { dummy = result.Value; };
 
             // ASSERT
             action.Should().Throw<InvalidOperationException>();
+            dummy.Should().BeNull("because it should never have been set");
         }
 
         /// <summary>

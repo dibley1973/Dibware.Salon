@@ -20,6 +20,14 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures.Strategies
     public class CarryOverMinuteDurationSubtractionStrategy : IDurationSubtractionStrategy
     {
         /// <summary>
+        /// Gets a value indicating whether this instance can subtract.
+        /// </summary>
+        /// <value>
+        /// Always returns <c>true</c>.
+        /// </value>
+        public bool CanSubtract => true;
+
+        /// <summary>
         /// Subtracts the value of the specified secondary <see cref="Duration"/>
         /// from the specified primary <see cref="Duration"/>. USe specifically for when
         /// carrying over minutes is required. Otherwise, please use

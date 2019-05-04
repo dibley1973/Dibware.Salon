@@ -310,5 +310,21 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
             // ASSERT
             actual.Should().Be(59, "because 59 is the upper boundary");
         }
+
+        /// <summary>
+        /// Givens the special case zero property, when accessed, then returns zero value minutes past the hour.
+        /// </summary>
+        [Test]
+        public void GivenSpecialCaseZero_WhenAccessed_ThenReturnsZeroValueMinutesPastAnHour()
+        {
+            // ARRANGE
+            var minutesPastAnHour = MinutesPastAnHour.Zero;
+
+            // ACT
+            var actual = minutesPastAnHour.Value;
+
+            // ASSERT
+            actual.Should().Be(0, "because a value of zero is expected");
+        }
     }
 }

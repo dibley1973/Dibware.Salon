@@ -14,6 +14,14 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures.Strategies
     /// </summary>
     public interface IDurationSubtractionStrategy
     {
+        /// <summary>
+        /// Gets a value indicating whether this instance can subtract.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance can subtract; otherwise, <c>false</c>.
+        /// </value>
+        bool CanSubtract { get; }
+
         /// <summary>Subtracts the value of the specified secondary <see cref="Duration"/>
         /// from the specified primary <see cref="Duration"/>.</summary>
         /// <param name="primary">The primary <see cref="Duration"/>.</param>

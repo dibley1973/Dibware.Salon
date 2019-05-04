@@ -25,11 +25,12 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures.Factories
                 { DurationMinuteAddingBehaviour.CannotAddMinutes, new CarryOverMinuteDurationAdditionStrategy() }
             };
 
-        private static readonly Dictionary<bool, IDurationSubtractionStrategy> DurationSubtractionStrategies =
-            new Dictionary<bool, IDurationSubtractionStrategy>
+        private static readonly Dictionary<DurationSubtractionStrategyIndicator, IDurationSubtractionStrategy> DurationSubtractionStrategies =
+            new Dictionary<DurationSubtractionStrategyIndicator, IDurationSubtractionStrategy>
             {
-                { DurationMinuteSubtractingBehaviour.CanSubtractMinutes, new BasicDurationSubtractionStrategy() },
-                { DurationMinuteSubtractingBehaviour.CannotSubtractMinutes, new CarryOverMinuteDurationSubtractionStrategy() }
+                { DurationSubtractionStrategyIndicator.BasicDurationAdditionStrategy, new BasicDurationSubtractionStrategy() },
+                { DurationSubtractionStrategyIndicator.CarryOverMinuteDurationSubtractionStrategy, new CarryOverMinuteDurationSubtractionStrategy() },
+                { DurationSubtractionStrategyIndicator.ZeroDurationSubtractionStrategy, new ZeroDurationSubtractionStrategy() },
             };
 
         /// <summary>
@@ -45,15 +46,16 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures.Factories
         }
 
         /// <summary>
-        /// Gets the duration subtraction strategy for the specified state.
+        /// Gets the duration subtraction strategy for the specified <see cref="DurationSubtractionStrategyIndicator"/>.
         /// </summary>
-        /// <param name="canSubtractMinutes">Set to <c>true</c> if minutes can be subtracted; otherwise <c>false</c>.</param>
+        /// <param name="indicator">The indicator which identifies which strategy to get.</param>
         /// <returns>
-        /// Returns a correct <see cref="IDurationSubtractionStrategy"/> for the specified state.
+        /// Returns a correct <see cref="IDurationSubtractionStrategy"/> for the specified indicator.
         /// </returns>
-        public static IDurationSubtractionStrategy GetDurationSubtractionStrategy(bool canSubtractMinutes)
+        public static IDurationSubtractionStrategy GetDurationSubtractionStrategy(
+            DurationSubtractionStrategyIndicator indicator)
         {
-            return DurationSubtractionStrategies[canSubtractMinutes];
+            return DurationSubtractionStrategies[indicator];
         }
     }
 }

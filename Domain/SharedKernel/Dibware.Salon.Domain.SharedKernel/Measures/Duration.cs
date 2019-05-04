@@ -37,6 +37,14 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
             Minutes = minutes;
         }
 
+        /// <summary>
+        /// Gets the special case <see cref="Duration"/> with a value of zero.
+        /// </summary>
+        /// <value>
+        /// The zero.
+        /// </value>
+        public static Duration Zero => new Duration(Hours.Zero, MinutesPastAnHour.Zero);
+
         /// <summary>Gets the hours passed in the duration.</summary>
         /// <value>The number of hours as a <see cref="PositiveInteger"/></value>
         public Hours Hours { get; }
@@ -95,6 +103,21 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
             return duration;
         }
 
+        /// <summary>
+        /// Determines whether this instance can subtract the specified other.
+        /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns>
+        ///   <c>true</c> if this instance can subtract the specified other; otherwise, <c>false</c>.
+        /// </returns>
+        public bool CanSubtract(Duration other)
+        {
+            DurationSubtractionStrategyIndicator durationSubtractionStrategyIndicator = GetDurationSubtractionStrategyIndicator(other);
+            var strategy = DurationStrategiesFactory.GetDurationSubtractionStrategy(indicator: durationSubtractionStrategyIndicator);
+
+            return strategy.CanSubtract;
+        }
+
         /// <summary>Subtracts the value of the specified secondary <see cref="Duration"/>
         /// from the specified primary <see cref="Duration"/>.</summary>
         /// <param name="other">The secondary <see cref="Duration"/>.</param>
@@ -106,7 +129,8 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
         {
             Ensure.IsNotNull(other, (ArgumentName)nameof(other));
 
-            var strategy = DurationStrategiesFactory.GetDurationSubtractionStrategy(MinutesCanBeSubtracted(other));
+            DurationSubtractionStrategyIndicator durationSubtractionStrategyIndicator = GetDurationSubtractionStrategyIndicator(other);
+            var strategy = DurationStrategiesFactory.GetDurationSubtractionStrategy(indicator: durationSubtractionStrategyIndicator);
 
             var duration = strategy.Subtract(this, other);
 
@@ -155,6 +179,28 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
             }
         }
 
+        /// <summary>
+        /// Gets the correct duration subtraction strategy for subtracting the specified other <see cref="Duration"/>
+        /// </summary>
+        /// <param name="other">The other <see cref="Duration"/> to subtract</param>
+        /// <returns>
+        /// Returns a relevant <see cref="DurationSubtractionStrategyIndicator"/>
+        /// </returns>
+        private DurationSubtractionStrategyIndicator GetDurationSubtractionStrategyIndicator(Duration other)
+        {
+            if (MinutesCanBeSubtractedWithoutCarryingOverAnHour(other))
+            {
+                return DurationSubtractionStrategyIndicator.BasicDurationAdditionStrategy;
+            }
+
+            if (HoursWithOneHourCarryOverCanBeSubtracted(other))
+            {
+                return DurationSubtractionStrategyIndicator.CarryOverMinuteDurationSubtractionStrategy;
+            }
+
+            return DurationSubtractionStrategyIndicator.ZeroDurationSubtractionStrategy;
+        }
+
         /// <summary>Gets the total number of minutes.</summary>
         /// <returns>Returns a <see cref="PositiveInteger"/> representing the total number of minutes.</returns>
         private PositiveInteger GetTotalNumberOfMinutes()
@@ -172,14 +218,32 @@ namespace Dibware.Salon.Domain.SharedKernel.Measures
             return Minutes.CanAdd(other.Minutes);
         }
 
-        /// <summary>Gets a value indicating if minutes can be subtracted, or not.</summary>
-        /// <param name="other">The other.</param>
+        /// <summary>
+        /// Gets a value indicating if minutes can be subtracted, or not, without the need to carry over an hour.
+        /// </summary>
+        /// <param name="other">The other <see cref="Duration"/>.</param>
         /// <returns>
-        /// Returns <c>true</c> if the minutes can be added; otherwise <c>false</c>.
+        /// Returns <c>true</c> if the minutes can be subtracted; otherwise <c>false</c>.
         /// </returns>
-        private bool MinutesCanBeSubtracted(Duration other)
+        private bool MinutesCanBeSubtractedWithoutCarryingOverAnHour(Duration other)
         {
             return Minutes.CanSubtract(other.Minutes);
+        }
+
+        /// <summary>
+        /// Gets a value indicating if the hours of the specified <see cref="Duration"/>,
+        /// when included with with one hour carry over, can be subtracted from the hours
+        /// of this instance.
+        /// </summary>
+        /// <param name="other">The other <see cref="Duration"/>.</param>
+        /// <returns>
+        /// Returns <c>true</c> if the hours can be subtracted; otherwise <c>false</c>.
+        /// </returns>
+        private bool HoursWithOneHourCarryOverCanBeSubtracted(Duration other)
+        {
+            return Hours.CanSubtract(other.Hours) &&
+                   Hours.Subtract(other.Hours)
+                       .CanSubtract(new Hours(1));
         }
     }
 }
