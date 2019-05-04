@@ -43,7 +43,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures.Strategies
         };
 
         /// <summary>
-        /// Givens the duration of the subtract when called then always returns zero.
+        /// Given the duration of the subtract when called then always returns zero.
         /// </summary>
         /// <param name="duration1">The duration1.</param>
         /// <param name="duration2">The duration2.</param>

@@ -312,7 +312,7 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
         }
 
         /// <summary>
-        /// Givens the special case zero property, when accessed, then returns zero value minutes past the hour.
+        /// Given the special case zero property, when accessed, then returns zero value minutes past the hour.
         /// </summary>
         [Test]
         public void GivenSpecialCaseZero_WhenAccessed_ThenReturnsZeroValueMinutesPastAnHour()
