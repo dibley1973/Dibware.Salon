@@ -16,7 +16,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Helpers
         /// <returns>Returns <c>true</c> if both objects are null; otherwise <c>false</c>.</returns>
         public static bool BothReferencesAreNull(object primary, object secondary)
         {
-            return ReferenceEquals(primary, null) && ReferenceEquals(secondary, null);
+            return primary is null && secondary is null;
         }
 
         /// <summary>Returns primary value indicating if either the primary or secondary <see cref="object"/> is null.</summary>
@@ -25,7 +25,7 @@ namespace Dibware.Salon.Domain.SharedKernel.Helpers
         /// <returns>Returns <c>true</c> if the primary of the secondary is null; otherwise <c>false</c>.</returns>
         public static bool OneOrTheOtherReferenceIsNull(object primary, object secondary)
         {
-            return ReferenceEquals(primary, null) || ReferenceEquals(secondary, null);
+            return primary is null || secondary is null;
         }
     }
 }
