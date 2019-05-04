@@ -46,8 +46,8 @@ namespace Dibware.Salon.Domain.SharedKernel.Guards
         {
             var nameResult = Create(value);
 
-            Func<string> errorMessageCallback = () => nameResult.Error;
-            Ensure.IsNotInvalidCast(nameResult.IsSuccess, errorMessageCallback);
+            string ErrorMessageCallback() => nameResult.Error;
+            Ensure.IsNotInvalidCast(nameResult.IsSuccess, ErrorMessageCallback);
 
             return nameResult.Value;
         }

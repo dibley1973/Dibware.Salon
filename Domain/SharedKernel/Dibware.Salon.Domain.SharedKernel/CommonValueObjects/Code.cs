@@ -7,7 +7,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System;
 using System.Diagnostics;
 using Dibware.Salon.Domain.SharedKernel.Amplifiers;
 using Dibware.Salon.Domain.SharedKernel.BaseClasses;
@@ -57,9 +56,9 @@ namespace Dibware.Salon.Domain.SharedKernel.CommonValueObjects
         public static explicit operator Code(string value)
         {
             var codeResult = Create(value);
-            Func<string> errorMessageCallback = () => codeResult.Error;
+            string ErrorMessageCallback() => codeResult.Error;
 
-            Ensure.IsNotInvalidCast(codeResult.IsSuccess, errorMessageCallback);
+            Ensure.IsNotInvalidCast(codeResult.IsSuccess, ErrorMessageCallback);
 
             return codeResult.Value;
         }

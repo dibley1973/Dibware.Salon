@@ -201,6 +201,23 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Measures
         }
 
         /// <summary>
+        /// Given the can subtract when supplied null other then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenCanSubtract_WhenSuppliedNullOther_ThenThrowsException()
+        {
+            // ARRANGE
+            var duration1 = new Duration(ValidHours, new MinutesPastAnHour(5));
+            const Duration nullDuration = null;
+
+            // ACT
+            Action actual = () => duration1.CanSubtract(nullDuration);
+
+            // ASSERT
+            actual.Should().Throw<ArgumentNullException>("because a null other duration is not permitted");
+        }
+
+        /// <summary>
         /// Given the subtract when supplied valid other then returns true.
         /// </summary>
         /// <param name="duration1">The duration1.</param>

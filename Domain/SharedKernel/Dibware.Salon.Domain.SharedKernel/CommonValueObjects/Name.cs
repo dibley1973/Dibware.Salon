@@ -54,9 +54,9 @@ namespace Dibware.Salon.Domain.SharedKernel.CommonValueObjects
         public static explicit operator Name(string value)
         {
             var nameResult = Create(value);
-            Func<string> errorMessageCallback = () => nameResult.Error;
+            string ErrorMessageCallback() => nameResult.Error;
 
-            Ensure.IsNotInvalidCast(nameResult.IsSuccess, errorMessageCallback);
+            Ensure.IsNotInvalidCast(nameResult.IsSuccess, ErrorMessageCallback);
 
             return nameResult.Value;
         }
