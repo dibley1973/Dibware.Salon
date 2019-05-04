@@ -7,6 +7,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
 using Dibware.Salon.Domain.SharedKernel.Constants.ErrorKeys;
 using Dibware.Salon.Domain.SharedKernel.Guards;
 using FluentAssertions;
@@ -119,6 +120,48 @@ namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.Guards
             // ASSERT
             actual.Should().NotBeNull($"because a valid {nameof(ArgumentName)} should have been created.");
             actual.Value.Should().Be(validValue, "because the value should match the cast from value");
+        }
+
+        /// <summary>
+        /// Given the explicit operator when cast from null value then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenExplicitOperator_WhenCastFromNullValue_ThenThrowsException()
+        {
+            // ARRANGE
+            const string nullValue = null;
+            ArgumentName argumentName = null;
+
+            // ACT
+            Action actual = () =>
+            {
+                argumentName = (ArgumentName)nullValue;
+            };
+
+            // ASSERT
+            actual.Should().Throw<InvalidCastException>("because an empty string cannot be cast to an argument name");
+            argumentName.Should().BeNull();
+        }
+
+        /// <summary>
+        /// Given the explicit operator when cast from empty value then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenExplicitOperator_WhenCastFromEmptyValue_ThenThrowsException()
+        {
+            // ARRANGE
+            const string emptyValue = "";
+            ArgumentName argumentName = null;
+
+            // ACT
+            Action actual = () =>
+            {
+                argumentName = (ArgumentName)emptyValue;
+            };
+
+            // ASSERT
+            actual.Should().Throw<InvalidCastException>("because an empty string cannot be cast to an argument name");
+            argumentName.Should().BeNull();
         }
 
         /// <summary>
