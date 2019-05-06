@@ -23,9 +23,9 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
     {
 #pragma warning restore S4035
 
-        /// <summary>Implementation of the the != comparison operator for the <see cref="Entity"/>.</summary>
-        /// <param name="primary">The primary <see cref="Entity"/> to check.</param>
-        /// <param name="secondary">The secondary <see cref="Entity"/> to check.</param>
+        /// <summary>Implementation of the the != comparison operator for the <see cref="ValueObject{T}"/>.</summary>
+        /// <param name="primary">The primary <see cref="ValueObject{T}"/> to check.</param>
+        /// <param name="secondary">The secondary <see cref="ValueObject{T}"/> to check.</param>
         /// <returns>The result of the comparison operator.</returns>
         public static bool operator !=(ValueObject<T> primary, ValueObject<T> secondary)
         {
@@ -33,14 +33,14 @@ namespace Dibware.Salon.Domain.SharedKernel.BaseClasses
         }
 
 #pragma warning disable S3875
-        /// <summary>Implementation of the the == comparison operator for the <see cref="Entity"/>.</summary>
+        /// <summary>Implementation of the the == comparison operator for the <see cref="ValueObject{T}"/>.</summary>
         /// <remarks>
         /// Disable S3975 ("operator==" should not be overloaded on reference types) warning
         /// from SonarQube as this class is to be treated like a value type when it comes to
         /// reference equality.
         /// </remarks>
-        /// <param name="primary">The primary <see cref="Entity"/> to check.</param>
-        /// <param name="secondary">The secondary <see cref="Entity"/> to check.</param>
+        /// <param name="primary">The primary <see cref="ValueObject{T}"/> to check.</param>
+        /// <param name="secondary">The secondary <see cref="ValueObject{T}"/> to check.</param>
         /// <returns>The result of the comparison operator.</returns>
         public static bool operator ==(ValueObject<T> primary, ValueObject<T> secondary)
         {
