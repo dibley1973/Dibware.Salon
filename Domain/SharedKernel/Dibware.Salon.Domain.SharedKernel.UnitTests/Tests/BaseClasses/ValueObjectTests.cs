@@ -16,7 +16,7 @@ using NUnit.Framework;
 namespace Dibware.Salon.Domain.SharedKernel.UnitTests.Tests.BaseClasses
 {
     /// <summary>
-    /// Provides unit tests for the <see cref="Entity"/> class.
+    /// Provides unit tests for the <see cref="ValueObject{T}"/> class.
     /// </summary>
     [TestFixture]
     public class ValueObjectTests
