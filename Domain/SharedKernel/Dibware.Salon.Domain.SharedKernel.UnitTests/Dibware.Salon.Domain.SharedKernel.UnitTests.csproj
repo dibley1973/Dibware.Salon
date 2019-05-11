@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <Folder Include="Tests\BaseClasses\" />
+    <Folder Include="Tests\Financial\" />
   </ItemGroup>
 
   <ItemGroup>
