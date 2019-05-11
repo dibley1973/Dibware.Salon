@@ -21,10 +21,23 @@ The code is to be written in a manner that allows easy readability, modification
 Classes should be protected with adequate cover to test all likely code paths and a suitable range of values.
 
 #### Unit Testing Naming
-It is eexpected that all test should be in the `GivenSomething_WhenSomethingElse_ThenSoSomethingOther`, for example:
+It is expected that all test should be in the `GivenSomething_WhenSomethingElse_ThenSoSomethingOther`, for example:
 ```
+///
+        <summary>Given the constructor when passed null hours then throws exception.</summary>
+        [Test]
+        public void GivenConstructor_WhenPassedNullHours_ThenThrowsException()
+        {
+            // ARRANGE
+            const Hours nullHours = null;
 
+            // ACT
+            Action actual = () => new Duration(nullHours, ValidMinutes);
+
+            // ASSERT
+            actual.Should().Throw<ArgumentNullException>("because a null hours is not permitted");
+        }
 ```
 
 ### Reference
-Refactoring by Martin Fowler
+Refer to the book **Refactoring** by *Martin Fowler*
